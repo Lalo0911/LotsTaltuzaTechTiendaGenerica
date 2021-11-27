@@ -33,7 +33,7 @@ public class Controller {
 			tienda.getbF().escribirArchivoClientes(tienda.getClientesDAO().getClientes());
 			System.out.println(tienda.getClientesDAO().leerCliente());
 			
-			
+			System.out.println(tienda.getClientesDAO().buscarClientes(1000579928));
 
 	}
 	

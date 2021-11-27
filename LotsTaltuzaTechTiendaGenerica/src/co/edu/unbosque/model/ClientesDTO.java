@@ -59,5 +59,14 @@ public class ClientesDTO implements Serializable{
 		this.ciudad = ciudad;
 	}
 
+
+	@Override
+	public String toString() {
+		return "ClientesDTO [cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", ciudad=" + ciudad + "]";
+	}
+	
+	
+
 }
 
