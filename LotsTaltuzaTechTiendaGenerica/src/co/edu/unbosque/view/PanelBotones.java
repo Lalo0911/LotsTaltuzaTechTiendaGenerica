@@ -52,3 +52,87 @@ public class PanelBotones extends JPanel{
     public JButton getButClientes() {
         return butClientes;
     }
+
+
+
+    public void setButClientes(JButton butClientes) {
+        this.butClientes = butClientes;
+    }
+
+
+
+    public JButton getButProveedores() {
+        return butProveedores;
+    }
+
+
+
+    public void setButProveedores(JButton butProveedores) {
+        this.butProveedores = butProveedores;
+    }
+
+
+
+    public JButton getButProductos() {
+        return butProductos;
+    }
+
+
+
+    public void setButProductos(JButton butProductos) {
+        this.butProductos = butProductos;
+    }
+
+
+
+    public JButton getButVentas() {
+        return butVentas;
+    }
+
+
+
+    public void setButVentas(JButton butVentas) {
+        this.butVentas = butVentas;
+    }
+
+
+
+    public JLabel getLabTitulo1() {
+        return labTitulo1;
+    }
+
+
+
+    public void setLabTitulo1(JLabel labTitulo1) {
+        this.labTitulo1 = labTitulo1;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+
+
+    public static String getCliente() {
+        return CLIENTE;
+    }
+
+
+
+    public static String getProveedores() {
+        return PROVEEDORES;
+    }
+
+
+
+    public static String getVentas() {
+        return VENTAS;
+    }
+
+
+
+    public static String getProductos() {
+        return PRODUCTOS;
+    }
+    
+}
