@@ -12,6 +12,7 @@ public class PanelBotones extends JPanel{
 	private JButton butProveedores;
 	private JButton butProductos;
 	private JButton butVentas;
+	private JButton butEditarProperties;
 	
 	
 	private JLabel labTitulo1;
@@ -19,7 +20,7 @@ public class PanelBotones extends JPanel{
 
 	public PanelBotones() {
 		
-		setLayout( new GridLayout(6,1) );
+		setLayout( new GridLayout(7,1) );
 		
 		labTitulo1 = new JLabel("Nombre Tienda", SwingConstants.CENTER);
 		labTitulo1.setFont((new Font("Bahnschrift",Font.BOLD,20)));
@@ -41,9 +42,22 @@ public class PanelBotones extends JPanel{
 		butVentas.setActionCommand("VENTAS");
 		add(butVentas);
 		
+		butEditarProperties = new JButton("Editar Propiedades");
+		butEditarProperties.setActionCommand("EDITAR");
+		add(butEditarProperties);
+		
 		
 	}
 
+	public JButton getButEditarProperties() {
+		return butEditarProperties;
+	}
+
+
+
+	public void setButEditarProperties(JButton butEditarProperties) {
+		this.butEditarProperties = butEditarProperties;
+	}
 	
 	
 	public JButton getButClientes() {

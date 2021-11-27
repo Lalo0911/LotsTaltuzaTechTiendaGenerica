@@ -81,12 +81,12 @@ public class ClientesDAO implements Crud{
 
 	public void actualizarCliente(String cedula, String cedula1, String nombre, String direccion, String telefono,String correo){
 		if(buscarClientes(cedula)!=null) 
-		{
+		{ System.out.println(cedula);
 			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono,correo);
 			eliminarCliente(cedula);
 			agregarCliente(encontrar,1);
 
-		}
+		}System.out.println(cedula);
 	}
 
 	public void eliminarCliente(String cedula){

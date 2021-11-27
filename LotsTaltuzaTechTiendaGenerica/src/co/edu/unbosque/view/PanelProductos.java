@@ -37,11 +37,7 @@ public class PanelProductos extends JPanel{
 	private JButton butActualizar;
 	private JButton butEliminar;
 	
-	
-	public static final String AGREGARPRODUCTO = "AgregarProducto";
-	public static final String LEERPRODUCTO = "LeerProducto";
-	public static final String ACTUALIZARPRODUCTO = "ActualizarProducto";
-	public static final String BORRARPRODUCTO = "BorrarProducto";
+
 	private static final long serialVersionUID = 1L;
 	
 	public PanelProductos() {
@@ -96,21 +92,21 @@ public class PanelProductos extends JPanel{
 		
 		
 		butEscribir = new JButton("Escribir Juego");
-		butEscribir.setActionCommand(AGREGARPRODUCTO);
+		butEscribir.setActionCommand("AGREGARPRODUCTO");
 		
 		butLeer = new JButton("Leer Juego");
-		butLeer.setActionCommand(LEERPRODUCTO);
+		butLeer.setActionCommand("LEERPRODUCTO");
 		
 	
 		add(butEscribir);
 		add(butLeer);
 		
 		butActualizar = new JButton("Actualizar Cliente");
-		butActualizar.setActionCommand(ACTUALIZARPRODUCTO);
+		butActualizar.setActionCommand("ACTUALIZARPRODUCTO");
 		add(butActualizar);
 		
 		butEliminar = new JButton("Borrar Cliente");
-		butEliminar.setActionCommand(BORRARPRODUCTO);
+		butEliminar.setActionCommand("BORRARPRODUCTO");
 		add(butEliminar);
 		
 		
@@ -170,22 +166,6 @@ public class PanelProductos extends JPanel{
 
 	public JButton getButEliminar() {
 		return butEliminar;
-	}
-
-	public static String getAgregarproducto() {
-		return AGREGARPRODUCTO;
-	}
-
-	public static String getLeerproducto() {
-		return LEERPRODUCTO;
-	}
-
-	public static String getActualizarproducto() {
-		return ACTUALIZARPRODUCTO;
-	}
-
-	public static String getBorrarproducto() {
-		return BORRARPRODUCTO;
 	}
 
 	public static long getSerialversionuid() {

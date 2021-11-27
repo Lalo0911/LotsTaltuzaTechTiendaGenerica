@@ -5,17 +5,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import javax.swing.JFileChooser; 
 
-import javax.swing.JFileChooser;
+public class Propiedades { 
 
-public class Propiedades {
-
-	private Properties prop = new Properties();
-	private String archivoprop = "./Data/cgionfig.properties";
+	private Properties prop = new Properties(); 
+	private String archivoprop = "./Data/config.properties";
 	
-	public Propiedades() {
+	public Propiedades() 
+	{
 		escribirPropiedades();
-		leerPropiedades();
+		
 	}
 	
 	public int escribirPropiedades() {

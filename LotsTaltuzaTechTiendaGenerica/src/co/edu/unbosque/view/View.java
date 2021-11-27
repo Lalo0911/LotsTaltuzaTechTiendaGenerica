@@ -24,6 +24,7 @@ public class View extends JFrame{
 	private PanelBotones2 panelBotones2;
 	private PanelVentas panelVentas;
 	private PanelResultados2 panelResultados2;	
+	private PanelPropiedades panelPropiedades;
 	
 	public View(Controller control) {
 		
@@ -37,7 +38,7 @@ public class View extends JFrame{
 		panelClientes = new PanelClientes();
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
-		
+		panelPropiedades = new PanelPropiedades();
 		
 		add(panelBotones,BorderLayout.CENTER);
 		panelProductos = new PanelProductos();
@@ -69,57 +70,22 @@ public class View extends JFrame{
 	    }
 
 
-	public PanelClientes getPanelEntrada() {
+	    
+
+	public PanelClientes getPanelClientes() {
 		return panelClientes;
 	}
-
-	public void setPanelEntrada(PanelClientes panelJugador) {
-		this.panelClientes = panelJugador;
-	}
-
-	public PanelProductos getPanelRegistro() {
+	
+	public PanelProductos getPanelProductos() {
 		return panelProductos;
 	}
-
-	public void setPanelRegistro(PanelProductos panelJuego) {
-		this.panelProductos = panelJuego;
-	}
-
+	
 	public PanelResultados getPanelResultados() {
 		return panelResultados;
-	}
+	}	
 
-	public void setPanelResultados(PanelResultados panelResultados) {
-		this.panelResultados = panelResultados;
-	}
-
-	public void escribirMensaje(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Sistema", JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	
-	public PanelClientes getPanelJugador() {
-		return panelClientes;
-	}
-
-	public void setPanelJugador(PanelClientes panelJugador) {
-		this.panelClientes = panelJugador;
-	}
-
-	public PanelProductos getPanelJuego() {
-		return panelProductos;
-	}
-
-	public void setPanelJuego(PanelProductos panelJuego) {
-		this.panelProductos = panelJuego;
-	}
-
-	public PanelProveedores getPanelPartida() {
+	public PanelProveedores getPanelProveedores() {
 		return panelProveedores;
-	}
-
-	public void setPanelPartida(PanelProveedores panelPartida) {
-		this.panelProveedores = panelPartida;
 	}
 
 	public static long getSerialversionuid() {
@@ -130,40 +96,24 @@ public class View extends JFrame{
 		return panelBotones;
 	}
 
-	public void setPanelBotones(PanelBotones panelBotones) {
-		this.panelBotones = panelBotones;
-	}
-
 	public PanelBotones2 getPanelBotones2() {
 		return panelBotones2;
-	}
-
-	public void setPanelBotones2(PanelBotones2 panelBotones2) {
-		this.panelBotones2 = panelBotones2;
 	}
 
 	public PanelBuscar getPanelBuscar() {
 		return panelBuscar;
 	}
 
-	public void setPanelBuscar(PanelBuscar panelBuscar) {
-		this.panelBuscar = panelBuscar;
-	}
-
 	public PanelVentas getPanelVentas() {
 		return panelVentas;
-	}
-
-	public void setPanelVentas(PanelVentas panelVentas) {
-		this.panelVentas = panelVentas;
 	}
 
 	public PanelResultados2 getPanelResultados2() {
 		return panelResultados2;
 	}
 
-	public void setPanelResultados2(PanelResultados2 panelResultados2) {
-		this.panelResultados2 = panelResultados2;
-	}	
+	public PanelPropiedades getPanelPropiedades() {
+		return panelPropiedades;
+	}
 	
 }

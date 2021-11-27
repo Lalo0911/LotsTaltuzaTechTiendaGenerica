@@ -24,7 +24,6 @@ public class PanelClientes extends JPanel{
 	private JLabel labCorreo;
 	private JTextField txtCorreo;
 	
-	private JLabel labPuntaje;
 	
 	private JLabel labVacio1;
 	private JLabel labVacio2;
@@ -171,13 +170,6 @@ public class PanelClientes extends JPanel{
 	}
 
 
-
-	public JLabel getLabPuntaje() {
-		return labPuntaje;
-	}
-
-
-
 	public JLabel getLabVacio1() {
 		return labVacio1;
 	}
@@ -259,13 +251,6 @@ public class PanelClientes extends JPanel{
 	public void setTxtCorreo(JTextField txtCorreo) {
 		this.txtCorreo = txtCorreo;
 	}
-
-
-
-	public void setLabPuntaje(JLabel labPuntaje) {
-		this.labPuntaje = labPuntaje;
-	}
-
 
 
 	public void setLabVacio1(JLabel labVacio1) {

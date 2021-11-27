@@ -61,7 +61,6 @@ public class Fachada {
 	public void setClientesDAO(ClientesDAO clientesDAO) {
 		this.clientesDAO = clientesDAO;
 	}
-
 	
 
 }
