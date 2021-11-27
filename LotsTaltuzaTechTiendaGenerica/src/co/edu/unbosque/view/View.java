@@ -19,7 +19,7 @@ public class View extends JFrame{
 	private PanelBuscar panelBuscar;
 	private PanelResultados panelResultados; 
 	private PanelProductos panelJuego;
-	private PanelPartida panelPartida;
+	private PanelProveedores panelPartida;
 	private PanelBotones panelBotones;
 	private PanelBotones2 panelBotones2;
 	private PanelVentas panelVentas;
@@ -45,7 +45,7 @@ public class View extends JFrame{
 		panelVentas = new PanelVentas();
 		
 		add(panelBotones2,BorderLayout.NORTH);
-		panelPartida = new PanelPartida();
+		panelPartida = new PanelProveedores();
 		panelResultados = new PanelResultados();
 		panelResultados2 = new PanelResultados2();
 		panelBotones2.setVisible(false);
@@ -114,11 +114,11 @@ public class View extends JFrame{
 		this.panelJuego = panelJuego;
 	}
 
-	public PanelPartida getPanelPartida() {
+	public PanelProveedores getPanelPartida() {
 		return panelPartida;
 	}
 
-	public void setPanelPartida(PanelPartida panelPartida) {
+	public void setPanelPartida(PanelProveedores panelPartida) {
 		this.panelPartida = panelPartida;
 	}
 
