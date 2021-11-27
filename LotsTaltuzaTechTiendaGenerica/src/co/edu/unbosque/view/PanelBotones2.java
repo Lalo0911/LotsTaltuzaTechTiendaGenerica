@@ -9,31 +9,44 @@ public class PanelBotones2 extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private JButton butRegresar;
+	private JButton butBuscar;
+	
+	
 	private JLabel labVacio1;
 	private JLabel labVacio2;
-
-	private JButton butBuscar;
-	public static final String INICIO = "Inicio";
-	public static final String PANELBUSCAR = "Buscar";
 
 
 	public PanelBotones2() {
 		setLayout( new GridLayout(1,3) );
+		
 		labVacio1 = new JLabel("");
-		butRegresar = new JButton("Regresar");
-		butRegresar.setActionCommand(INICIO);
-		add(butRegresar);
 		add(labVacio1);
-		butBuscar = new JButton("Buscar Persona");
-		butBuscar.setActionCommand(PANELBUSCAR);
+		
+		butRegresar = new JButton("Regresar");
+		butRegresar.setActionCommand("INICIO");
+		add(butRegresar);
+		
+		butBuscar = new JButton("Buscar");
+		butBuscar.setActionCommand("BUSCAR");
 		add(butBuscar);
 
 	}
 
 
-	
+
 	public JButton getButRegresar() {
 		return butRegresar;
+	}
+
+
+	public JButton getButBuscar() {
+		return butBuscar;
+	}
+
+
+
+	public void setButBuscar(JButton butBuscar) {
+		this.butBuscar = butBuscar;
 	}
 
 
@@ -63,32 +76,11 @@ public class PanelBotones2 extends JPanel{
 		this.labVacio2 = labVacio2;
 	}
 
-
-	public JButton getButBuscar() {
-		return butBuscar;
-	}
-
-
-
-	public void setButBuscar(JButton butBuscar) {
-		this.butBuscar = butBuscar;
-	}
-
-
-
-	public static String getPanelbuscar() {
-		return PANELBUSCAR;
-	}
-
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 
-	public static String getInicio() {
-		return INICIO;
-	}
+	
 	
 }

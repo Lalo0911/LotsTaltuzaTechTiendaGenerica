@@ -14,10 +14,6 @@ import javax.swing.border.TitledBorder;
 public class PanelClientes extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
-	public static final String AGREGARCLIENTE = "AgregarCliente";
-	public static final String LEERCLIENTE = "LeerCliente";
-	public static final String ACTUALIZARCLIENTE = "ActualizarCliente";
-	public static final String BORRARCLIENTE = "BorrarCliente";
 	
 	private JLabel labCedula;
 	private JTextField txtCedula;
@@ -45,6 +41,8 @@ public class PanelClientes extends JPanel{
 	private JButton butEscribir;
 	private JButton butActualizar;
 	private JButton butEliminar;
+	
+	
 	
 	
 	
@@ -104,20 +102,22 @@ public class PanelClientes extends JPanel{
 		add(labVacio2);
 		
 		butEscribir = new JButton("Escribir Cliente");
-		butEscribir.setActionCommand(AGREGARCLIENTE);
+		butEscribir.setActionCommand("AGREGARCLIENTE");
 		add(butEscribir);
 		
 		butLeer = new JButton("Leer Cliente");
-		butLeer.setActionCommand(LEERCLIENTE);
+		butLeer.setActionCommand("LEERCLIENTE");
 		add(butLeer);
 		
 		butActualizar = new JButton("Actualizar Cliente");
-		butActualizar.setActionCommand(ACTUALIZARCLIENTE);
+		butActualizar.setActionCommand("ACTUALIZARCLIENTE");
 		add(butActualizar);
 		
 		butEliminar = new JButton("Borrar Cliente");
-		butEliminar.setActionCommand(BORRARCLIENTE);
+		butEliminar.setActionCommand("BORRARCLIENTE");
 		add(butEliminar);
+		
+		
 	}
 
 
@@ -304,32 +304,6 @@ public class PanelClientes extends JPanel{
 		this.butEscribir = butEscribir;
 	}
 
-
-
-	public static String getAgregarcliente() {
-		return AGREGARCLIENTE;
-	}
-
-
-
-	public static String getLeercliente() {
-		return LEERCLIENTE;
-	}
-
-
-
-	public static String getActualizarcliente() {
-		return ACTUALIZARCLIENTE;
-	}
-
-
-
-	public static String getBorrarjugador() {
-		return BORRARCLIENTE;
-	}
-
-
-
 	public JButton getButActualizar() {
 		return butActualizar;
 	}
@@ -352,8 +326,5 @@ public class PanelClientes extends JPanel{
 		this.butEliminar = butEliminar;
 	}
 	
-	
-
-
 
 }
