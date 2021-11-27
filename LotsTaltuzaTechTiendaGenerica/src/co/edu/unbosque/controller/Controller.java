@@ -164,7 +164,10 @@ public class Controller implements ActionListener{
 			try{
 			
 			cedula = Long.parseLong(gui.getPanelJugador().getTxtCedula().getText());
-			gui.getPanelJugador().getTxtCedula().setText("");
+			gui.getPanelJugador().getTxtDireccion().setText(fachada.getClientesDAO().buscarClientes(cedula).getDireccion());
+			gui.getPanelJugador().getTxtNombre().setText(fachada.getClientesDAO().buscarClientes(cedula).getNombre());
+			gui.getPanelJugador().getTxtTelefono().setText(String.valueOf(fachada.getClientesDAO().buscarClientes(cedula).getTelefono()));
+			
 			gui.getPanelJugador().getButActualizar().setActionCommand("ACTUALIZARCLIENTEDOS");
 			gui.getPanelJugador().getButEliminar().enable(false);
 			gui.getPanelJugador().getButEscribir().enable(false);
@@ -174,7 +177,7 @@ public class Controller implements ActionListener{
 			}
 			
 			catch(Exception y) {
-				JOptionPane.showMessageDialog(null, "Primero debe ingresar una cédula válida en el campo indicado, para\npoder actualizar datos de algún cliente");
+				JOptionPane.showMessageDialog(null, "Primero debe ingresar una cÃ©dula vÃ¡lida en el campo indicado, para\npoder actualizar datos de algÃºn cliente");
 			}
 	
 		}
@@ -188,7 +191,12 @@ public class Controller implements ActionListener{
 		    String nombre = gui.getPanelJugador().getTxtNombre().getText();
 	
 	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono);	
+	        JOptionPane.showMessageDialog(null, "Actializado con exito");
 	        
+	        gui.getPanelJugador().getTxtCedula().setText("");
+			gui.getPanelJugador().getTxtDireccion().setText("");
+			gui.getPanelJugador().getTxtTelefono().setText("");
+			gui.getPanelJugador().getTxtNombre().setText("");
 	        gui.getPanelJugador().getButEliminar().enable(true);
 			gui.getPanelJugador().getButEscribir().enable(true);
 			gui.getPanelJugador().getButLeer().enable(true);
@@ -197,7 +205,6 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("BUSCARCLIENTE"))
 		{
-			
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);

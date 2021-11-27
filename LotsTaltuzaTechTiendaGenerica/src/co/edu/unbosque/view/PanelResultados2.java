@@ -14,10 +14,12 @@ public class PanelResultados2 extends JPanel{
     private JTable tabla1;
     private JScrollPane scroll1;
     
-    private JLabel iva;
-    private JLabel sinIva;
-    private JLabel total;
-	
+    private JLabel lblPrecioSinIva;
+    private JLabel lblValorPrecioSinIva;
+    private JLabel lblPrecioIva;
+    private JLabel lblValorPrecioIva;
+    private JLabel lblValorTotal;
+    private JLabel lblPrecioValorTotal;
 
 	public PanelResultados2() {
 
@@ -46,20 +48,102 @@ public class PanelResultados2 extends JPanel{
 	       // scroll1.setBounds(25, 100, 380, 350
 		add(scroll1, "cell 0 0,grow");
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		add(lblNewLabel, "cell 0 1,alignx right");
+		lblPrecioSinIva = new JLabel("PRECIO SIN IVA: ");
+		add(lblPrecioSinIva, "flowx,cell 0 1,alignx right");
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		add(lblNewLabel_1, "cell 0 2,alignx right");
+		lblPrecioIva = new JLabel("IVA TOTAL: ");
+		add(lblPrecioIva, "flowx,cell 0 2,alignx right ");
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		add(lblNewLabel_2, "cell 0 3,alignx right");
+		lblValorTotal = new JLabel("PRECIO TOTAL: ");
+		add(lblValorTotal, "flowx,cell 0 3,alignx right");
+		
+		lblValorPrecioSinIva = new JLabel(" 2000");
+	//	lblValorPrecioSinIva.setBorder(new );
+		add(lblValorPrecioSinIva, "cell 0 1");
+		
+		lblValorPrecioIva = new JLabel(" 100");
+		add(lblValorPrecioIva, "cell 0 2");
+		
+		lblPrecioValorTotal = new JLabel(" 2100");
+		add(lblPrecioValorTotal, "cell 0 3");
 
 		
 	}
 
+	public DefaultTableModel getMod1() {
+		return mod1;
+	}
 
+	public void setMod1(DefaultTableModel mod1) {
+		this.mod1 = mod1;
+	}
 
+	public JTable getTabla1() {
+		return tabla1;
+	}
 
-	
+	public void setTabla1(JTable tabla1) {
+		this.tabla1 = tabla1;
+	}
+
+	public JScrollPane getScroll1() {
+		return scroll1;
+	}
+
+	public void setScroll1(JScrollPane scroll1) {
+		this.scroll1 = scroll1;
+	}
+
+	public JLabel getLblPrecioSinIva() {
+		return lblPrecioSinIva;
+	}
+
+	public void setLblPrecioSinIva(JLabel lblPrecioSinIva) {
+		this.lblPrecioSinIva = lblPrecioSinIva;
+	}
+
+	public JLabel getLblValorPrecioSinIva() {
+		return lblValorPrecioSinIva;
+	}
+
+	public void setLblValorPrecioSinIva(JLabel lblValorPrecioSinIva) {
+		this.lblValorPrecioSinIva = lblValorPrecioSinIva;
+	}
+
+	public JLabel getLblPrecioIva() {
+		return lblPrecioIva;
+	}
+
+	public void setLblPrecioIva(JLabel lblPrecioIva) {
+		this.lblPrecioIva = lblPrecioIva;
+	}
+
+	public JLabel getLblValorPrecioIva() {
+		return lblValorPrecioIva;
+	}
+
+	public void setLblValorPrecioIva(JLabel lblValorPrecioIva) {
+		this.lblValorPrecioIva = lblValorPrecioIva;
+	}
+
+	public JLabel getLblValorTotal() {
+		return lblValorTotal;
+	}
+
+	public void setLblValorTotal(JLabel lblValorTotal) {
+		this.lblValorTotal = lblValorTotal;
+	}
+
+	public JLabel getLblPrecioValorTotal() {
+		return lblPrecioValorTotal;
+	}
+
+	public void setLblPrecioValorTotal(JLabel lblPrecioValorTotal) {
+		this.lblPrecioValorTotal = lblPrecioValorTotal;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

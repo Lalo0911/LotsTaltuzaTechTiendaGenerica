@@ -1,5 +1,4 @@
 package co.edu.unbosque.view;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JTable;
@@ -30,13 +29,22 @@ public class PanelVentass extends JPanel {
 		add(table, "cell 0 0,grow");
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		add(lblNewLabel, "cell 0 1,alignx right");
+		add(lblNewLabel, "flowx,cell 0 1,alignx right");
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		add(lblNewLabel_1, "cell 0 2,alignx right");
+		add(lblNewLabel_1, "flowx,cell 0 2,alignx right");
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		add(lblNewLabel_2, "cell 0 3,alignx right");
+		add(lblNewLabel_2, "flowx,cell 0 3,alignx right");
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		add(lblNewLabel_3, "cell 0 1");
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		add(lblNewLabel_4, "cell 0 2");
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		add(lblNewLabel_5, "cell 0 3");
 
 	}
 }

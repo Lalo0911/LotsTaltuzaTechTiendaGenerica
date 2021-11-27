@@ -44,7 +44,7 @@ public class ClientesDAO {
 			respuesta =
 					"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
 					" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
-					" Dirección: " +bF.leerArchivoClientes().get(i).getDireccion()+
+					" DirecciÃ³n: " +bF.leerArchivoClientes().get(i).getDireccion()+
 					" Telefono: " +bF.leerArchivoClientes().get(i).getTelefono()
 					+"\n"+respuesta;	
 		}

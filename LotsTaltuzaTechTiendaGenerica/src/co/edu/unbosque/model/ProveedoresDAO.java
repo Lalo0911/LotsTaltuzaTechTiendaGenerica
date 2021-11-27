@@ -35,7 +35,7 @@ public class ProveedoresDAO {
 		respuesta =
 		"Nit: "+bF.leerArchivoProveedores().get(i).getNit()+
 		" Nombre: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
-		" Dirección: " +bF.leerArchivoProveedores().get(i).getDireccion()+
+		" DirecciÃ³n: " +bF.leerArchivoProveedores().get(i).getDireccion()+
 		" Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
 		" Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+"\n"+respuesta;	
 				}
