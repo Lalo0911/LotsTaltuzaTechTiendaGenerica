@@ -3,7 +3,9 @@ package co.edu.unbosque.controller;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
+
 import co.edu.unbosque.model.Fachada;
 import co.edu.unbosque.view.View;
 
@@ -30,7 +32,7 @@ public class Controller implements ActionListener{
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		
-
+		
 		gui.getPanelJuego().getButEscribir().addActionListener(this);
 		gui.getPanelJuego().getButLeer().addActionListener(this);
 
@@ -43,11 +45,34 @@ public class Controller implements ActionListener{
 		gui.getPanelBotones2().getButRegresar().addActionListener(this);
 		gui.getPanelBotones2().getButBuscar().addActionListener(this);
 		
-		gui.getPanelBuscar().getButAgregar().addActionListener(this);
+	//	gui.getPanelBuscar().getButAgregar().addActionListener(this);
+		
+		gui.getPanelJugador().getButEscribir().addActionListener(this);
+		gui.getPanelJugador().getButLeer().addActionListener(this);
+		gui.getPanelJugador().getButActualizar().addActionListener(this);
+		gui.getPanelJugador().getButEliminar().addActionListener(this);
+		
 	}
 
-	public void actionPerformed(ActionEvent evento) 
-	{
+	public void actionPerformed(ActionEvent evento){ 
+	
+	long cedula = 0;	
+		
+		if(evento.getActionCommand().equals("VENTAS"))
+		{
+			
+			gui.getPanelBotones().setVisible(false);
+			gui.getPanelBotones2().setVisible(true);
+			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
+			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
+			gui.getContentPane().add(gui.getPanelVentas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
+			gui.getPanelVentas().setVisible(true);
+			gui.getPanelResultados2().setVisible(true);
+			
+			
+		}
+		
 		if (evento.getActionCommand().equals("CLIENTE")) 
 		{
 			gui.getPanelBotones().setVisible(false);
@@ -85,51 +110,6 @@ public class Controller implements ActionListener{
 			gui.getPanelResultados().setVisible(true);
 			gui.getPanelPartida().setVisible(true);
 		}
-		//Juego
-		if (evento.getActionCommand().equals(gui.getPanelJuego().LEERPRODUCTO)) 
-		{
-			//gui.getPanelResultados().getTxtObjeto1().setText(fachada.getJuegoDAO().leerJuego());
-		}
-		if (evento.getActionCommand().equals(gui.getPanelJuego().AGREGARPRODUCTO)) 
-		{    
-			//fachada.getJuegoDTO().setNombre(gui.getPanelJuego().getTxtNombreJuego().getText());
-			//fachada.getJuegoDTO().setTipo(gui.getPanelJuego().getTxtTipoJuego().getText());
-			//fachada.getJuegoDAO().agregarJuego(fachada.getJuegoDTO());
-			//fachada.getB_file().escribirArchivoJuego(fachada.getJuegoDAO().getJuego());
-		}
-
-		//Jugador
-
-		if (evento.getActionCommand().equals("LEERCLIENTE")) 
-		{
-			//gui.getPanelResultados().getTxtObjeto1().setText(fachada.getJugadorDAO().leerJugador());
-
-		}
-		if (evento.getActionCommand().equals("AGREGARCLIENTE")) 
-		{		
-			//fachada.getJugadorDTO().setGenero(gui.getPanelJugador().getTxtGenero().getText());
-			//fachada.getJugadorDTO().setDocumento(Integer.parseInt(gui.getPanelJugador().getTxtDocumento().getText()));
-			//fachada.getJugadorDTO().setNombre(gui.getPanelJugador().getTxtNombre().getText());
-			//fachada.getJugadorDTO().setEdad(Integer.parseInt(gui.getPanelJugador().getTxtEdad().getText()));
-			//fachada.getJugadorDTO().setPuntaje(Double.parseDouble(gui.getPanelJugador().getTxtPuntaje().getText()));
-			//fachada.getJugadorDAO().agregarJugador(fachada.getJugadorDTO());
-			//fachada.getB_file().escribirArchivoJugador(fachada.getJugadorDAO().getJugador());
-		}
-		
-		if(evento.getActionCommand().equals("LEERPARTIDA")) {
-			//gui.getPanelResultados().getTxtObjeto1().setText(fachada.getPartidaDAO().leerPartida());
-		}
-
-		if(evento.getActionCommand().equals("AGREGARPARTIDA")) {
-			//fachada.getPartidaDTO().setJugador1(gui.getPanelPartida().getTxtJugador1().getText());
-			//fachada.getPartidaDTO().setJugador2(gui.getPanelPartida().getTxtJugador2().getText());
-			//fachada.getPartidaDTO().setPuntaje1(gui.getPanelPartida().getTxtPuntaje1().getText());
-			//fachada.getPartidaDTO().setPuntaje2(gui.getPanelPartida().getTxtPuntaje2().getText());
-			//fachada.getPartidaDTO().setTipoPartida(gui.getPanelPartida().getTxtTipoPartida().getText());
-			//fachada.getPartidaDAO().agregarPartida(fachada.getPartidaDTO());
-			//fachada.getB_file().escribirArchivoPartida(fachada.getPartidaDAO().getPartida());
-			
-		}
 		
 		if(evento.getActionCommand().equals("BUSCARPROVEEDORES"))
 		{
@@ -157,6 +137,64 @@ public class Controller implements ActionListener{
 			gui.limpiar_texto(gui.getPanelBuscar());	
 		}
 		
+		if(evento.getActionCommand().equals("LEERCLIENTE"))
+		{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leerCliente());
+			
+		}
+		
+		if(evento.getActionCommand().equals("AGREGARCLIENTE")){
+			
+			fachada.getClientesDTO().setCedula(Long.parseLong(gui.getPanelJugador().getTxtCedula().getText()));
+			fachada.getClientesDTO().setDireccion(gui.getPanelJugador().getTxtDireccion().getText());
+			fachada.getClientesDTO().setTelefono(Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText()));
+			fachada.getClientesDTO().setNombre(gui.getPanelJugador().getTxtNombre().getText());
+			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 0);
+			
+			gui.getPanelJugador().getTxtCedula().setText("");
+			gui.getPanelJugador().getTxtDireccion().setText("");
+			gui.getPanelJugador().getTxtTelefono().setText("");
+			gui.getPanelJugador().getTxtNombre().setText("");
+			
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARCLIENTE"))
+		{
+			
+			try{
+			
+			cedula = Long.parseLong(gui.getPanelJugador().getTxtCedula().getText());
+			gui.getPanelJugador().getTxtCedula().setText("");
+			gui.getPanelJugador().getButActualizar().setActionCommand("ACTUALIZARCLIENTEDOS");
+			gui.getPanelJugador().getButEliminar().enable(false);
+			gui.getPanelJugador().getButEscribir().enable(false);
+			gui.getPanelJugador().getButLeer().enable(false);
+			JOptionPane.showMessageDialog(null, "Ahora ingrese valores y oprima de nuevo el boton");
+				
+			}
+			
+			catch(Exception y) {
+				JOptionPane.showMessageDialog(null, "Primero debe ingresar una cédula válida en el campo indicado, para\npoder actualizar datos de algún cliente");
+			}
+	
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARCLIENTEDOS"))
+		{
+			
+			long cedula1 = Long.parseLong(gui.getPanelJugador().getTxtCedula().getText());
+			String direccion = gui.getPanelJugador().getTxtDireccion().getText();
+			int telefono = Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText());
+		    String nombre = gui.getPanelJugador().getTxtNombre().getText();
+	
+	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono);	
+	        
+	        gui.getPanelJugador().getButEliminar().enable(true);
+			gui.getPanelJugador().getButEscribir().enable(true);
+			gui.getPanelJugador().getButLeer().enable(true);
+	        gui.getPanelJugador().getButActualizar().setActionCommand("ACTUALIZARCLIENTE");
+		}
+		
 		if(evento.getActionCommand().equals("BUSCARCLIENTE"))
 		{
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
@@ -168,6 +206,12 @@ public class Controller implements ActionListener{
 			gui.getPanelJuego().setVisible(false);
 			gui.getPanelBotones().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
+			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
+		}
+		
+		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
+		{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(Long.parseLong(gui.getPanelBuscar().getTxtBuscar().getText())).toString());
 		}
 
 		if (evento.getActionCommand().equals("INICIO")) 

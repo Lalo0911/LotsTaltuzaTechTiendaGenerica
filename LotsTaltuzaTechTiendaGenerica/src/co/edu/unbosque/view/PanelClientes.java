@@ -1,14 +1,8 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 public class PanelClientes extends JPanel{
@@ -30,8 +24,6 @@ public class PanelClientes extends JPanel{
 	private JLabel labCorreo;
 	private JTextField txtCorreo;
 	
-	
-	
 	private JLabel labPuntaje;
 	
 	private JLabel labVacio1;
@@ -41,19 +33,13 @@ public class PanelClientes extends JPanel{
 	private JButton butEscribir;
 	private JButton butActualizar;
 	private JButton butEliminar;
-	
-	
-	
-	
-	
 
 	public PanelClientes() {
+		
 		setLayout( new GridLayout(9,2) );
 		TitledBorder border = BorderFactory.createTitledBorder("Jugador");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
-		
-		
 		
 		labCedula = new JLabel("Cedula:");
 		add(labCedula);

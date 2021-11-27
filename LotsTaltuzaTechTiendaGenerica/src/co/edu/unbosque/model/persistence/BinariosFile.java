@@ -1,17 +1,13 @@
 package co.edu.unbosque.model.persistence;
-
 import java.io.*;
 import java.util.ArrayList;
 import co.edu.unbosque.model.*;
-
-
 
 public class BinariosFile {
 
 	private File f;
 
 	public BinariosFile() {
-
 	}
 
 	public String escribirArchivoClientes(ArrayList<ClientesDTO> clientes) {
@@ -30,21 +26,20 @@ public class BinariosFile {
 		}
 		return mensaje;
 	}
-	
-	
+
 	public ArrayList<ClientesDTO> leerArchivoClientes() {
-		 ArrayList<ClientesDTO> clientes=null;
+		ArrayList<ClientesDTO> clientes=null;
 		try {
-	 		ObjectInputStream in = new ObjectInputStream (new FileInputStream("./Data/clientes.dat")); 
-	 		clientes =(ArrayList<ClientesDTO>)in.readObject();
-	 		in.close();
+			ObjectInputStream in = new ObjectInputStream (new FileInputStream("./Data/clientes.dat")); 
+			clientes =(ArrayList<ClientesDTO>)in.readObject();
+			in.close();
 
 		} catch (IOException | ClassNotFoundException e) {
 			return null;
 		}
 		return clientes;
 	}
-	
+
 	public String escribirArchivoProveedores(ArrayList<ProveedoresDTO> proveedores) {
 		String mensaje="Archivo Generado Exitosamente!";
 		f=new File("./Data/proveedores.dat");
@@ -61,13 +56,13 @@ public class BinariosFile {
 		}
 		return mensaje;
 	}
-	
+
 	public ArrayList<ProveedoresDTO> leerArchivoProveedores() {
-		 ArrayList<ProveedoresDTO> proveedores=null;
+		ArrayList<ProveedoresDTO> proveedores=null;
 		try {
-	 		ObjectInputStream in = new ObjectInputStream (new FileInputStream("./Data/proveedores.dat")); 
-	 		proveedores =(ArrayList<ProveedoresDTO>)in.readObject();
-	 		in.close();
+			ObjectInputStream in = new ObjectInputStream (new FileInputStream("./Data/proveedores.dat")); 
+			proveedores =(ArrayList<ProveedoresDTO>)in.readObject();
+			in.close();
 
 		} catch (IOException | ClassNotFoundException e) {
 			return null;
@@ -75,19 +70,16 @@ public class BinariosFile {
 		return proveedores;
 	}
 	
-	public String eliminarFichero(File fichero) {
-		
-		String message= "";
-	    if (!fichero.exists()) {
-	        message="El archivo data no existe.";
-	    } else {
-	        fichero.delete();
-	        
-	        message="El archivo data fue eliminado."+leerArchivoClientes();
-	    }
-return message;
+	public void eliminarFichero(File fichero) {
+
+		if (fichero.exists()==true) {
+			fichero.delete();
+		} 
+
 	}
-	
+   
 }
+
+
 
 

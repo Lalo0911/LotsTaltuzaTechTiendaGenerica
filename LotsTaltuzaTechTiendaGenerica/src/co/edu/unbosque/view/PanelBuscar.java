@@ -9,12 +9,12 @@ public class PanelBuscar extends JPanel{
 
 
 	private static final long serialVersionUID = 1L;
-	public static final String BUSCAR = "BuscarJugador";
 	private JLabel labBuscar;
 	private JTextField txtBuscar;
-	private JButton butAgregar;
+	private JButton butBuscar;
 
 	public PanelBuscar() {
+		
 		setLayout( new GridLayout(4,2) );
 		TitledBorder border = BorderFactory.createTitledBorder("Buscar Jugador");
 		border.setTitleColor(Color.BLACK);
@@ -27,9 +27,9 @@ public class PanelBuscar extends JPanel{
 		txtBuscar.setBackground(Color.WHITE);
 		add(txtBuscar);
 
-		butAgregar = new JButton("Buscar Jugador");
-		butAgregar.setActionCommand(BUSCAR);
-		add(butAgregar);
+		butBuscar = new JButton("Buscar");
+		butBuscar .setActionCommand("BUSCARPANEL");
+		add(butBuscar);
 		
 	}
 
@@ -49,20 +49,16 @@ public class PanelBuscar extends JPanel{
 		this.txtBuscar = txtBuscar;
 	}
 
-	public JButton getButAgregar() {
-		return butAgregar;
+	public JButton getButBuscar() {
+		return butBuscar ;
 	}
 
-	public void setButAgregar(JButton butAgregar) {
-		this.butAgregar = butAgregar;
+	public void setButBuscar(JButton butBuscar) {
+		this.butBuscar = butBuscar;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public static String getBuscar() {
-		return BUSCAR;
 	}
 	
 }

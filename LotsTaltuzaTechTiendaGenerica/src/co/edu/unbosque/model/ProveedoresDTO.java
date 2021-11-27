@@ -20,8 +20,6 @@ public class ProveedoresDTO implements Serializable{
 		this.ciudad = ciudad;
 	}
 
-	
-
 	public long getNit() {
 		return nit;
 	}
@@ -66,13 +64,9 @@ public class ProveedoresDTO implements Serializable{
 		this.ciudad = ciudad;
 	}
 
-	@Override
 	public String toString() {
 		return "Proveedores [nit=" + nit + ", nombreProveedor=" + nombreProveedor + ", direccion=" + direccion
 				+ ", telefono=" + telefono + ", ciudad=" + ciudad + "]";
 	}
-	
-	
-	
 
 }

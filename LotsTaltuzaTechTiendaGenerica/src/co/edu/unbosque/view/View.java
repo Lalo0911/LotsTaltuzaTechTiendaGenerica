@@ -22,10 +22,12 @@ public class View extends JFrame{
 	private PanelPartida panelPartida;
 	private PanelBotones panelBotones;
 	private PanelBotones2 panelBotones2;
+	private PanelVentas panelVentas;
+	private PanelResultados2 panelResultados2;	
 	
 	public View(Controller control) {
 		
-		setSize(700,500); 
+		setSize(700,700);
 		setResizable(false); 
 		setTitle("Lots Taltuza Tech"); 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,15 +38,19 @@ public class View extends JFrame{
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
 		
+		
 		add(panelBotones,BorderLayout.CENTER);
 		panelJuego = new PanelProductos();
 		panelBotones2 = new PanelBotones2();
+		panelVentas = new PanelVentas();
 		
 		add(panelBotones2,BorderLayout.NORTH);
 		panelPartida = new PanelPartida();
 		panelResultados = new PanelResultados();
+		panelResultados2 = new PanelResultados2();
 		panelBotones2.setVisible(false);
 		panelResultados.setVisible(false);
+		panelResultados2.setVisible(false);
 		
 		panelBuscar = new PanelBuscar();
 		panelBuscar.setVisible(false);
@@ -142,6 +148,22 @@ public class View extends JFrame{
 
 	public void setPanelBuscar(PanelBuscar panelBuscar) {
 		this.panelBuscar = panelBuscar;
+	}
+
+	public PanelVentas getPanelVentas() {
+		return panelVentas;
+	}
+
+	public void setPanelVentas(PanelVentas panelVentas) {
+		this.panelVentas = panelVentas;
+	}
+
+	public PanelResultados2 getPanelResultados2() {
+		return panelResultados2;
+	}
+
+	public void setPanelResultados2(PanelResultados2 panelResultados2) {
+		this.panelResultados2 = panelResultados2;
 	}	
 	
 }
