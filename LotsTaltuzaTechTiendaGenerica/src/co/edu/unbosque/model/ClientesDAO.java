@@ -19,6 +19,7 @@ public class ClientesDAO {
 		bF = new BinariosFile();
 
 	}
+	
 	public void agregarCliente(ClientesDTO clientes1, int num){
 		if(num==1) {
 			clientes.add(clientes1);
@@ -41,11 +42,11 @@ public class ClientesDAO {
 
 		for(int i=0;i<clientes.size();i++){
 			respuesta =
-					"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
-					" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
-					" Dirección: " +bF.leerArchivoClientes().get(i).getDireccion()+
-					" Telefono: " +bF.leerArchivoClientes().get(i).getTelefono()+	
-					" Ciudad: " +bF.leerArchivoClientes().get(i).getCiudad()+"\n"+respuesta;	
+				"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
+				" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
+				" Dirección: " +bF.leerArchivoClientes().get(i).getDireccion()+
+				" Telefono: " +bF.leerArchivoClientes().get(i).getTelefono()+	
+				" Ciudad: " +bF.leerArchivoClientes().get(i).getCiudad()+"\n"+respuesta;	
 		}
 		return respuesta;
 	}
