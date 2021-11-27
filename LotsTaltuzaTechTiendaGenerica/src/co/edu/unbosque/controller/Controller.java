@@ -37,13 +37,11 @@ public class Controller {
 			tienda.getClientesDTO().setCiudad("laNalga");
 			tienda.getClientesDAO().agregarCliente(tienda.getClientesDTO(),0);
 			tienda.getbF().escribirArchivoClientes(tienda.getClientesDAO().getClientes());
-			System.out.println(tienda.getClientesDAO().leerCliente());
+			//System.out.println(tienda.getClientesDAO().leerCliente());
 			
-			System.out.println("Si "+tienda.getClientesDAO().buscarClientes(12345).toString());
-			
-			tienda.getClientesDAO().actualizarCliente(12345, 9876, "Nelson", "ElMangoFeliz", 45, null);
+			tienda.getClientesDAO().eliminarCliente(12345);
+		//	tienda.getClientesDAO().actualizarCliente(12345, 9876, "Nelson", "ElMangoFeliz", 45, null);
 			System.out.println(tienda.getClientesDAO().leerCliente());
-			System.out.println("Si "+tienda.getClientesDAO().buscarClientes(9876).toString());
 
 	}
 	

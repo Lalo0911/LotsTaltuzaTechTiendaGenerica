@@ -58,7 +58,7 @@ public class ClientesDAO {
 		{	
 			for (int i = 0; i < clientes.size(); i++) 
 			{
-				if(clientes.get(i).getCedula()==(cedula)) 
+				if(clientes.get(i).getCedula()==cedula) 
 				{
 					encontrar= clientes.get(i);
 				}	
@@ -67,9 +67,7 @@ public class ClientesDAO {
 		return encontrar;
 	}
 
-	public void actualizarCliente(long cedula, long cedula1, String nombre, String direccion, int telefono, String ciudad)
-	{
-
+	public void actualizarCliente(long cedula, long cedula1, String nombre, String direccion, int telefono, String ciudad){
 		if(buscarClientes(cedula)!=null) 
 		{
 
@@ -80,17 +78,16 @@ public class ClientesDAO {
 			buscarClientes(cedula).setCiudad(ciudad);
 			agregarCliente(buscarClientes(cedula),1);
 
-
 		}
 	}
 
-	public void eliminarCliente(long cedula) 
-	{
+	public void eliminarCliente(long cedula){
+		
 		if(buscarClientes(cedula) != null) 
 		{
 			f=new File("./Data/clientes.dat");
 			clientes.remove(buscarClientes(cedula));
-			bF.eliminarFichero(f);
+			System.out.println(bF.eliminarFichero(f));
 			bF.escribirArchivoClientes(clientes);
 
 		}

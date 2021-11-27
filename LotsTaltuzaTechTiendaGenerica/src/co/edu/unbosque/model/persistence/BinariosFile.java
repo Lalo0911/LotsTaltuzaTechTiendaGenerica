@@ -74,18 +74,19 @@ public class BinariosFile {
 		}
 		return proveedores;
 	}
-	public static void eliminarFichero(File fichero) {
+	
+	public String eliminarFichero(File fichero) {
+		
 		String message= "";
 	    if (!fichero.exists()) {
 	        message="El archivo data no existe.";
 	    } else {
 	        fichero.delete();
-	        message="El archivo data fue eliminado.";
+	        
+	        message="El archivo data fue eliminado."+leerArchivoClientes();
 	    }
-
+return message;
 	}
-	
-	
 	
 }
 
