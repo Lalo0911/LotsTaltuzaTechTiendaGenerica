@@ -197,6 +197,7 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("BUSCARCLIENTE"))
 		{
+			
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
