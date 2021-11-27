@@ -64,10 +64,10 @@ public class ClientesDAO {
 		return encontrar;
 	}
 
-	public void actualizarCliente(long cedula, long cedula1, String nombre, String direccion, int telefono){
+	public void actualizarCliente(long cedula, long cedula1, String nombre, String direccion, int telefono,String correo){
 		if(buscarClientes(cedula)!=null) 
 		{
-			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono);
+			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono,correo);
 			eliminarCliente(cedula);
 			agregarCliente(encontrar,1);
 

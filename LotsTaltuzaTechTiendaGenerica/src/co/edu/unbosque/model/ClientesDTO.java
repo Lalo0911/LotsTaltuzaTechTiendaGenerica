@@ -7,14 +7,16 @@ public class ClientesDTO implements Serializable{
 	private long cedula;
 	private String nombre;
 	private String direccion;
+	private String correo;
 	private int telefono; 
 	
-	public ClientesDTO(long cedula, String nombre, String direccion, int telefono) {
+	public ClientesDTO(long cedula, String nombre, String direccion, int telefono,String correo) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.correo = correo;
 
 	}
 
@@ -51,10 +53,22 @@ public class ClientesDTO implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "ClientesDTO [cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono="
-				+ telefono + "]";
+	public String getCorreo() {
+		return correo;
 	}
+
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+
+
+	public String toString() {
+		return "ClientesDTO [cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion + ", correo="
+				+ correo + ", telefono=" + telefono + "]";
+	}
+
+	
 }
 

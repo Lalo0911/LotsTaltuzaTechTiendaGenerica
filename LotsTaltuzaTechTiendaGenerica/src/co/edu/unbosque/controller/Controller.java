@@ -27,37 +27,30 @@ public class Controller implements ActionListener{
 
 	public void asignarOyentes() 
 	{
-		//Panel Inicial
 		gui.getPanelBotones().getButClientes().addActionListener(this);
 		gui.getPanelBotones().getButProductos().addActionListener(this);
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		
-		//Botones Panel Productos
+		
 		gui.getPanelJuego().getButEscribir().addActionListener(this);
 		gui.getPanelJuego().getButLeer().addActionListener(this);
-		gui.getPanelJuego().getButActualizar().addActionListener(this);
-		gui.getPanelJuego().getButEliminar().addActionListener(this);
-		
-		//Botones Panel Partida
-		gui.getPanelPartida().getButEscribir().addActionListener(this);
-		gui.getPanelPartida().getButLeer().addActionListener(this);
-		gui.getPanelPartida().getButActualizar().addActionListener(this);
-		gui.getPanelPartida().getButEliminar().addActionListener(this);
 
-		//Panel Clientes
-		gui.getPanelJugador().getButEscribir().addActionListener(this);
+	//	gui.getPanelPartida().getButAgregar().addActionListener(this);
+		gui.getPanelPartida().getButLeer().addActionListener(this);
+
 		gui.getPanelJugador().getButLeer().addActionListener(this);
-		gui.getPanelJugador().getButActualizar().addActionListener(this);
-		gui.getPanelJugador().getButEliminar().addActionListener(this);
+		gui.getPanelJugador().getButEscribir().addActionListener(this);
 		
-		//Botones Regresar y Buscar 
 		gui.getPanelBotones2().getButRegresar().addActionListener(this);
 		gui.getPanelBotones2().getButBuscar().addActionListener(this);
 		
 	//	gui.getPanelBuscar().getButAgregar().addActionListener(this);
 		
-	
+		gui.getPanelJugador().getButEscribir().addActionListener(this);
+		gui.getPanelJugador().getButLeer().addActionListener(this);
+		gui.getPanelJugador().getButActualizar().addActionListener(this);
+		gui.getPanelJugador().getButEliminar().addActionListener(this);
 		
 	}
 
@@ -156,12 +149,14 @@ public class Controller implements ActionListener{
 			fachada.getClientesDTO().setDireccion(gui.getPanelJugador().getTxtDireccion().getText());
 			fachada.getClientesDTO().setTelefono(Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText()));
 			fachada.getClientesDTO().setNombre(gui.getPanelJugador().getTxtNombre().getText());
+			fachada.getClientesDTO().setCorreo(gui.getPanelJugador().getTxtCorreo().getText());
 			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 0);
 			
 			gui.getPanelJugador().getTxtCedula().setText("");
 			gui.getPanelJugador().getTxtDireccion().setText("");
 			gui.getPanelJugador().getTxtTelefono().setText("");
 			gui.getPanelJugador().getTxtNombre().setText("");
+			gui.getPanelJugador().getTxtCorreo().setText("");
 			
 		}
 		
@@ -196,8 +191,9 @@ public class Controller implements ActionListener{
 			String direccion = gui.getPanelJugador().getTxtDireccion().getText();
 			int telefono = Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText());
 		    String nombre = gui.getPanelJugador().getTxtNombre().getText();
+		    String correo = gui.getPanelJugador().getTxtCorreo().getText();
 	
-	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono);	
+	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono,correo);	
 	        JOptionPane.showMessageDialog(null, "Actializado con exito");
 	        
 	        gui.getPanelJugador().getTxtCedula().setText("");

@@ -14,7 +14,7 @@ public class Fachada {
 	public Fachada()
 	{
 		
-		clientesDTO = new ClientesDTO(0, null, null, 0);
+		clientesDTO = new ClientesDTO(0, null, null, 0,null);
 		clientesDAO = new ClientesDAO();
 		bF = new BinariosFile();
 		prop = new Propiedades();

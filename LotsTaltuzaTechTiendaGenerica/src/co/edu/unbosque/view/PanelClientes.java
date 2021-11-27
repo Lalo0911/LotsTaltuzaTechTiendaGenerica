@@ -44,7 +44,7 @@ public class PanelClientes extends JPanel{
 		labCedula = new JLabel("Cedula:");
 		add(labCedula);
 		
-		txtCedula = new JTextField("");
+		txtCedula = new JTextField();
 		txtCedula.setForeground(Color.BLACK);
 		txtCedula.setBackground(Color.WHITE);
 		add(txtCedula);
@@ -68,7 +68,7 @@ public class PanelClientes extends JPanel{
 		labTelefono = new JLabel("Telefono:");
 		add(labTelefono);
 		
-		txtTelefono = new JTextField("");
+		txtTelefono = new JTextField();
 		txtTelefono.setForeground(Color.BLACK);
 		txtTelefono.setBackground(Color.WHITE);
 		add(txtTelefono);
