@@ -59,11 +59,5 @@ public class ClientesDTO implements Serializable{
 		this.ciudad = ciudad;
 	}
 
-
-	
-	
-	
-	
-	
 }
 

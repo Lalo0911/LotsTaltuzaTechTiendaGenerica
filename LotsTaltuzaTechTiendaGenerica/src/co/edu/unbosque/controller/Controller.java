@@ -18,7 +18,6 @@ public class Controller {
 	{
 		tienda.getProp().escribirPropiedades();	
 
-
 			tienda.getClientesDTO().setCedula(1000579928);
 			tienda.getClientesDTO().setNombre("Santiago");
 			tienda.getClientesDTO().setDireccion("cll 10");
