@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="C:/Users/Lalita/Desktop/libreria/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="D:/EclipseWorkSpace/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

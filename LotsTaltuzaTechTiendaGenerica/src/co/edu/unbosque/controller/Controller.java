@@ -35,23 +35,24 @@ public class Controller implements ActionListener{
 		
 		gui.getPanelJuego().getButEscribir().addActionListener(this);
 		gui.getPanelJuego().getButLeer().addActionListener(this);
+		gui.getPanelJuego().getButActualizar().addActionListener(this);
+		gui.getPanelJuego().getButEliminar().addActionListener(this);
 
-	//	gui.getPanelPartida().getButAgregar().addActionListener(this);
+		gui.getPanelPartida().getButEscribir().addActionListener(this);
 		gui.getPanelPartida().getButLeer().addActionListener(this);
+		gui.getPanelPartida().getButActualizar().addActionListener(this);
+		gui.getPanelPartida().getButEliminar().addActionListener(this);
 
-		gui.getPanelJugador().getButLeer().addActionListener(this);
-		gui.getPanelJugador().getButEscribir().addActionListener(this);
-		
-		gui.getPanelBotones2().getButRegresar().addActionListener(this);
-		gui.getPanelBotones2().getButBuscar().addActionListener(this);
-		
-	//	gui.getPanelBuscar().getButAgregar().addActionListener(this);
-		
 		gui.getPanelJugador().getButEscribir().addActionListener(this);
 		gui.getPanelJugador().getButLeer().addActionListener(this);
 		gui.getPanelJugador().getButActualizar().addActionListener(this);
 		gui.getPanelJugador().getButEliminar().addActionListener(this);
 		
+		gui.getPanelBotones2().getButRegresar().addActionListener(this);
+		gui.getPanelBotones2().getButBuscar().addActionListener(this);
+		
+		gui.getPanelBuscar().getButBuscar().addActionListener(this);
+			
 	}
 
 	public void actionPerformed(ActionEvent evento){ 
