@@ -12,7 +12,7 @@ public class ProgramaTest extends TestCase {
 	
 	public void testTodo() {
 		
-		assertEquals("Mensaje generrar error",cliente.leerCliente()," Nombre: Santiago");
+		assertEquals("Mensaje generrar error",cliente.leer()," Nombre: Santiago");
 	}
 	
 	

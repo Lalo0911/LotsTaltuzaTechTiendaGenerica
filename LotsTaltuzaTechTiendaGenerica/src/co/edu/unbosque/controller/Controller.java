@@ -18,7 +18,7 @@ public class Controller implements ActionListener{
 	public Controller() 
 
 	{
-
+		
 		fachada = new Fachada();
 		gui = new View(this);
 		gui.setVisible(true);
@@ -57,7 +57,7 @@ public class Controller implements ActionListener{
 
 	public void actionPerformed(ActionEvent evento){ 
 	
-	long cedula = 0;	
+	String cedula = null;	
 		
 		if(evento.getActionCommand().equals("VENTAS"))
 		{
@@ -140,15 +140,15 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("LEERCLIENTE"))
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leerCliente());
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
 			
 		}
 		
 		if(evento.getActionCommand().equals("AGREGARCLIENTE")){
 			
-			fachada.getClientesDTO().setCedula(Long.parseLong(gui.getPanelJugador().getTxtCedula().getText()));
+			fachada.getClientesDTO().setCedula(gui.getPanelJugador().getTxtCedula().getText());
 			fachada.getClientesDTO().setDireccion(gui.getPanelJugador().getTxtDireccion().getText());
-			fachada.getClientesDTO().setTelefono(Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText()));
+			fachada.getClientesDTO().setTelefono(gui.getPanelJugador().getTxtTelefono().getText());
 			fachada.getClientesDTO().setNombre(gui.getPanelJugador().getTxtNombre().getText());
 			fachada.getClientesDTO().setCorreo(gui.getPanelJugador().getTxtCorreo().getText());
 			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 0);
@@ -161,15 +161,22 @@ public class Controller implements ActionListener{
 			
 		}
 		
+		if(evento.getActionCommand().equals("BORRARCLIENTE")){
+			fachada.getClientesDAO().eliminarCliente(gui.getPanelJugador().getTxtCedula().getText());
+			JOptionPane.showMessageDialog(null, "Eliminado con exito");
+		}
+		
 		if(evento.getActionCommand().equals("ACTUALIZARCLIENTE"))
 		{
 			
 			try{
 			
-			cedula = Long.parseLong(gui.getPanelJugador().getTxtCedula().getText());
+			gui.getPanelResultados().getTxtObjeto1().setText("");
+			cedula = gui.getPanelJugador().getTxtCedula().getText();
 			gui.getPanelJugador().getTxtDireccion().setText(fachada.getClientesDAO().buscarClientes(cedula).getDireccion());
 			gui.getPanelJugador().getTxtNombre().setText(fachada.getClientesDAO().buscarClientes(cedula).getNombre());
-			gui.getPanelJugador().getTxtTelefono().setText(String.valueOf(fachada.getClientesDAO().buscarClientes(cedula).getTelefono()));
+			gui.getPanelJugador().getTxtTelefono().setText(fachada.getClientesDAO().buscarClientes(cedula).getTelefono());
+			gui.getPanelJugador().getTxtCorreo().setText(fachada.getClientesDAO().buscarClientes(cedula).getCorreo());
 			
 			gui.getPanelJugador().getButActualizar().setActionCommand("ACTUALIZARCLIENTEDOS");
 			gui.getPanelJugador().getButEliminar().enable(false);
@@ -188,19 +195,20 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("ACTUALIZARCLIENTEDOS"))
 		{
 			
-			long cedula1 = Long.parseLong(gui.getPanelJugador().getTxtCedula().getText());
+			String cedula1 = gui.getPanelJugador().getTxtCedula().getText();
 			String direccion = gui.getPanelJugador().getTxtDireccion().getText();
-			int telefono = Integer.parseInt(gui.getPanelJugador().getTxtTelefono().getText());
+			String telefono = gui.getPanelJugador().getTxtTelefono().getText();
 		    String nombre = gui.getPanelJugador().getTxtNombre().getText();
 		    String correo = gui.getPanelJugador().getTxtCorreo().getText();
 	
-	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono,correo);	
+	        fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono, correo);	
 	        JOptionPane.showMessageDialog(null, "Actializado con exito");
-	        
+	  
 	        gui.getPanelJugador().getTxtCedula().setText("");
 			gui.getPanelJugador().getTxtDireccion().setText("");
 			gui.getPanelJugador().getTxtTelefono().setText("");
 			gui.getPanelJugador().getTxtNombre().setText("");
+			gui.getPanelJugador().getTxtCorreo().setText("");
 	        gui.getPanelJugador().getButEliminar().enable(true);
 			gui.getPanelJugador().getButEscribir().enable(true);
 			gui.getPanelJugador().getButLeer().enable(true);
@@ -223,7 +231,7 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(Long.parseLong(gui.getPanelBuscar().getTxtBuscar().getText())).toString());
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
 		}
 
 		if (evento.getActionCommand().equals("INICIO")) 

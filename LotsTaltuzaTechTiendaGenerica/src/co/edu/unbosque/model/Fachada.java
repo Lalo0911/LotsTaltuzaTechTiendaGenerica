@@ -1,6 +1,7 @@
 package co.edu.unbosque.model;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
+import co.edu.unbosque.model.persistence.ArchivoTexto;
 import co.edu.unbosque.model.persistence.Propiedades;
 
 public class Fachada {
@@ -10,11 +11,10 @@ public class Fachada {
 	private ClientesDTO clientesDTO;
 	private ClientesDAO clientesDAO;
 	
-	
 	public Fachada()
 	{
 		
-		clientesDTO = new ClientesDTO(0, null, null, 0,null);
+		clientesDTO = new ClientesDTO(null, null, null, null,null);
 		clientesDAO = new ClientesDAO();
 		bF = new BinariosFile();
 		prop = new Propiedades();

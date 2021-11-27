@@ -15,11 +15,11 @@ public class View extends JFrame{
 
 	
 	private static final long serialVersionUID = 1L;
-	private PanelClientes panelJugador; 
+	private PanelClientes panelClientes; 
 	private PanelBuscar panelBuscar;
 	private PanelResultados panelResultados; 
-	private PanelProductos panelJuego;
-	private PanelProveedores panelPartida;
+	private PanelProductos panelProductos;
+	private PanelProveedores panelProveedores;
 	private PanelBotones panelBotones;
 	private PanelBotones2 panelBotones2;
 	private PanelVentas panelVentas;
@@ -34,18 +34,18 @@ public class View extends JFrame{
 		setLocationRelativeTo(null); 
 		
 		setLayout( new BorderLayout() );
-		panelJugador = new PanelClientes();
+		panelClientes = new PanelClientes();
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
 		
 		
 		add(panelBotones,BorderLayout.CENTER);
-		panelJuego = new PanelProductos();
+		panelProductos = new PanelProductos();
 		panelBotones2 = new PanelBotones2();
 		panelVentas = new PanelVentas();
 		
 		add(panelBotones2,BorderLayout.NORTH);
-		panelPartida = new PanelProveedores();
+		panelProveedores = new PanelProveedores();
 		panelResultados = new PanelResultados();
 		panelResultados2 = new PanelResultados2();
 		panelBotones2.setVisible(false);
@@ -70,19 +70,19 @@ public class View extends JFrame{
 
 
 	public PanelClientes getPanelEntrada() {
-		return panelJugador;
+		return panelClientes;
 	}
 
 	public void setPanelEntrada(PanelClientes panelJugador) {
-		this.panelJugador = panelJugador;
+		this.panelClientes = panelJugador;
 	}
 
 	public PanelProductos getPanelRegistro() {
-		return panelJuego;
+		return panelProductos;
 	}
 
 	public void setPanelRegistro(PanelProductos panelJuego) {
-		this.panelJuego = panelJuego;
+		this.panelProductos = panelJuego;
 	}
 
 	public PanelResultados getPanelResultados() {
@@ -99,27 +99,27 @@ public class View extends JFrame{
 	
 	
 	public PanelClientes getPanelJugador() {
-		return panelJugador;
+		return panelClientes;
 	}
 
 	public void setPanelJugador(PanelClientes panelJugador) {
-		this.panelJugador = panelJugador;
+		this.panelClientes = panelJugador;
 	}
 
 	public PanelProductos getPanelJuego() {
-		return panelJuego;
+		return panelProductos;
 	}
 
 	public void setPanelJuego(PanelProductos panelJuego) {
-		this.panelJuego = panelJuego;
+		this.panelProductos = panelJuego;
 	}
 
 	public PanelProveedores getPanelPartida() {
-		return panelPartida;
+		return panelProveedores;
 	}
 
 	public void setPanelPartida(PanelProveedores panelPartida) {
-		this.panelPartida = panelPartida;
+		this.panelProveedores = panelPartida;
 	}
 
 	public static long getSerialversionuid() {

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class ClientesDTO implements Serializable{
 	
-	private long cedula;
+	private String cedula;
 	private String nombre;
 	private String direccion;
 	private String correo;
-	private int telefono; 
+	private String telefono; 
 	
-	public ClientesDTO(long cedula, String nombre, String direccion, int telefono,String correo) {
+	public ClientesDTO(String cedula, String nombre, String direccion, String telefono,String correo) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -21,10 +21,10 @@ public class ClientesDTO implements Serializable{
 	}
 
 	
-	public long getCedula() {
+	public String getCedula() {
 		return cedula;
 	}
-	public void setCedula(long cedula) {
+	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
 
@@ -44,11 +44,11 @@ public class ClientesDTO implements Serializable{
 		this.direccion = direccion;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
