@@ -27,30 +27,37 @@ public class Controller implements ActionListener{
 
 	public void asignarOyentes() 
 	{
+		//Panel Inicial
 		gui.getPanelBotones().getButClientes().addActionListener(this);
 		gui.getPanelBotones().getButProductos().addActionListener(this);
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		
-		
+		//Botones Panel Productos
 		gui.getPanelJuego().getButEscribir().addActionListener(this);
 		gui.getPanelJuego().getButLeer().addActionListener(this);
-
-		gui.getPanelPartida().getButAgregar().addActionListener(this);
-		gui.getPanelPartida().getButLeer().addActionListener(this);
-
-		gui.getPanelJugador().getButLeer().addActionListener(this);
-		gui.getPanelJugador().getButEscribir().addActionListener(this);
+		gui.getPanelJuego().getButActualizar().addActionListener(this);
+		gui.getPanelJuego().getButEliminar().addActionListener(this);
 		
+		//Botones Panel Partida
+		gui.getPanelPartida().getButEscribir().addActionListener(this);
+		gui.getPanelPartida().getButLeer().addActionListener(this);
+		gui.getPanelPartida().getButActualizar().addActionListener(this);
+		gui.getPanelPartida().getButEliminar().addActionListener(this);
+
+		//Panel Clientes
+		gui.getPanelJugador().getButEscribir().addActionListener(this);
+		gui.getPanelJugador().getButLeer().addActionListener(this);
+		gui.getPanelJugador().getButActualizar().addActionListener(this);
+		gui.getPanelJugador().getButEliminar().addActionListener(this);
+		
+		//Botones Regresar y Buscar 
 		gui.getPanelBotones2().getButRegresar().addActionListener(this);
 		gui.getPanelBotones2().getButBuscar().addActionListener(this);
 		
 	//	gui.getPanelBuscar().getButAgregar().addActionListener(this);
 		
-		gui.getPanelJugador().getButEscribir().addActionListener(this);
-		gui.getPanelJugador().getButLeer().addActionListener(this);
-		gui.getPanelJugador().getButActualizar().addActionListener(this);
-		gui.getPanelJugador().getButEliminar().addActionListener(this);
+	
 		
 	}
 
