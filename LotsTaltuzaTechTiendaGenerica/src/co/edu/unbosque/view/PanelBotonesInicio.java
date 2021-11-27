@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class PanelBotones extends JPanel{
+public class PanelBotonesInicio extends JPanel{
     
     private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class PanelBotones extends JPanel{
     public static final String VENTAS = "Venta";
     public static final String PRODUCTOS = "Productos";
 
-    public PanelBotones() {
+    public PanelBotonesInicio() {
         
         setLayout( new GridLayout(6,1) );
         

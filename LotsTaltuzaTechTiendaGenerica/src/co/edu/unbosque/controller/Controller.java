@@ -30,10 +30,20 @@ public class Controller {
 			tienda.getClientesDTO().setTelefono(32145657);
 			tienda.getClientesDTO().setCiudad("Bog");
 			tienda.getClientesDAO().agregarCliente(tienda.getClientesDTO(),0);
+			tienda.getClientesDTO().setCedula(12345);
+			tienda.getClientesDTO().setNombre("Lalo");
+			tienda.getClientesDTO().setDireccion("frd r");
+			tienda.getClientesDTO().setTelefono(5645);
+			tienda.getClientesDTO().setCiudad("laNalga");
+			tienda.getClientesDAO().agregarCliente(tienda.getClientesDTO(),0);
 			tienda.getbF().escribirArchivoClientes(tienda.getClientesDAO().getClientes());
 			System.out.println(tienda.getClientesDAO().leerCliente());
 			
-			System.out.println(tienda.getClientesDAO().buscarClientes(1000579928));
+			System.out.println("Si "+tienda.getClientesDAO().buscarClientes(12345).toString());
+			
+			tienda.getClientesDAO().actualizarCliente(12345, 9876, "Nelson", "ElMangoFeliz", 45, null);
+			System.out.println(tienda.getClientesDAO().leerCliente());
+			System.out.println("Si "+tienda.getClientesDAO().buscarClientes(9876).toString());
 
 	}
 	
