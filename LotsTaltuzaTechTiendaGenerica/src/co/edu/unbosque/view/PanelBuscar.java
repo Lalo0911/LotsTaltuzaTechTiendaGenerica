@@ -12,11 +12,13 @@ public class PanelBuscar extends JPanel{
 	private JLabel labBuscar;
 	private JTextField txtBuscar;
 	private JButton butBuscar;
+	
+	private JButton butSeleccionarCliente;
 
 	public PanelBuscar() {
 		
 		setLayout( new GridLayout(4,2) );
-		TitledBorder border = BorderFactory.createTitledBorder("Buscar Jugador");
+		TitledBorder border = BorderFactory.createTitledBorder("Buscar Cliente");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		labBuscar = new JLabel("Documento:");
@@ -30,6 +32,11 @@ public class PanelBuscar extends JPanel{
 		butBuscar = new JButton("Buscar");
 		butBuscar .setActionCommand("BUSCARPANEL");
 		add(butBuscar);
+		
+		butSeleccionarCliente = new JButton("Seleccionar");
+		butSeleccionarCliente.setActionCommand("SELECCIONAR");
+		butSeleccionarCliente.setVisible(false);
+		add(butSeleccionarCliente);
 		
 	}
 
@@ -59,6 +66,14 @@ public class PanelBuscar extends JPanel{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public JButton getButSeleccionarCliente() {
+		return butSeleccionarCliente;
+	}
+
+	public void setButSeleccionarCliente(JButton butSeleccionarCliente) {
+		this.butSeleccionarCliente = butSeleccionarCliente;
 	}
 	
 }

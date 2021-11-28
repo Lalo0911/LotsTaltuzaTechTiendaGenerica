@@ -48,23 +48,23 @@ public class PanelResultados2 extends JPanel{
 	       // scroll1.setBounds(25, 100, 380, 350
 		add(scroll1, "cell 0 0,grow");
 		
-		lblPrecioSinIva = new JLabel("PRECIO SIN IVA: ");
+		lblPrecioSinIva = new JLabel("PRECIO SIN IVA: $");
 		add(lblPrecioSinIva, "flowx,cell 0 1,alignx right");
 		
-		lblPrecioIva = new JLabel("IVA TOTAL: ");
+		lblPrecioIva = new JLabel("IVA TOTAL: $");
 		add(lblPrecioIva, "flowx,cell 0 2,alignx right ");
 		
-		lblValorTotal = new JLabel("PRECIO TOTAL: ");
+		lblValorTotal = new JLabel("PRECIO TOTAL: $");
 		add(lblValorTotal, "flowx,cell 0 3,alignx right");
 		
-		lblValorPrecioSinIva = new JLabel(" 2000");
+		lblValorPrecioSinIva = new JLabel(" 0");
 	//	lblValorPrecioSinIva.setBorder(new );
 		add(lblValorPrecioSinIva, "cell 0 1");
 		
-		lblValorPrecioIva = new JLabel(" 100");
+		lblValorPrecioIva = new JLabel(" 0");
 		add(lblValorPrecioIva, "cell 0 2");
 		
-		lblPrecioValorTotal = new JLabel(" 2100");
+		lblPrecioValorTotal = new JLabel(" 0");
 		add(lblPrecioValorTotal, "cell 0 3");
 
 		

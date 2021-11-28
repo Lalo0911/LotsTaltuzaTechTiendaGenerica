@@ -1,58 +1,60 @@
 package co.edu.unbosque.model;
 
-public class ProductosDTO {
+import java.io.Serializable;
 
-	private int codigoProducto;
-	private String nombreProveedor;
-	private int nitProveedor;
-	private int precioCompraProducto;
-	private int precioVentaProducto;
+public class ProductosDTO implements Serializable{
 
-	public ProductosDTO(int codigoProducto, String nombreProveedor, int nitProveedor, int precioCompraProducto,
-			int precioVentaProducto) {
+	private String codigoProducto;
+	private String nombreProducto;
+	private String nitProveedor;
+	private String precioCompraProducto;
+	private String precioVentaProducto;
+
+	public ProductosDTO(String codigoProducto, String nombreProducto, String nitProveedor, String precioCompraProducto,
+			String precioVentaProducto) {
 		super();
 		this.codigoProducto = codigoProducto;
-		this.nombreProveedor = nombreProveedor;
+		this.nombreProducto = nombreProducto;
 		this.nitProveedor = nitProveedor;
 		this.precioCompraProducto = precioCompraProducto;
 		this.precioVentaProducto = precioVentaProducto;
 	}
 	
-	public int getCodigoProducto() {
+	public String getCodigoProducto() {
 		return codigoProducto;
 	}
-	public void setCodigoProducto(int codigoProducto) {
+	public void setCodigoProducto(String codigoProducto) {
 		this.codigoProducto = codigoProducto;
 	}
-	public String getNombreProveedor() {
-		return nombreProveedor;
+	public String getNombreProducto() {
+		return nombreProducto;
 	}
-	public void setNombreProveedor(String nombreProveedor) {
-		this.nombreProveedor = nombreProveedor;
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
 	}
-	public int getNitProveedor() {
+	public String getNitProveedor() {
 		return nitProveedor;
 	}
-	public void setNitProveedor(int nitProveedor) {
+	public void setNitProveedor(String nitProveedor) {
 		this.nitProveedor = nitProveedor;
 	}
-	public int getPrecioCompraProducto() {
+	public String getPrecioCompraProducto() {
 		return precioCompraProducto;
 	}
-	public void setPrecioCompraProducto(int precioCompraProducto) {
+	public void setPrecioCompraProducto(String precioCompraProducto) {
 		this.precioCompraProducto = precioCompraProducto;
 	}
-	public int getPrecioVentaProducto() {
+	public String getPrecioVentaProducto() {
 		return precioVentaProducto;
 	}
-	public void setPrecioVentaProducto(int precioVentaProducto) {
+	public void setPrecioVentaProducto(String precioVentaProducto) {
 		this.precioVentaProducto = precioVentaProducto;
 	}
 	@Override
 	public String toString() {
-		return "Productos [codigoProducto=" + codigoProducto + ", nombreProveedor=" + nombreProveedor
-				+ ", nitProveedor=" + nitProveedor + ", precioCompraProducto=" + precioCompraProducto
-				+ ", precioVentaProducto=" + precioVentaProducto + "]";
+		return "Código Producto-" + codigoProducto + ", Nombre Proveedor-" + nombreProducto
+				+ ", Nit Proveedor-" + nitProveedor + ", Precio Compra Producto-" + precioCompraProducto
+				+ ", Precio Venta Producto-" + precioVentaProducto;
 	}
 
 }

@@ -33,12 +33,9 @@ public class PanelProveedores extends JPanel{
 	private JButton butActualizar;
 	private JButton butEliminar;
 	
-	
-	
-	
 	public PanelProveedores() {
 		setLayout( new GridLayout(8,2) );
-		TitledBorder border = BorderFactory.createTitledBorder("Partida");
+		TitledBorder border = BorderFactory.createTitledBorder("Proveedores");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		

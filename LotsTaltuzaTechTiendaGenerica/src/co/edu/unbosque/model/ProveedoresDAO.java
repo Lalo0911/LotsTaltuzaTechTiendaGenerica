@@ -1,98 +1,105 @@
 package co.edu.unbosque.model;
-
+import java.io.File;
 import java.util.ArrayList;
-
 import co.edu.unbosque.model.persistence.BinariosFile;
 
-public class ProveedoresDAO {
 
+public class ProveedoresDAO implements Crud{
 	
 	private ArrayList<ProveedoresDTO> proveedores;
 	private BinariosFile bF;
+	private File f;
+	
 	
 
 	public ProveedoresDAO() 
 	{
 		proveedores = new ArrayList<ProveedoresDTO>();
-		bF = new BinariosFile();
-		
+		bF = new BinariosFile();	
 	}
-	public void agregarCliente(ProveedoresDTO proveedores1){
-		if(bF.leerArchivoClientes()!=null) {
-		proveedores = bF.leerArchivoProveedores();
-		proveedores.add(proveedores1);
-	    bF.escribirArchivoProveedores(proveedores);
-		}
-		else {
-			proveedores.add(proveedores1);
+	
+	public void agregarProveedor(ProveedoresDTO proveedoruno, int num){
+		if(num==1) {
+			proveedores.add(proveedoruno);
 			bF.escribirArchivoProveedores(proveedores);
 		}
+		else {
+			if(bF.leerArchivoProveedores()!=null) {
+				proveedores=bF.leerArchivoProveedores();
+				proveedores.add(proveedoruno);
+				bF.escribirArchivoProveedores(proveedores);
+			}
+			else {
+				proveedores.add(proveedoruno);
+				bF.escribirArchivoProveedores(proveedores);
+			}
+		}
 	}
-	public String leerProveedor(){
-	      String respuesta= "";
-	    
-				for(int i=0;i<bF.leerArchivoProveedores().size();i++){
-		respuesta =
-		"Nit: "+bF.leerArchivoProveedores().get(i).getNit()+
-		" Nombre: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
-		" Dirección: " +bF.leerArchivoProveedores().get(i).getDireccion()+
-		" Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
-		" Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+"\n"+respuesta;	
-				}
-	       return respuesta;
-	    }
-	public ProveedoresDTO buscarProveedores(long nit) {
+	
+	public String leer() {
 		
+		String respuesta= "";
+
+		for(int i=0;i<proveedores.size();i++){
+			respuesta =
+		                "NIT: "+bF.leerArchivoProveedores().get(i).getNit()+
+		                " Nombre del proveedor: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
+		                " Direccion: " +bF.leerArchivoProveedores().get(i).getDireccion()+
+		                " Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
+		                " Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+
+		                "\n"+respuesta;
+		}
+		return respuesta;
+	}
+	
+	public ProveedoresDTO buscarProveedor(String nit) {
+
 		ProveedoresDTO encontrar = null;
-		if(bF.leerArchivoProveedores()!=null) 
-		{	
-			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) 
-			{
-				if(bF.leerArchivoProveedores().get(i).getNit()==(nit)) 
-				{
-					encontrar= bF.leerArchivoProveedores().get(i);
+
+		if(proveedores!=null) {	
+			for (int i = 0; i < proveedores.size(); i++) {
+				if(proveedores.get(i).getNit().equals(nit)) {
+					encontrar= proveedores.get(i);
 				}	
 			}
 		}
 		return encontrar;
 	}
+	
+	public void actualizarProveedor(String nitBuscar,String nit, String nombreProveedor, String direccion, String telefono, String ciudad){
+		if(buscarProveedor(nitBuscar)!=null) 
+		{ 
+			ProveedoresDTO encontrar = new ProveedoresDTO(nit, nombreProveedor, direccion, telefono, ciudad);
+			eliminarProveedor(nitBuscar);
+			agregarProveedor(encontrar,1);
+		}
+	}
+	
+	public void eliminarProveedor(String nit){
 
-	public void actualizarCliente(long nit, long nit1, String nombre, String direccion, int telefono, String ciudad)
-	{
+		if(buscarProveedor(nit) != null){ 
 
-		if(buscarProveedores(nit)!=null) 
-		{
-			buscarProveedores(nit).setNit(nit1);
-			buscarProveedores(nit).setNombreProveedor(nombre);
-			buscarProveedores(nit).setDireccion(direccion);
-			buscarProveedores(nit).setTelefono(telefono);
-			buscarProveedores(nit).setCiudad(ciudad);
+			f= new File("./Data/proveedores.dat");
+			bF.eliminarFichero(f);
+			proveedores.remove(buscarProveedor(nit));			
+			bF.escribirArchivoProveedores(proveedores);
+
+		}
+		else{
+			
 		}
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
-	public void eliminarCliente(long nit) 
-	{
-		if(buscarProveedores(nit) != null) 
-		{
-			bF.leerArchivoClientes().remove(buscarProveedores(nit));
-		}
-	}
-	public BinariosFile getbF() {
-		return bF;
-	}
-	public void setbF(BinariosFile bF) {
-		this.bF = bF;
-	}
 	public ArrayList<ProveedoresDTO> getProveedores() {
 		return proveedores;
 	}
-	public void setProveedores(ArrayList<ProveedoresDTO> proveedores) {
-		this.proveedores = proveedores;
+
+	public BinariosFile getbF() {
+		return bF;
 	}
 
-
+	public File getF() {
+		return f;
+	}
 
 }
-
-

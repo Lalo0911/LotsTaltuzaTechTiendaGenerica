@@ -65,8 +65,7 @@ public class ClientesDTO implements Serializable{
 
 
 	public String toString() {
-		return "ClientesDTO [cedula=" + cedula + ", nombre=" + nombre + ", direccion=" + direccion + ", correo="
-				+ correo + ", telefono=" + telefono + "]";
+		return "Cedula-" + cedula + ", Nombre-" + nombre + ", Direccion-" + direccion + ", Correo "+ correo + ", Telefono-" + telefono;
 	}
 
 	

@@ -25,7 +25,7 @@ public class View extends JFrame{
 	private PanelVentas panelVentas;
 	private PanelResultados2 panelResultados2;	
 	private PanelPropiedades panelPropiedades;
-	
+		
 	public View(Controller control) {
 		
 		setSize(700,700);
@@ -70,7 +70,9 @@ public class View extends JFrame{
 	    }
 
 
-	    
+	public void mostrarMensajeJOption(String mensaje, String titulo,int tipoDeMensaje) {
+			JOptionPane.showMessageDialog(null, mensaje, titulo ,tipoDeMensaje);	
+	}    
 
 	public PanelClientes getPanelClientes() {
 		return panelClientes;

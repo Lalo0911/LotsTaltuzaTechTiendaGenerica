@@ -44,7 +44,7 @@ public class PanelProductos extends JPanel{
 		
 		setLayout( new GridLayout(8,2) );
 		
-		TitledBorder border = BorderFactory.createTitledBorder("Juego");
+		TitledBorder border = BorderFactory.createTitledBorder("Productos");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		
@@ -88,24 +88,19 @@ public class PanelProductos extends JPanel{
 		txtPrecioVentaProducto.setBackground(Color.WHITE);
 		add(txtPrecioVentaProducto);
 		
-		
-		
-		
-		butEscribir = new JButton("Escribir Juego");
+		butEscribir = new JButton("Escribir Producto");
 		butEscribir.setActionCommand("AGREGARPRODUCTO");
-		
-		butLeer = new JButton("Leer Juego");
-		butLeer.setActionCommand("LEERPRODUCTO");
-		
-	
 		add(butEscribir);
+		
+		butLeer = new JButton("Leer Producto");
+		butLeer.setActionCommand("LEERPRODUCTO");
 		add(butLeer);
 		
-		butActualizar = new JButton("Actualizar Cliente");
+		butActualizar = new JButton("Actualizar Producto");
 		butActualizar.setActionCommand("ACTUALIZARPRODUCTO");
 		add(butActualizar);
 		
-		butEliminar = new JButton("Borrar Cliente");
+		butEliminar = new JButton("Borrar Producto");
 		butEliminar.setActionCommand("BORRARPRODUCTO");
 		add(butEliminar);
 		

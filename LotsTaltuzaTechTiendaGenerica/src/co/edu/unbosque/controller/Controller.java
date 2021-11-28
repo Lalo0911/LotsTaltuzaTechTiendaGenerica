@@ -14,6 +14,11 @@ public class Controller implements ActionListener{
 
 	private Fachada fachada;
 	private View gui;
+	private String cedula;
+	private String codigoProducto;
+	private String nit;
+	int valortotalCompra = 0;
+	double ivaTotal = 0; 
 
 	public Controller() 
 
@@ -32,7 +37,6 @@ public class Controller implements ActionListener{
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		gui.getPanelBotones().getButEditarProperties().addActionListener(this);
-		
 		
 		gui.getPanelProductos().getButEscribir().addActionListener(this);
 		gui.getPanelProductos().getButLeer().addActionListener(this);
@@ -53,35 +57,141 @@ public class Controller implements ActionListener{
 		gui.getPanelBotones2().getButBuscar().addActionListener(this);
 		
 		gui.getPanelBuscar().getButBuscar().addActionListener(this);
+		gui.getPanelBuscar().getButSeleccionarCliente().addActionListener(this);
 		
 		gui.getPanelVentas().getBtnAgregarProd().addActionListener(this);
 		gui.getPanelVentas().getBtnBuscarProd().addActionListener(this);
-			
+		gui.getPanelVentas().getBtnTerminarCompra().addActionListener(this);
+		
 		gui.getPanelPropiedades().getButEditar().addActionListener(this);
+		
 	}
 
 	public void actionPerformed(ActionEvent evento){ 
 	
-	String cedula = null;	
 		
+		//Modulo 1
 		if(evento.getActionCommand().equals("EDITARPROPIEDADES")) {
-			gui.get
+			String nombreTienda =  gui.getPanelPropiedades().getTxtNombreTienda().getText()+"";
+			String TipoComercio =  gui.getPanelPropiedades().getTxtTipoComercio().getText()+"";
+			String nit = gui.getPanelPropiedades().getTxtNit().getText()+"";
+			String ciudad = gui.getPanelPropiedades().getTxtCiudad().getText()+"";
+			String iva = gui.getPanelPropiedades().getTxtValorIva().getText()+"";
+			String tasaInteres = gui.getPanelPropiedades().getTxtTasaInteres().getText()+"";
+			String nombreBanco = gui.getPanelPropiedades().getTxtNombreBanco().getText()+"";
+			String numeroCuenta = gui.getPanelPropiedades().getTxtNumeroCuenta().getText()+"";
+			String nombreGerente = gui.getPanelPropiedades().getTxtNombreGerente().getText()+"";
+			fachada.getProp().escribirPropiedades(nombreTienda, TipoComercio, nit, ciudad, iva, tasaInteres, nombreBanco, numeroCuenta, nombreGerente);
+			gui.mostrarMensajeJOption("Se ha Actualizado con �xito", "Actualizaci�n Propiedades", 2);
+			gui.limpiar_texto(gui.getPanelPropiedades());
 		}
 	
+		//Modulo 5
 		if(evento.getActionCommand().equals("VENTAS"))
 		{
 			
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
-			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
+			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE1");
+			gui.getContentPane().add(gui.getPanelVentas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
+			gui.getPanelVentas().setVisible(true);
+			gui.getPanelResultados2().setVisible(true);	
+		}
+		
+		if(evento.getActionCommand().equals("SELECCIONAR")) {
+			String cliente = gui.getPanelResultados().getTxtObjeto1().getText();			
+			String[] divisiones = cliente.split("-"); 
+			String[] nombreCliente = divisiones[2].split(",");
+			String[] cedula_cliente = divisiones[1].split(",");
+			gui.getPanelVentas().getLblNombreCliente().setText(nombreCliente[0]+ " - "+ cedula_cliente[0]);
+			
+			//regresa al panel ventas
+			gui.getPanelResultados().setVisible(false);
+			gui.getPanelBuscar().setVisible(false);
+			gui.getPanelBotones().setVisible(false);
+			gui.getPanelBotones2().setVisible(true);
+			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
+			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE1");
 			gui.getContentPane().add(gui.getPanelVentas(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
 			gui.getPanelVentas().setVisible(true);
 			gui.getPanelResultados2().setVisible(true);
+				
+		}
+		
+		if(evento.getActionCommand().equals("BUSCARPRODUCTO_A_A�ADIR"))
+		{
+			String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
 			
+			String precioVenta = fachada.getProductosDAO().buscarProducto(codProducto).getPrecioVentaProducto();
+			
+			String nombreProducto = fachada.getProductosDAO().buscarProducto(codProducto).getNombreProducto();
+			
+			gui.getPanelVentas().getlblProductoBuscado().setText(nombreProducto+ "  $ "+ precioVenta);
 			
 		}
+		
+		if(evento.getActionCommand().equals("FINALIZARCOMPRA"))
+		{
+			//Archivo Ventas
+			String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
+			gui.getPanelResultados2().getLblValorPrecioSinIva().getText();
+			String[] cedula = gui.getPanelVentas().getLblNombreCliente().getText().split("-");
+			String archivoVentas = cedula[1];
+			gui.getPanelResultados2().getLblValorPrecioIva().getText();
+			gui.getPanelResultados2().getLblPrecioValorTotal().getText();
+			
+			
+			//Archivo Detalles de Venta
+			if (gui.getPanelResultados2().getTabla1().getSelectedRow() != -1) {
+				String tabla = (String) gui.getPanelResultados2().getMod1().getValueAt(gui.getPanelResultados2().getTabla1().getSelectedRow(), 0);;
+
+	            // Lo imprimimos en pantalla
+				System.out.println(tabla);
+	        } else {
+	            System.out.println("Seleccione un renglon primero");
+	        }
+		}
+		
+		
+		
+		
+		if(evento.getActionCommand().equals("AGREGARPRODUCTO1")) 
+		{
+			
+		String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
+
+		String nombreProducto = fachada.getProductosDAO().buscarProducto(codProducto).getNombreProducto();
+		
+		String cantidad = gui.getPanelVentas().getTxfcantProd().getText();
+		
+		String precioUni = fachada.getProductosDAO().buscarProducto(codProducto).getPrecioVentaProducto();
+		
+		int valortotal =  Integer.parseInt(precioUni) *  Integer.parseInt(cantidad);
+		double iva = Double.parseDouble(fachada.getProp().getProp().getProperty("Iva"));
+		
+		ivaTotal = valortotal * iva + ivaTotal;
+		
+
+		valortotalCompra  = valortotalCompra  + valortotal;
+		 
+		gui.getPanelResultados2().getMod1().addRow(new String[]{codProducto, nombreProducto, cantidad ,precioUni,String.valueOf(valortotal)});
+		
+		gui.getPanelResultados2().getLblPrecioValorTotal().setText(String.valueOf(valortotalCompra));
+		gui.getPanelResultados2().getLblValorPrecioIva().setText(String.valueOf(ivaTotal));
+		gui.getPanelResultados2().getLblValorPrecioSinIva().setText(String.valueOf(valortotalCompra - ivaTotal));
+		gui.getPanelVentas().getTxfcantProd().setText("");
+		gui.getPanelVentas().getlblProductoBuscado().setText("");
+	
+			
+		}
+		
+		
+		//FIN MODULO 5
+		
+		
 		
 		if(evento.getActionCommand().equals("EDITAR"))
 		{
@@ -147,6 +257,26 @@ public class Controller implements ActionListener{
 			gui.limpiar_texto(gui.getPanelBuscar());	
 		}
 		
+		 if (evento.getActionCommand().equals("LEERPRODUCTO")){
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().leer());
+		}
+
+        if (evento.getActionCommand().equals("AGREGARPRODUCTO")) {
+			
+			fachada.getProductosDTO().setCodigoProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
+			fachada.getProductosDTO().setNitProveedor(gui.getPanelProductos().getTxtNitProveedorDeProducto().getText());
+			fachada.getProductosDTO().setNombreProducto(gui.getPanelProductos().getTxtNombreProducto().getText());
+			fachada.getProductosDTO().setPrecioCompraProducto(gui.getPanelProductos().getTxtPrecioCompraProducto().getText());
+			fachada.getProductosDTO().setPrecioVentaProducto(gui.getPanelProductos().getTxtPrecioVentaProducto().getText());
+			fachada.getProductosDAO().agregarProducto(fachada.getProductosDTO(), 0);
+			
+			gui.getPanelProductos().getTxtCodigoProducto().setText("");
+			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
+			gui.getPanelProductos().getTxtNombreProducto().setText("");
+			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
+			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
+        }
+		
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO"))
 		{
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
@@ -158,6 +288,67 @@ public class Controller implements ActionListener{
 			gui.getPanelProductos().setVisible(false);
 			gui.getPanelBotones().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
+			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARPRODUCTODOS");
+		}
+		
+		if(evento.getActionCommand().equals("BUSCARPRODUCTODOS")) 
+		{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().buscarProducto(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTO")){
+			
+			try{
+			
+			gui.getPanelResultados().getTxtObjeto1().setText("");
+			codigoProducto = gui.getPanelProductos().getTxtCodigoProducto().getText();
+			
+			gui.getPanelProductos().getTxtCodigoProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getCodigoProducto());
+			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getNitProveedor());
+			gui.getPanelProductos().getTxtNombreProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getNombreProducto());
+			gui.getPanelProductos().getTxtPrecioCompraProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getPrecioCompraProducto());
+			gui.getPanelProductos().getTxtPrecioVentaProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getPrecioVentaProducto());
+			
+			
+			if(fachada.getClientesDAO().buscarClientes(cedula)!=null){
+				
+			gui.getPanelProductos().getButActualizar().setActionCommand("ACTUALIZARPRODUCTODOS");
+			gui.mostrarMensajeJOption("Ahora ingrese valores y oprima de nuevo el boton", "Proceso a seguir", 1);
+			
+			}
+			
+				
+			}
+			
+			catch(Exception y) {
+				JOptionPane.showMessageDialog(null, "Primero debe ingresar una cédula válida en el campo indicado, para\npoder actualizar datos de algún cliente");
+			}
+	
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTODOS")){
+			
+			String codigoProductoDos = gui.getPanelProductos().getTxtCodigoProducto().getText();
+			String nitProducto = gui.getPanelProductos().getTxtNitProveedorDeProducto().getText();
+			String nombreProducto = gui.getPanelProductos().getTxtNombreProducto().getText();
+			String precioCompraProducto = gui.getPanelProductos().getTxtPrecioCompraProducto().getText();
+			String precioVentaProducto = gui.getPanelProductos().getTxtPrecioVentaProducto().getText();
+		
+	       fachada.getProductosDAO().actualizarProducto(codigoProducto, codigoProductoDos, nitProducto ,nombreProducto, precioCompraProducto, precioVentaProducto);	
+	        JOptionPane.showMessageDialog(null, "Actializado con exito");
+	  
+	        gui.getPanelProductos().getTxtCodigoProducto().setText("");
+			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
+			gui.getPanelProductos().getTxtNombreProducto().setText("");
+			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
+			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
+	        gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");	
+			
+		}
+		
+		if(evento.getActionCommand().equals("BORRARPRODUCTO")){
+			fachada.getProductosDAO().eliminarProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
 		}
 		
 		if(evento.getActionCommand().equals("LEERCLIENTE"))
@@ -185,7 +376,7 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("BORRARCLIENTE")){
 			fachada.getClientesDAO().eliminarCliente(gui.getPanelClientes().getTxtCedula().getText());
-			JOptionPane.showMessageDialog(null, "Eliminado con exito");
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
 		}
 		
 		if(evento.getActionCommand().equals("ACTUALIZARCLIENTE"))
@@ -203,10 +394,7 @@ public class Controller implements ActionListener{
 			if(fachada.getClientesDAO().buscarClientes(cedula)!=null){
 				
 			gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARCLIENTEDOS");
-			gui.getPanelClientes().getButEliminar().enable(false);
-			gui.getPanelClientes().getButEscribir().enable(false);
-			gui.getPanelClientes().getButLeer().enable(false);
-			JOptionPane.showMessageDialog(null, "Ahora ingrese valores y oprima de nuevo el boton");
+			gui.mostrarMensajeJOption("Ahora ingrese valores y oprima de nuevo el boton", "Proceso a seguir", 1);
 			
 			}
 			
@@ -236,13 +424,127 @@ public class Controller implements ActionListener{
 			gui.getPanelClientes().getTxtTelefono().setText("");
 			gui.getPanelClientes().getTxtNombre().setText("");
 			gui.getPanelClientes().getTxtCorreo().setText("");
-	        gui.getPanelClientes().getButEliminar().enable(true);
-			gui.getPanelClientes().getButEscribir().enable(true);
-			gui.getPanelClientes().getButLeer().enable(true);
 	        gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARCLIENTE");
 		}
 		
 		if(evento.getActionCommand().equals("BUSCARCLIENTE"))
+		{
+		
+			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+			gui.getPanelResultados().setVisible(true);
+			gui.getPanelBuscar().setVisible(true);
+			gui.getPanelBuscar().getButSeleccionarCliente().setVisible(false);
+			gui.getPanelProveedores().setVisible(false);
+			gui.getPanelClientes().setVisible(false);
+			gui.getPanelProductos().setVisible(false);
+			gui.getPanelBotones().setVisible(false);
+			gui.getPanelResultados2().setVisible(false);
+			gui.getPanelVentas().setVisible(false);
+			gui.limpiar_texto(gui.getPanelBuscar());	
+			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
+		
+		}
+		
+		
+		if(evento.getActionCommand().equals("BUSCARCLIENTE1"))
+		{
+			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+			gui.getPanelResultados().setVisible(true);
+			gui.getPanelBuscar().setVisible(true);
+			gui.getPanelBuscar().getButSeleccionarCliente().setVisible(true);
+			gui.getPanelProveedores().setVisible(false);
+			gui.getPanelClientes().setVisible(false);
+			gui.getPanelProductos().setVisible(false);
+			gui.getPanelBotones().setVisible(false);
+			gui.getPanelResultados2().setVisible(false);
+			gui.getPanelVentas().setVisible(false);
+			gui.limpiar_texto(gui.getPanelBuscar());	
+			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
+		}
+		
+		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
+		{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+		}
+		
+		
+		if(evento.getActionCommand().equals("AGREGARPROVEEDOR")){
+			
+			fachada.getProveedoresDTO().setNit(gui.getPanelProveedores().getTxtNit().getText());
+			fachada.getProveedoresDTO().setCiudad(gui.getPanelProveedores().getTxtCiudad().getText());
+			fachada.getProveedoresDTO().setDireccion(gui.getPanelProveedores().getTxtDireccion().getText());
+			fachada.getProveedoresDTO().setNombreProveedor(gui.getPanelProveedores().getTxtNombre().getText());
+			fachada.getProveedoresDTO().setTelefono(gui.getPanelProveedores().getTxtTelefono().getText());
+			
+			fachada.getProveedoresDAO().agregarProveedor(fachada.getProveedoresDTO(), 0);
+			
+			gui.getPanelProveedores().getTxtNit().setText("");
+			gui.getPanelProveedores().getTxtCiudad().setText("");
+			gui.getPanelProveedores().getTxtDireccion().setText("");
+			gui.getPanelProveedores().getTxtNombre().setText("");
+			gui.getPanelProveedores().getTxtTelefono();
+			
+		}
+		
+		if(evento.getActionCommand().equals("LEERPROVEEDOR")){
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().leer());
+		}
+		
+		if(evento.getActionCommand().equals("BORRARPROVEEDOR")){
+			fachada.getProveedoresDAO().eliminarProveedor(gui.getPanelProveedores().getTxtNit().getText());
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARPROVEEDOR")){
+			
+		try{
+			
+			gui.getPanelResultados().getTxtObjeto1().setText("");
+			nit = gui.getPanelProveedores().getTxtNit().getText();
+			gui.getPanelProveedores().getTxtDireccion().setText(fachada.getProveedoresDAO().buscarProveedor(nit).getDireccion());
+			gui.getPanelProveedores().getTxtNombre().setText(fachada.getProveedoresDAO().buscarProveedor(nit).getNombreProveedor());
+			gui.getPanelProveedores().getTxtTelefono().setText(fachada.getProveedoresDAO().buscarProveedor(nit).getTelefono());
+			gui.getPanelProveedores().getTxtCiudad().setText(fachada.getProveedoresDAO().buscarProveedor(nit).getCiudad());
+			
+			if(fachada.getProveedoresDAO().buscarProveedor(nit)!=null){
+				
+			gui.getPanelProveedores().getButActualizar().setActionCommand("ACTUALIZARPROVEEDORDOS");
+			gui.mostrarMensajeJOption("Ahora ingrese valores y oprima de nuevo el boton", "Proceso a seguir", 1);
+			
+			}
+			
+				
+			}
+			
+			catch(Exception y) {
+				JOptionPane.showMessageDialog(null, "Primero debe ingresar una cédula válida en el campo indicado, para\npoder actualizar datos de algún cliente");
+			}
+	        
+		}
+		
+		if(evento.getActionCommand().equals("ACTUALIZARPROVEEDORDOS")){
+			
+			String nituno = gui.getPanelProveedores().getTxtNit().getText();
+			String nombre = gui.getPanelProveedores().getTxtNombre().getText();
+			String direccion = gui.getPanelProveedores().getTxtDireccion().getText();
+		    String telefono = gui.getPanelProveedores().getTxtTelefono().getText();
+		    String ciudad = gui.getPanelProveedores().getTxtCiudad().getText();
+	
+	        fachada.getClientesDAO().actualizarCliente(nit, nituno, nombre, direccion, telefono, ciudad);	
+	        JOptionPane.showMessageDialog(null, "Actializado con exito");
+	  
+	        gui.getPanelProveedores().getTxtNit().setText("");
+			gui.getPanelProveedores().getTxtDireccion().setText("");
+			gui.getPanelProveedores().getTxtTelefono().setText("");
+			gui.getPanelProveedores().getTxtNombre().setText("");
+			gui.getPanelProveedores().getTxtCiudad().setText("");
+	        gui.getPanelProveedores().getButActualizar().setActionCommand("ACTUALIZARPROVEEDOR");
+	        
+		}
+		
+		if(evento.getActionCommand().equals("BUSCARPROVEEDORES"))
 		{
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
@@ -253,12 +555,12 @@ public class Controller implements ActionListener{
 			gui.getPanelProductos().setVisible(false);
 			gui.getPanelBotones().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
-			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
+			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARPROVEEDORESDOS");
 		}
 		
-		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
+		if(evento.getActionCommand().equals("BUSCARPROVEEDORESDOS")) 
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().buscarProveedor(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
 		}
 
 		if (evento.getActionCommand().equals("INICIO")) 
@@ -269,11 +571,13 @@ public class Controller implements ActionListener{
 			gui.getPanelProductos().setVisible(false);
 			gui.getPanelBotones().setVisible(true);
 			gui.getPanelBuscar().setVisible(false);
+			gui.getPanelBotones2().getButBuscar().setVisible(true);
 			gui.getPanelPropiedades().setVisible(false);
 			gui.getPanelResultados2().setVisible(false);
 			gui.getPanelVentas().setVisible(false);
 			gui.getContentPane().add(gui.getPanelBotones(),BorderLayout.CENTER);
 			gui.getPanelBotones2().setVisible(false);
+			
 			gui.getPanelResultados().getTxtObjeto1().setText("");
 			gui.limpiar_texto(gui.getPanelClientes());
 			gui.limpiar_texto(gui.getPanelProveedores());
@@ -281,27 +585,7 @@ public class Controller implements ActionListener{
 			gui.limpiar_texto(gui.getPanelBuscar());
 		}
 		
-		
-		/*if (evento.getActionCommand().equals("BUSCAR")) 
-		{			
-			
-					
-				if(fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText()))!=null) {
-					
-			gui.getPanelResultados().getTxtObjeto1().setText(	
-			"Documento: "+fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText())).getDocumento()+"\n"+
-			"Nombre: "+fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText())).getNombre()+"\n"+
-			"Edad: "+fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText())).getEdad()+"\n"+
-			"Genero: "+fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText())).getGenero()+"\n"+
-			"Puntaje: "+fachada.getJugadorDAO().buscarJugador(Integer.parseInt(gui.getPanelBuscar().getTxtBuscar().getText())).getPuntaje());
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "El jugador con documento '"+gui.getPanelBuscar().getTxtBuscar().getText()+"' no existe");
-				}
-				
-			
-		}*/
-		
 	}
 
+	
 }

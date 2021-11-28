@@ -14,21 +14,21 @@ public class Propiedades {
 	
 	public Propiedades() 
 	{
-		escribirPropiedades();
+		escribirPropiedades("TALTUZA","Electrodomesticos","10554875520","Bogotá D.C.","0.19","0.04","Bancolombia","1598746320","Laura Mateus");
 		
 	}
 	
-	public int escribirPropiedades() {
+	public int escribirPropiedades(String nombreTienda, String tipoComercio, String nit, String ciudad,String iva, String tasaInteres, String nombreBanco, String numeroCuenta, String nombreGerente ) {
 		try {
-			prop.setProperty("NombreTienda", "TALTUZA");
-			prop.setProperty("TipoComercio", "Electrodomesticos");
-			prop.setProperty("Nit", "10554875520");
-			prop.setProperty("Ciudad", "Bogotá D.C.");
-			prop.setProperty("Iva", "0.19");
-			prop.setProperty("TasaInteres", "0.04");
-			prop.setProperty("NombreBanco", "Bancolombia");
-			prop.setProperty("NumeroCuenta", "1598746320");
-			prop.setProperty("NombreGerente", "Laura Mateus");
+			prop.setProperty("NombreTienda", nombreTienda);
+			prop.setProperty("TipoComercio", tipoComercio);
+			prop.setProperty("Nit", nit);
+			prop.setProperty("Ciudad", ciudad);
+			prop.setProperty("Iva", iva);
+			prop.setProperty("TasaInteres", tasaInteres);
+			prop.setProperty("NombreBanco", nombreBanco);
+			prop.setProperty("NumeroCuenta", numeroCuenta);
+			prop.setProperty("NombreGerente", nombreGerente);
 			prop.store(new FileOutputStream(archivoprop), null);
 		}catch(IOException ex) {
 			return -1;
@@ -43,7 +43,7 @@ public class Propiedades {
 			prop.load(new FileInputStream(archivoprop));
 
 			prop.list(System.out);
-
+			
 			linea += "Nombre Tienda: "+prop.getProperty("NombreTienda");
 			linea += "Tipo de comercio: "+prop.getProperty("TipoComercio");
 			linea += "NIT de la tienda: "+prop.getProperty("Nit");

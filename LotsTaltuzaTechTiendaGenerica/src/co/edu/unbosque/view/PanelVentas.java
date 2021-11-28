@@ -8,22 +8,26 @@ import javax.swing.border.TitledBorder;
 
 public class PanelVentas extends JPanel{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
+	private JTextField txfcantProd;
 	private JTextField txfCodProd;
+	private JLabel lblcantProd;
 	private JLabel lblCliente;
 	private JLabel lblNombreCliente;
 	private JLabel lblNumeroFactura;
 	private JLabel lblIndice_numeroFactura;
 	private JLabel lblCodigoProd;
 	private JButton btnBuscarProd;
-	private JLabel productoBuscado;
+	private JLabel lblproductoBuscado;
 	private JButton btnAgregarProd;
+	private JButton btnTerminarCompra;
+	
 	
 	
 	public PanelVentas() {
 		
-		TitledBorder border = BorderFactory.createTitledBorder("");
+		TitledBorder border = BorderFactory.createTitledBorder("Ventas");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		
@@ -43,23 +47,37 @@ public class PanelVentas extends JPanel{
 		
 		add(new JLabel(""), "cell 0 2");
 		
-		lblCodigoProd = new JLabel("C\u00F3digo del producto");
+		lblCodigoProd = new JLabel("Codigo del producto");
 		add(lblCodigoProd, "cell 1 2,grow");
 		
-		txfCodProd = new JTextField();
+		txfCodProd = new JTextField("");
 		add(txfCodProd, "cell 2 2,grow");
 		txfCodProd.setColumns(10);
 		
-		btnBuscarProd = new JButton("Buscar Producto");
-		add(btnBuscarProd, "cell 2 3,grow");
 		
 		add(new JLabel(""), "cell 1 4,grow");
 		
-		productoBuscado = new JLabel("\"producto buscado\"  #cantidad   ---$$  ");
-		add(productoBuscado, "cell 2 4,grow");
+		lblproductoBuscado = new JLabel("Producto");
+		add(lblproductoBuscado, "cell 2 4,alignx center,grow");
+		
+		btnBuscarProd = new JButton("Buscar Producto");
+		btnBuscarProd.setActionCommand("BUSCARPRODUCTO_A_AÑADIR");
+		add(btnBuscarProd, "cell 2 3,alignx center,grow");
+		
 		
 		btnAgregarProd = new JButton("Agregar");
-		add(btnAgregarProd, "cell 3 4");
+		btnAgregarProd.setActionCommand("AGREGARPRODUCTO1");
+		add(btnAgregarProd, "cell 1 4");
+		
+		btnTerminarCompra = new JButton("Finalizar Compra");
+		btnTerminarCompra.setActionCommand("FINALIZARCOMPRA"); 
+		add(btnTerminarCompra, "cell 2 5, alignx center, growx");
+		
+		lblcantProd = new JLabel("Cantidad:");
+		add(lblcantProd, "cell 3 4,growx");
+		
+		txfcantProd = new JTextField("");
+		add(txfcantProd, "cell 4 4,grow");
 		
 		add(new JLabel(""), "cell 1 5,grow");
 
@@ -106,13 +124,28 @@ public class PanelVentas extends JPanel{
 	}
 
 
-	public JLabel getProductoBuscado() {
-		return productoBuscado;
+	public JLabel getlblProductoBuscado() {
+		return lblproductoBuscado;
 	}
 
 
 	public JButton getBtnAgregarProd() {
 		return btnAgregarProd;
+	}
+
+
+	public JButton getBtnTerminarCompra() {
+		return btnTerminarCompra;
+	}
+
+
+	public JTextField getTxfcantProd() {
+		return txfcantProd;
+	}
+
+
+	public JLabel getLblcantProd() {
+		return lblcantProd;
 	}
 	
 }

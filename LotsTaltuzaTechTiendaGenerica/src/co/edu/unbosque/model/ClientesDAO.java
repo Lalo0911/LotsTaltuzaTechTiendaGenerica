@@ -52,19 +52,7 @@ public class ClientesDAO implements Crud{
 		return respuesta;
 	}
 	
-	/*public String leerCliente(){
-		String respuesta= "";
-
-		for(int i=0;i<clientes.size();i++){
-			respuesta =
-					"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
-					" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
-					" Direccion: " +bF.leerArchivoClientes().get(i).getDireccion()+
-					" Telefono: " +bF.leerArchivoClientes().get(i).getTelefono()
-					+"\n"+respuesta;	
-		}
-		return respuesta;
-	}*/
+	
 	public ClientesDTO buscarClientes(String cedula) {
 
 		ClientesDTO encontrar = null;
@@ -81,12 +69,12 @@ public class ClientesDAO implements Crud{
 
 	public void actualizarCliente(String cedula, String cedula1, String nombre, String direccion, String telefono,String correo){
 		if(buscarClientes(cedula)!=null) 
-		{ System.out.println(cedula);
+		{ 
 			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono,correo);
 			eliminarCliente(cedula);
 			agregarCliente(encontrar,1);
 
-		}System.out.println(cedula);
+		}
 	}
 
 	public void eliminarCliente(String cedula){
@@ -95,9 +83,7 @@ public class ClientesDAO implements Crud{
 
 			f= new File("./Data/clientes.dat");
 			bF.eliminarFichero(f);
-			System.out.println(clientes.size());
-			clientes.remove(buscarClientes(cedula));
-			System.out.println(clientes.size());			
+			clientes.remove(buscarClientes(cedula));		
 			bF.escribirArchivoClientes(clientes);
 
 		}

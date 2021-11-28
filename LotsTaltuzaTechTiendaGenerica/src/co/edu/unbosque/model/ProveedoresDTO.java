@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class ProveedoresDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private long nit;
+	private String nit;
 	private String nombreProveedor;
 	private String direccion;
-	private int telefono;
+	private String telefono;
 	private String ciudad;
 	
-	public ProveedoresDTO(long nit, String nombreProveedor, String direccion, int telefono, String ciudad) {
+	public ProveedoresDTO(String nit, String nombreProveedor, String direccion, String telefono, String ciudad) {
 		super();
 		this.nit = nit;
 		this.nombreProveedor = nombreProveedor;
@@ -20,11 +20,11 @@ public class ProveedoresDTO implements Serializable{
 		this.ciudad = ciudad;
 	}
 
-	public long getNit() {
+	public String getNit() {
 		return nit;
 	}
 
-	public void setNit(long nit) {
+	public void setNit(String nit) {
 		this.nit = nit;
 	}
 
@@ -48,11 +48,11 @@ public class ProveedoresDTO implements Serializable{
 		this.direccion = direccion;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

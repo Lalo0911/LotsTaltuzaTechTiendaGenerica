@@ -50,7 +50,7 @@ private JLabel labNombreTienda;
 		
 		setLayout( new GridLayout(10,2) );
 		
-		TitledBorder border = BorderFactory.createTitledBorder("Juego");
+		TitledBorder border = BorderFactory.createTitledBorder("Propiedades");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		
@@ -150,26 +150,6 @@ private JLabel labNombreTienda;
 		add(labNombreGerente);
 		add(txtNombreGerente);
 		add(butEditar);
-//		add(labNombreTienda);
-//		add(txtNombreTienda);
-//		add(labTipoComercio);
-//		add(txtTipoComercio);
-//		add(labNit);
-//		add(txtNit);
-//		add(labCiudad);
-//		add(txtCiudad);
-//		add(labValorIva);
-//		add(txtValorIva);
-//		add(labTasaInteres);
-//		add(txtTasaInteres);
-//		add(labNombreBanco);
-//		add(txtNombreBanco);
-//		add(labNumeroCuenta);
-//		
-//		add(labNombreGerente);
-//		add(txtNombreGerente);
-//		add(butEditar);
-			
 	
 	}
 

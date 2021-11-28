@@ -36,7 +36,7 @@ public class PanelClientes extends JPanel{
 	public PanelClientes() {
 		
 		setLayout( new GridLayout(9,2) );
-		TitledBorder border = BorderFactory.createTitledBorder("Jugador");
+		TitledBorder border = BorderFactory.createTitledBorder("Cliente");
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		
