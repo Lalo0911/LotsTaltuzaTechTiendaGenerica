@@ -253,7 +253,7 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
-			gui.getPanelPropiedades().setVisible(true);
+			gui.getPanelConsultas().setVisible(true);
 			
 			
 		}
@@ -268,10 +268,10 @@ public class Controller implements ActionListener{
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
 			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
-			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelPropiedades(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
-			gui.getPanelConsultas().setVisible(true);
+			gui.getPanelPropiedades().setVisible(true);
 			
 		}
 		
