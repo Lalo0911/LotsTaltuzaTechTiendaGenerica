@@ -18,6 +18,20 @@ public class ProveedoresDAO implements Crud{
 		bF = new BinariosFile();	
 	}
 	
+	public boolean Verificar(String nit) {
+		boolean repetida = false;
+		
+		if(proveedores!=null) {	
+			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
+				if(proveedores.get(i).getNit().equals(nit)) {
+					repetida= true;
+				}	
+			}
+		}
+		
+		return repetida;
+	}
+	
 	public void agregarProveedor(ProveedoresDTO proveedoruno, int num){
 		if(num==1) {
 			proveedores.add(proveedoruno);
@@ -39,8 +53,10 @@ public class ProveedoresDAO implements Crud{
 	public String leer() {
 		
 		String respuesta= "";
-
-		for(int i=0;i<proveedores.size();i++){
+		
+		 try{
+			 
+			for(int i=0;i<bF.leerArchivoProveedores().size();i++){
 			respuesta =
 		                "NIT: "+bF.leerArchivoProveedores().get(i).getNit()+
 		                " Nombre del proveedor: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
@@ -48,16 +64,20 @@ public class ProveedoresDAO implements Crud{
 		                " Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
 		                " Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+
 		                "\n"+respuesta;
-		}
+		     } 
+			 
+		 }catch(Exception e){
+	   
+         }
 		return respuesta;
-	}
+	    }
 	
 	public ProveedoresDTO buscarProveedor(String nit) {
 
 		ProveedoresDTO encontrar = null;
 
 		if(proveedores!=null) {	
-			for (int i = 0; i < proveedores.size(); i++) {
+			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
 				if(proveedores.get(i).getNit().equals(nit)) {
 					encontrar= proveedores.get(i);
 				}	

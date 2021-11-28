@@ -1,6 +1,7 @@
 package co.edu.unbosque.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ClientesDTO implements Serializable{
 	
@@ -9,6 +10,8 @@ public class ClientesDTO implements Serializable{
 	private String direccion;
 	private String correo;
 	private String telefono; 
+	private String historialVentas;
+	private String detallerDeVentas;
 	
 	public ClientesDTO(String cedula, String nombre, String direccion, String telefono,String correo) {
 		super();
@@ -16,8 +19,7 @@ public class ClientesDTO implements Serializable{
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.correo = correo;
-
+		this.correo = correo;	
 	}
 
 	
@@ -62,6 +64,27 @@ public class ClientesDTO implements Serializable{
 		this.correo = correo;
 	}
 
+
+
+
+	public String getHistorialVentas() {
+		return historialVentas;
+	}
+
+
+	public void setHistorialVentas(String historialVentas) {
+		this.historialVentas = historialVentas;
+	}
+
+
+	public String getDetallerDeVentas() {
+		return detallerDeVentas;
+	}
+
+
+	public void setDetallerDeVentas(String detallerDeVentas) {
+		this.detallerDeVentas = detallerDeVentas;
+	}
 
 
 	public String toString() {

@@ -37,6 +37,7 @@ public class Controller implements ActionListener{
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		gui.getPanelBotones().getButEditarProperties().addActionListener(this);
+		gui.getPanelBotones().getButConsultas().addActionListener(this);
 		
 		gui.getPanelProductos().getButEscribir().addActionListener(this);
 		gui.getPanelProductos().getButLeer().addActionListener(this);
@@ -65,6 +66,8 @@ public class Controller implements ActionListener{
 		
 		gui.getPanelPropiedades().getButEditar().addActionListener(this);
 		
+		gui.getPanelConsultas().getBtnConsultaProveedores().addActionListener(this);
+		gui.getPanelConsultas().getBtnConsultaClientes().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent evento){ 
@@ -105,7 +108,7 @@ public class Controller implements ActionListener{
 			String[] divisiones = cliente.split("-"); 
 			String[] nombreCliente = divisiones[2].split(",");
 			String[] cedula_cliente = divisiones[1].split(",");
-			gui.getPanelVentas().getLblNombreCliente().setText(nombreCliente[0]+ " - "+ cedula_cliente[0]);
+			gui.getPanelVentas().getLblNombreCliente().setText(nombreCliente[0]+ "-"+ cedula_cliente[0]);
 			
 			//regresa al panel ventas
 			gui.getPanelResultados().setVisible(false);
@@ -135,25 +138,72 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("FINALIZARCOMPRA"))
 		{
-			//Archivo Ventas
-			String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
-			gui.getPanelResultados2().getLblValorPrecioSinIva().getText();
+			//Archivo Venta
+			
+			String valorSinIva = gui.getPanelResultados2().getLblValorPrecioSinIva().getText();
+			
 			String[] cedula = gui.getPanelVentas().getLblNombreCliente().getText().split("-");
 			String archivoVentas = cedula[1];
-			gui.getPanelResultados2().getLblValorPrecioIva().getText();
-			gui.getPanelResultados2().getLblPrecioValorTotal().getText();
+			
+			String ValorPrecioIva = gui.getPanelResultados2().getLblValorPrecioIva().getText();
+			
+			String ValorTotal = gui.getPanelResultados2().getLblPrecioValorTotal().getText();
+			
+			int numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText());
+			gui.getPanelVentas().getLblIndice_numeroFactura().setText(numeroFactura+"");
+			
+			String rta = 
+						"Numero de factura: " + String.valueOf(numeroFactura) + "\n" +
+						"Cedula: " + cedula[1] + "\n" + 
+						"Valor sin iva: " + valorSinIva  + "\n" +
+						"Valor total iva " + ValorPrecioIva  + "\n" +
+						"Valor total: " + ValorTotal;
 			
 			
 			//Archivo Detalles de Venta
-			if (gui.getPanelResultados2().getTabla1().getSelectedRow() != -1) {
-				String tabla = (String) gui.getPanelResultados2().getMod1().getValueAt(gui.getPanelResultados2().getTabla1().getSelectedRow(), 0);;
-
-	            // Lo imprimimos en pantalla
-				System.out.println(tabla);
-	        } else {
-	            System.out.println("Seleccione un renglon primero");
-	        }
+			
+		
+			String tablaValores="";
+			for (int i = 0; i < gui.getPanelResultados2().getTabla1().getRowCount(); i++) {
+				for (int j = 0; j < gui.getPanelResultados2().getTabla1().getColumnCount(); j++) {
+					
+					if(j==0)
+					{
+					 tablaValores = "No. Factura: " + gui.getPanelVentas().getLblIndice_numeroFactura().getText() +"\n"+tablaValores;
+					}
+					
+					switch(j) {
+					
+					case 0: tablaValores = "Codigo: "+ gui.getPanelResultados2().getTabla1().getValueAt(i, j) + " | "+ tablaValores;  
+					break;
+					
+					case 1: tablaValores = "Nombre: " + gui.getPanelResultados2().getTabla1().getValueAt(i, j) + " | "+ tablaValores;
+					break;
+					
+					case 2: tablaValores = "Cantidad: " + gui.getPanelResultados2().getTabla1().getValueAt(i, j) + " | "+ tablaValores;
+					break;
+					
+					case 3: tablaValores = "Valor unitario: " + gui.getPanelResultados2().getTabla1().getValueAt(i, j)+ " | "+ tablaValores;
+					break;
+					
+					case 4: tablaValores = "Valor total: " + gui.getPanelResultados2().getTabla1().getValueAt(i, j) +" | "+ tablaValores;
+					break;
+					
+					case 5:  tablaValores = "Cantidad: " + gui.getPanelResultados2().getTabla1().getValueAt(i, j) +" | "+ tablaValores;
+					break;
+							
+					}
+				}
+			}
+			fachada.getClientesDAO().buscarClientes(cedula[1]).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
+			fachada.getClientesDAO().buscarClientes(cedula[1]).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
+			
+			System.out.println(fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas());
+			System.out.println(fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas());
+			numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText())+1;
+			gui.getPanelVentas().getLblIndice_numeroFactura().setText(numeroFactura+"");
 		}
+		
 		
 		
 		
@@ -192,17 +242,36 @@ public class Controller implements ActionListener{
 		//FIN MODULO 5
 		
 		
+		//Modulo 6
+		
+		if(evento.getActionCommand().equals("CONSULTAS"))
+		{
+			
+			gui.getPanelBotones().setVisible(false);
+			gui.getPanelBotones2().setVisible(true);
+			gui.getPanelBotones2().getButBuscar().setVisible(false);
+			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+			gui.getPanelResultados().setVisible(true);
+			gui.getPanelPropiedades().setVisible(true);
+			
+			
+		}
+		
+		//Fin Modulo 6
+		
 		
 		if(evento.getActionCommand().equals("EDITAR"))
 		{
 			
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
-			gui.getPanelBotones2().getButBuscar().setVisible(false);
-			gui.getContentPane().add(gui.getPanelPropiedades(),BorderLayout.CENTER);
+			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
+			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
+			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
-			gui.getPanelPropiedades().setVisible(true);
-			
+			gui.getPanelConsultas().setVisible(true);
 			
 		}
 		
@@ -263,18 +332,26 @@ public class Controller implements ActionListener{
 
         if (evento.getActionCommand().equals("AGREGARPRODUCTO")) {
 			
+			if(fachada.getProductosDAO().Verificar(gui.getPanelProductos().getTxtCodigoProducto().getText())==false){
+			
 			fachada.getProductosDTO().setCodigoProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
 			fachada.getProductosDTO().setNitProveedor(gui.getPanelProductos().getTxtNitProveedorDeProducto().getText());
 			fachada.getProductosDTO().setNombreProducto(gui.getPanelProductos().getTxtNombreProducto().getText());
 			fachada.getProductosDTO().setPrecioCompraProducto(gui.getPanelProductos().getTxtPrecioCompraProducto().getText());
 			fachada.getProductosDTO().setPrecioVentaProducto(gui.getPanelProductos().getTxtPrecioVentaProducto().getText());
-			fachada.getProductosDAO().agregarProducto(fachada.getProductosDTO(), 0);
-			
+			fachada.getProductosDAO().agregarProducto(fachada.getProductosDTO(), 0);	
 			gui.getPanelProductos().getTxtCodigoProducto().setText("");
 			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
 			gui.getPanelProductos().getTxtNombreProducto().setText("");
 			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
-			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
+			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");	
+			
+			}else{
+				gui.mostrarMensajeJOption("Este codigo de producto ya fue ingresado con anterioridad", "Informacion", 1);
+			}
+			
+			
+			
         }
 		
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO"))
@@ -359,6 +436,8 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("AGREGARCLIENTE")){
 			
+			if(fachada.getClientesDAO().Verificar(gui.getPanelClientes().getTxtCedula().getText())==false){
+				
 			fachada.getClientesDTO().setCedula(gui.getPanelClientes().getTxtCedula().getText());
 			fachada.getClientesDTO().setDireccion(gui.getPanelClientes().getTxtDireccion().getText());
 			fachada.getClientesDTO().setTelefono(gui.getPanelClientes().getTxtTelefono().getText());
@@ -370,7 +449,11 @@ public class Controller implements ActionListener{
 			gui.getPanelClientes().getTxtDireccion().setText("");
 			gui.getPanelClientes().getTxtTelefono().setText("");
 			gui.getPanelClientes().getTxtNombre().setText("");
-			gui.getPanelClientes().getTxtCorreo().setText("");
+			gui.getPanelClientes().getTxtCorreo().setText("");	
+			
+			}else{
+				gui.mostrarMensajeJOption("Esta caedula ya fue ingresado con anterioridad", "Informacion", 1);
+			}		
 			
 		}
 		
@@ -472,19 +555,26 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("AGREGARPROVEEDOR")){
 			
+			if(fachada.getProveedoresDAO().Verificar(gui.getPanelProveedores().getTxtNit().getText())==false){
+				
 			fachada.getProveedoresDTO().setNit(gui.getPanelProveedores().getTxtNit().getText());
 			fachada.getProveedoresDTO().setCiudad(gui.getPanelProveedores().getTxtCiudad().getText());
 			fachada.getProveedoresDTO().setDireccion(gui.getPanelProveedores().getTxtDireccion().getText());
 			fachada.getProveedoresDTO().setNombreProveedor(gui.getPanelProveedores().getTxtNombre().getText());
 			fachada.getProveedoresDTO().setTelefono(gui.getPanelProveedores().getTxtTelefono().getText());
-			
 			fachada.getProveedoresDAO().agregarProveedor(fachada.getProveedoresDTO(), 0);
 			
 			gui.getPanelProveedores().getTxtNit().setText("");
 			gui.getPanelProveedores().getTxtCiudad().setText("");
 			gui.getPanelProveedores().getTxtDireccion().setText("");
 			gui.getPanelProveedores().getTxtNombre().setText("");
-			gui.getPanelProveedores().getTxtTelefono();
+			gui.getPanelProveedores().getTxtTelefono();	
+				
+			}else{
+				
+			gui.mostrarMensajeJOption("Este NIT ya fue ingresado con anterioridad", "Informacion", 1);	
+			}
+			
 			
 		}
 		
@@ -566,6 +656,7 @@ public class Controller implements ActionListener{
 		if (evento.getActionCommand().equals("INICIO")) 
 		{
 			gui.getPanelResultados().setVisible(false);
+			gui.getPanelConsultas().setVisible(false);
 			gui.getPanelProveedores().setVisible(false);
 			gui.getPanelClientes().setVisible(false);
 			gui.getPanelProductos().setVisible(false);

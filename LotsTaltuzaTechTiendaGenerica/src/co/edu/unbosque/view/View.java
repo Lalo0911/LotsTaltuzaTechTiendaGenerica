@@ -25,6 +25,7 @@ public class View extends JFrame{
 	private PanelVentas panelVentas;
 	private PanelResultados2 panelResultados2;	
 	private PanelPropiedades panelPropiedades;
+	private PanelConsultas panelConsultas;
 		
 	public View(Controller control) {
 		
@@ -39,11 +40,14 @@ public class View extends JFrame{
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
 		panelPropiedades = new PanelPropiedades();
+		panelConsultas = new PanelConsultas();
+		
 		
 		add(panelBotones,BorderLayout.CENTER);
 		panelProductos = new PanelProductos();
 		panelBotones2 = new PanelBotones2();
 		panelVentas = new PanelVentas();
+		
 		
 		add(panelBotones2,BorderLayout.NORTH);
 		panelProveedores = new PanelProveedores();
@@ -116,6 +120,10 @@ public class View extends JFrame{
 
 	public PanelPropiedades getPanelPropiedades() {
 		return panelPropiedades;
+	}
+
+	public PanelConsultas getPanelConsultas() {
+		return panelConsultas;
 	}
 	
 }

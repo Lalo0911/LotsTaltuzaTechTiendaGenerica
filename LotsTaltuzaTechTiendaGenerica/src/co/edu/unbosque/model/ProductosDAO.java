@@ -2,6 +2,8 @@ package co.edu.unbosque.model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import co.edu.unbosque.model.persistence.BinariosFile;
 
 public class ProductosDAO implements Crud{
@@ -18,6 +20,20 @@ public class ProductosDAO implements Crud{
 		productos = new ArrayList<ProductosDTO>();
 		bF = new BinariosFile();
 		
+	}
+	
+	public boolean Verificar(String codigoDelProducto) {
+		boolean repetida = false;
+		
+		if(productos!=null) {	
+			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
+				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigoDelProducto)) {
+					repetida= true;
+				}	
+			}
+		}
+		
+		return repetida;
 	}
 	
 	public void agregarProducto(ProductosDTO productos1, int num){
@@ -41,8 +57,10 @@ public class ProductosDAO implements Crud{
 	public String leer() {
 		
 		String respuesta= "";
-
-		for(int i=0;i<productos.size();i++){
+		
+		try{
+			
+		for(int i=0;i<bF.leerArchivoProductos().size();i++){
 			respuesta =
 					
 		                "Codigo del producto: "+bF.leerArchivoProductos().get(i).getCodigoProducto()+
@@ -50,7 +68,11 @@ public class ProductosDAO implements Crud{
 		                " Nit del proveedor del producto: " +bF.leerArchivoProductos().get(i).getNitProveedor()+
 		                " Precio de compra del producto: " +bF.leerArchivoProductos().get(i).getPrecioCompraProducto()+	
 		                " Precio de venta del producto: " +bF.leerArchivoProductos().get(i).getPrecioVentaProducto()+"\n"+respuesta;
-		}
+		}	
+			
+		}catch(Exception e){
+
+       }
 		return respuesta;
 	}
 	
@@ -59,8 +81,8 @@ public class ProductosDAO implements Crud{
 		ProductosDTO encontrar = null;
 
 		if(productos!=null) {	
-			for (int i = 0; i < productos.size(); i++) {
-				if(productos.get(i).getCodigoProducto().equals(codigo)) {
+			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
+				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigo)) {
 					encontrar= productos.get(i);
 				}	
 			}

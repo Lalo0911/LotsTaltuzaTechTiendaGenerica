@@ -13,6 +13,7 @@ public class PanelBotones extends JPanel{
 	private JButton butProductos;
 	private JButton butVentas;
 	private JButton butEditarProperties;
+	private JButton butConsultas;
 	
 	
 	private JLabel labTitulo1;
@@ -45,6 +46,10 @@ public class PanelBotones extends JPanel{
 		butEditarProperties = new JButton("Editar Propiedades");
 		butEditarProperties.setActionCommand("EDITAR");
 		add(butEditarProperties);
+		
+		butConsultas = new JButton("Consultas");
+		butConsultas.setActionCommand("CONSULTAS");
+		add(butConsultas);
 		
 		
 	}
@@ -120,6 +125,14 @@ public class PanelBotones extends JPanel{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public JButton getButConsultas() {
+		return butConsultas;
+	}
+
+	public void setButConsultas(JButton butConsultas) {
+		this.butConsultas = butConsultas;
 	}
 
 

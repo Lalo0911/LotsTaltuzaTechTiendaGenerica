@@ -42,7 +42,7 @@ public class PanelVentas extends JPanel{
 		lblNumeroFactura = new JLabel("No. Factura");
 		add(lblNumeroFactura, "cell 1 1,alignx right,growy");
 		
-		lblIndice_numeroFactura = new JLabel("0");
+		lblIndice_numeroFactura = new JLabel("1");
 		add(lblIndice_numeroFactura, "cell 2 1,alignx center,growy");
 		
 		add(new JLabel(""), "cell 0 2");
