@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import co.edu.unbosque.controller.Controller;
 
@@ -26,8 +28,12 @@ public class View extends JFrame{
 	private PanelResultados2 panelResultados2;	
 	private PanelPropiedades panelPropiedades;
 	private PanelConsultas panelConsultas;
-	//Eliminar
-	private Viewsss pruebasView;
+	
+	private JScrollPane sp; 
+	private JTextArea ta;
+	
+	
+
 		
 	public View(Controller control) {
 		
@@ -42,8 +48,9 @@ public class View extends JFrame{
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
 		panelPropiedades = new PanelPropiedades();
-		pruebasView = new Viewsss();
 		panelConsultas = new PanelConsultas();
+		
+		;
 		
 		
 		add(panelBotones,BorderLayout.CENTER);
@@ -59,6 +66,11 @@ public class View extends JFrame{
 		panelBotones2.setVisible(false);
 		panelResultados.setVisible(false);
 		panelResultados2.setVisible(false);
+		
+		
+		
+	sp = new JScrollPane(panelResultados.getTxtObjeto1(), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+	//panelResultados.add(panelResultados.getSp());
 		
 		panelBuscar = new PanelBuscar();
 		panelBuscar.setVisible(false);
@@ -129,8 +141,5 @@ public class View extends JFrame{
 		return panelConsultas;
 	}
 
-	public Viewsss getPruebasView() {
-		return pruebasView;
-	}
-	
+
 }

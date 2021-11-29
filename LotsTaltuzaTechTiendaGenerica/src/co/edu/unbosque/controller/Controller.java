@@ -19,6 +19,7 @@ public class Controller implements ActionListener{
 	private String codigoProducto;
 	private String nit;
 	int valortotalCompra = 0;
+	int numeroFactura = 0;
 	double ivaTotal = 0; 
 
 	public Controller() throws IOException
@@ -103,17 +104,27 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
 			gui.getPanelVentas().setVisible(true);
 			gui.getPanelResultados2().setVisible(true);	
-			gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
 			
+			//Agregar Numero Factura Correspondiente
+			String historialTotal ="";
 			for(int i=0;i<fachada.getbF().leerArchivoClientes().size();i++) 
+			
 			{	
 				fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
-				for(int j = 0 ;j<fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas(); j++ )
-				{
-				
-				}
+				historialTotal = fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas()+historialTotal;
 			
+
+
 			}
+			 String[] conteoHistorial = historialTotal.split("\n");
+			 numeroFactura = conteoHistorial.length;
+			 gui.getPanelVentas().getLblIndice_numeroFactura().setText(String.valueOf(numeroFactura));
+			 
+			 //Editar Label indice
+			 gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
+			 
+			 
+			
 		}
 		if(evento.getActionCommand().equals("SELECCIONAR")) {
 			String cliente = gui.getPanelResultados().getTxtObjeto1().getText();			
@@ -342,17 +353,15 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("CONSULTAPROVEEDORES"))
 		{
-
-			String informacionProveedores= "Just Killed a man";
-
-			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
+			
+			//gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
 			//Generar PDF
-			try {
+			/*try {
 				System.out.println(fachada.getCpdf().CrearPdfConsultaProveedores(informacionProveedores));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			}	*/
 		}
 
 

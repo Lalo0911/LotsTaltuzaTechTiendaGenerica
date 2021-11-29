@@ -4,13 +4,16 @@ import java.awt.*;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+
 
 public class PanelResultados extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JLabel labResultado;
 	private JTextArea txtObjeto1;
+	private JScrollPane sp; 
 	
 	public PanelResultados() {
 		
@@ -19,12 +22,17 @@ public class PanelResultados extends JPanel{
 		border.setTitleColor(Color.BLACK);
 		setBorder( border );
 		labResultado = new JLabel("Listado de Resultados Juego");
+		
+		
+		//sp =new JScrollPane(txtObjeto1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		
 	
 		txtObjeto1 = new JTextArea("");
 		txtObjeto1.setForeground(Color.BLACK);
 		txtObjeto1.setOpaque(false);
 		txtObjeto1.setEditable(false);
-		txtObjeto1.setPreferredSize(new Dimension(650,100));
+		txtObjeto1.setPreferredSize(new Dimension(650,250));
 
 		add(txtObjeto1);
 	}
@@ -52,6 +60,16 @@ public class PanelResultados extends JPanel{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+
+	public JScrollPane getSp() {
+		return sp;
+	}
+
+
+	public void setSp(JScrollPane sp) {
+		this.sp = sp;
 	}
 
 }

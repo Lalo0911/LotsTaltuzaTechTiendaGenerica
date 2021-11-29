@@ -38,6 +38,16 @@ public class ProveedoresDAO implements Crud{
 			bF.escribirArchivoProveedores(proveedores);		
 		}
 	}
+	
+	public void actualizarProveedoresConsulta(String nit,ProveedoresDTO proveedorAnterior,String totalDeCompras){
+		if(buscarProveedor(nit)!=null) 
+		{ 	
+			proveedorAnterior.setTotalDeComprasProveedor(bF.leerArchivoProveedores().get(buscarIndiceProveedor(nit)).getTotalDeComprasProveedor()+"\n"+totalDeCompras);
+			eliminarProveedor(nit);
+			agregarProveedor(proveedorAnterior,1);
+
+		}
+	}
 
 	public void agregarProveedor(ProveedoresDTO proveedoruno, int num){
 		if(num==1) {
