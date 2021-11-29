@@ -27,7 +27,7 @@ public class Controller implements ActionListener{
 		fachada = new Fachada();
 		gui = new View(this);
 		gui.setVisible(true);
-		fachada.getClientesDAO().rellenar();
+		fachada.rellenar();
 		asignarOyentes();
 	}
 
@@ -69,6 +69,7 @@ public class Controller implements ActionListener{
 		
 		gui.getPanelConsultas().getBtnConsultaProveedores().addActionListener(this);
 		gui.getPanelConsultas().getBtnConsultaClientes().addActionListener(this);
+		gui.getPanelConsultas().getBtnConsultaDetalleCliente().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent evento){ 
@@ -279,9 +280,6 @@ public class Controller implements ActionListener{
 		}
 		
 		
-		
-				
-		
 		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
 		
@@ -291,22 +289,51 @@ public class Controller implements ActionListener{
 			
 		//Generar PDF
 			try {
+				//fachada.getCpdf().getDocumento().save("//D:\\\\Desktop\\\\DetalleClientes.pdf");
+				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionCliente));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+		
+		
+	
+		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
+		{
+		
+			String detalleCliente = "Hola, amigos";
 			
-				System.out.println(fachada.getCpdf().CrearPdf("prueba"));
+			gui.getPanelResultados().getTxtObjeto1().setText(detalleCliente);
+			
+		//Generar PDF
+			try {
+			//fachada.getCpdf().getDocumento().save("//D:\\Desktop\\DetalleClientes.pdf");
+				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(detalleCliente));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+			
 		
 			
-		}
-		
+	
+	
 		if(evento.getActionCommand().equals("CONSULTAPROVEEDORES"))
 		{
 			
 			String informacionProveedores= "Just Killed a man";
 			
-			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);	
+			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
+			//Generar PDF
+			try {
+			//fachada.getCpdf().getDocumento().save("//D:\\Desktop\\DetalleClientes.pdf");
+				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionProveedores));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 		}
 		
 		

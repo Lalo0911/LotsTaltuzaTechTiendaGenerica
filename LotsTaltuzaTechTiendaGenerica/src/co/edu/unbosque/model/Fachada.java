@@ -34,6 +34,12 @@ public class Fachada {
 		
 	}
 	
+	public void rellenar()
+	{
+		clientesDAO.rellenar();
+		productosDAO.rellenar();
+		proveedoresDAO.rellenar();
+	}	
 	public CreatePdf getCpdf() {
 		return cpdf;
 	}

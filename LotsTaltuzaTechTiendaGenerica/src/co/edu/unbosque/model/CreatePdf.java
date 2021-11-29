@@ -13,6 +13,7 @@ public class CreatePdf
 	private PDDocument documento;
 	private PDPage pagina;
 	private PDPageContentStream contenido;
+
 	
 	public CreatePdf() throws IOException 
 	{
@@ -21,27 +22,30 @@ public class CreatePdf
 		contenido = new PDPageContentStream(documento, pagina);
 	}
 		
-	public String CrearPdf(String texto) throws IOException {
+	public String CrearPdfConsultaClientes(String texto) throws IOException {
 
 		
 		documento.addPage(pagina);
 		contenido.beginText();
-		contenido.setFont(PDType1Font.TIMES_BOLD, 12);
+		contenido.setFont(PDType1Font.COURIER, 12);
 		contenido.newLineAtOffset(20, pagina.getMediaBox().getHeight()-52);
 		contenido.showText(texto);
 		contenido.endText();
 		
 		contenido.close();
 		
-		documento.save("//C:\\Users\\User\\Downloads\\Sample.pdf");  
+		documento.save("//D:\\\\Desktop\\\\DetalleClientes.pdf");  
 		
 		
 		System.out.println("PDF created");
 		
 		return "PDF created";
-		
-	
 	}
+	
+	
+	
+	
+	
 
 	public PDDocument getDocumento() {
 		return documento;

@@ -11,7 +11,7 @@ public class PanelResultados extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JLabel labResultado;
 	private JTextArea txtObjeto1;
-
+	
 	public PanelResultados() {
 		
 		

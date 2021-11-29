@@ -34,13 +34,10 @@ public class ClientesDAO implements Crud{
 		return repetida;
 	}
 
-public void rellenar(){
-	if(bF.leerArchivoClientes()!=null){
-	clientes=bF.leerArchivoClientes();
+	public void rellenar(){
+		clientes=bF.leerArchivoClientes();
+		bF.escribirArchivoClientes(clientes);
 	}
-}
-
-
 
 	public void agregarCliente(ClientesDTO clientes1, int num){
 		if(num==1) {

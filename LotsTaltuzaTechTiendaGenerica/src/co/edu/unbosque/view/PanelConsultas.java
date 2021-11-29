@@ -83,4 +83,19 @@ public class PanelConsultas extends JPanel {
 		this.btnConsultaProveedores = btnConsultaProveedores;
 	}
 
+
+	public JLabel getLblIngresar() {
+		return lblIngresar;
+	}
+
+
+	public JButton getBtnConsultaDetalleCliente() {
+		return btnConsultaDetalleCliente;
+	}
+
+
+	public JTextField getTxfIngresoId() {
+		return txfIngresoId;
+	}
+
 }

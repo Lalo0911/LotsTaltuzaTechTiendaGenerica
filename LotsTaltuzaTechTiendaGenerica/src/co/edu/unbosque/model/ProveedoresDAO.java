@@ -32,6 +32,11 @@ public class ProveedoresDAO implements Crud{
 		return repetida;
 	}
 	
+	public void rellenar(){
+		proveedores=bF.leerArchivoProveedores();
+		bF.escribirArchivoProveedores(proveedores);
+	}
+	
 	public void agregarProveedor(ProveedoresDTO proveedoruno, int num){
 		if(num==1) {
 			proveedores.add(proveedoruno);
@@ -39,7 +44,7 @@ public class ProveedoresDAO implements Crud{
 		}
 		else {
 			if(bF.leerArchivoProveedores()!=null) {
-				proveedores=bF.leerArchivoProveedores();
+				//proveedores=bF.leerArchivoProveedores();
 				proveedores.add(proveedoruno);
 				bF.escribirArchivoProveedores(proveedores);
 			}
