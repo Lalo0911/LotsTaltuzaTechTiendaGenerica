@@ -74,7 +74,7 @@ public class ClientesDAO implements Crud{
 	return respuesta;
 	}
 	
-		public String consultarCliente() {
+	/*public String consultarCliente() {
 	String respuesta= "";
 
 		try{
@@ -93,7 +93,7 @@ public class ClientesDAO implements Crud{
 		}
 		
 		return respuesta;
-	}
+	}*/
 	
 
 	public ClientesDTO buscarClientes(String cedula) {

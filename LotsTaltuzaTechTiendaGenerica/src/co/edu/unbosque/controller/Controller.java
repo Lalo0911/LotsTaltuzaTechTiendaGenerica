@@ -104,8 +104,17 @@ public class Controller implements ActionListener{
 			gui.getPanelVentas().setVisible(true);
 			gui.getPanelResultados2().setVisible(true);	
 			gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
+			
+			for(int i=0;i<fachada.getbF().leerArchivoClientes().size();i++) 
+			{	
+			fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
+			for(int j= 0 ;fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas().size() )
+			{
+				
+			}
+			
+			}
 		}
-
 		if(evento.getActionCommand().equals("SELECCIONAR")) {
 			String cliente = gui.getPanelResultados().getTxtObjeto1().getText();			
 			String[] divisiones = cliente.split("-"); 
@@ -160,6 +169,7 @@ public class Controller implements ActionListener{
 
 			//Archivo Detalles de Venta
 
+			
 
 			String tablaValores="";
 			for (int i = 0; i < gui.getPanelResultados2().getTabla1().getRowCount(); i++) {
@@ -204,15 +214,7 @@ public class Controller implements ActionListener{
 			
 			
 			fachada.getClientesDAO().actualizarClienteConsulta(cedula[1], fachada.getbF().leerArchivoClientes().get(indiceCliente), rta, tablaValores);
-			
-			
-			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 1);
-
-			
-
-			System.out.println("Historial Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()
-					+"\n"+"Detalles Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas());
-
+		
 
 			//actualiza el numero Factura
 			numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText())+1;
@@ -288,15 +290,14 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
 
-			String informacionCliente = fachada.getClientesDAO().consultarCliente();
-			gui.getPanelResultados().getTxtObjeto1().setText(informacionCliente);
-			fachada.getCpdf().remove(informacionCliente); 
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
+		//	fachada.getCpdf().remove(fachada.getClientesDAO().leer()); 
 
-			informacionCliente = fachada.getCpdf().remove(informacionCliente);
+//			enco = fachada.getCpdf().remove(fachada.getClientesDAO().leer());
 			//Generar PDF
 			try {
 
-				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionCliente));
+				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(fachada.getClientesDAO().leer()));
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -319,16 +320,20 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
 		{
 
-			String detalleCliente = "Hola, amigos";
-			gui.getPanelResultados().getTxtObjeto1().setText(detalleCliente);
-
+         if(fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())!=-1){
+			//gui.getPanelConsultas().getTxfIngresoId().getText();
+			gui.getPanelResultados().getTxtObjeto1().setText("Historial venta: "+fachada.getbF().leerArchivoClientes().get(
+				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getHistorialVentas()+
+				"Detalles de ventas: "+fachada.getbF().leerArchivoClientes().get(
+				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getDetallerDeVentas());
+            }
 			//Generar PDF
-			try {
-				System.out.println(fachada.getCpdf().CrearPdfConsultaDetallesClientes(detalleCliente));
-			} catch (IOException e) {
+			//try {
+				//System.out.println(fachada.getCpdf().CrearPdfConsultaDetallesClientes(detalleCliente));
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				//e.printStackTrace();
+		//	}
 		}
 
 
