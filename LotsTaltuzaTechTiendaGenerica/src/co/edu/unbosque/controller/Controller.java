@@ -28,7 +28,7 @@ public class Controller implements ActionListener{
 		fachada = new Fachada();
 		gui = new View(this);
 		gui.setVisible(true);
-		//fachada.rellenar();
+		fachada.rellenar();
 		asignarOyentes();
 	}
 

@@ -36,7 +36,7 @@ public class Fachada {
 	
 	public void rellenar()
 	{
-	//	clientesDAO.rellenar();
+	    clientesDAO.rellenar();
 		productosDAO.rellenar();
 		proveedoresDAO.rellenar();
 	}	

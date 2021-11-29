@@ -30,7 +30,6 @@ public class View extends JFrame{
 	private PanelConsultas panelConsultas;
 	
 	private JScrollPane sp; 
-	private JTextArea ta;
 	
 	
 
@@ -50,7 +49,7 @@ public class View extends JFrame{
 		panelPropiedades = new PanelPropiedades();
 		panelConsultas = new PanelConsultas();
 		
-		;
+		
 		
 		
 		add(panelBotones,BorderLayout.CENTER);
@@ -70,7 +69,7 @@ public class View extends JFrame{
 		
 		
 	sp = new JScrollPane(panelResultados.getTxtObjeto1(), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-	//panelResultados.add(panelResultados.getSp());
+	panelResultados.add(sp);
 		
 		panelBuscar = new PanelBuscar();
 		panelBuscar.setVisible(false);

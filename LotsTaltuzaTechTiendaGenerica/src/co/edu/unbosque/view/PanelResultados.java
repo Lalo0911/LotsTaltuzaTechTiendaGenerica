@@ -24,9 +24,7 @@ public class PanelResultados extends JPanel{
 		labResultado = new JLabel("Listado de Resultados Juego");
 		
 		
-		//sp =new JScrollPane(txtObjeto1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		
+	
 	
 		txtObjeto1 = new JTextArea("");
 		txtObjeto1.setForeground(Color.BLACK);
