@@ -107,11 +107,11 @@ public class Controller implements ActionListener{
 			
 			for(int i=0;i<fachada.getbF().leerArchivoClientes().size();i++) 
 			{	
-			fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
-			for(int j= 0 ;fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas().size() )
-			{
+				fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
+				for(int j = 0 ;j<fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas(); j++ )
+				{
 				
-			}
+				}
 			
 			}
 		}
