@@ -40,6 +40,7 @@ public class BinariosFile {
 		} catch (IOException | ClassNotFoundException e) {
 			return null;
 		}
+		
 		return clientes;
 	}
 

@@ -10,6 +10,7 @@ public class ProveedoresDTO implements Serializable{
 	private String direccion;
 	private String telefono;
 	private String ciudad;
+	private String totalDeComprasProveedor;
 	
 	public ProveedoresDTO(String nit, String nombreProveedor, String direccion, String telefono, String ciudad) {
 		super();
@@ -62,6 +63,14 @@ public class ProveedoresDTO implements Serializable{
 
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	public String getTotalDeComprasProveedor() {
+		return totalDeComprasProveedor;
+	}
+
+	public void setTotalDeComprasProveedor(String totalDeComprasProveedor) {
+		this.totalDeComprasProveedor = totalDeComprasProveedor;
 	}
 
 	public String toString() {

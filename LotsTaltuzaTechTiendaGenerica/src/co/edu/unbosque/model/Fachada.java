@@ -1,11 +1,14 @@
 package co.edu.unbosque.model;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
-import co.edu.unbosque.model.persistence.ArchivoTexto;
+
+import java.io.IOException;
+
 import co.edu.unbosque.model.persistence.Propiedades;
 
 public class Fachada {
 	
+	private CreatePdf cpdf;
 	private BinariosFile bF;
 	private Propiedades prop;
 	private ClientesDTO clientesDTO;
@@ -15,7 +18,7 @@ public class Fachada {
 	private ProveedoresDAO proveedoresDAO;
 	private ProveedoresDTO proveedoresDTO;
 	
-	public Fachada()
+	public Fachada() throws IOException
 	{
 		
 		clientesDTO = new ClientesDTO(null, null, null, null,null);
@@ -26,8 +29,17 @@ public class Fachada {
 		proveedoresDTO= new ProveedoresDTO(null,null,null,null,null);
 		bF = new BinariosFile();
 		prop = new Propiedades();
+		cpdf = new CreatePdf();
 
 		
+	}
+	
+	public CreatePdf getCpdf() {
+		return cpdf;
+	}
+
+	public void setCpdf(CreatePdf cpdf) {
+		this.cpdf = cpdf;
 	}
 
 

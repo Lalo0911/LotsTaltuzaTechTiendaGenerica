@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -20,13 +21,13 @@ public class Controller implements ActionListener{
 	int valortotalCompra = 0;
 	double ivaTotal = 0; 
 
-	public Controller() 
+	public Controller() throws IOException
 
 	{
-		
 		fachada = new Fachada();
 		gui = new View(this);
 		gui.setVisible(true);
+		fachada.getClientesDAO().rellenar();
 		asignarOyentes();
 	}
 
@@ -141,23 +142,19 @@ public class Controller implements ActionListener{
 			//Archivo Venta
 			
 			String valorSinIva = gui.getPanelResultados2().getLblValorPrecioSinIva().getText();
-			
 			String[] cedula = gui.getPanelVentas().getLblNombreCliente().getText().split("-");
 			String archivoVentas = cedula[1];
-			
 			String ValorPrecioIva = gui.getPanelResultados2().getLblValorPrecioIva().getText();
-			
 			String ValorTotal = gui.getPanelResultados2().getLblPrecioValorTotal().getText();
-			
 			int numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText());
 			gui.getPanelVentas().getLblIndice_numeroFactura().setText(numeroFactura+"");
 			
 			String rta = 
-						"Numero de factura: " + String.valueOf(numeroFactura) + "\n" +
-						"Cedula: " + cedula[1] + "\n" + 
-						"Valor sin iva: " + valorSinIva  + "\n" +
-						"Valor total iva " + ValorPrecioIva  + "\n" +
-						"Valor total: " + ValorTotal;
+						"Numero de factura: " + String.valueOf(numeroFactura) + " | " +
+						"Cedula: " + cedula[1] + " | " + 
+						"Valor sin iva: " + valorSinIva  + " | " +
+						"Valor total iva " + ValorPrecioIva  + " | " +
+						"Valor total: " + ValorTotal+ "\n";
 			
 			
 			//Archivo Detalles de Venta
@@ -195,13 +192,36 @@ public class Controller implements ActionListener{
 					}
 				}
 			}
-			fachada.getClientesDAO().buscarClientes(cedula[1]).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
-			fachada.getClientesDAO().buscarClientes(cedula[1]).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
 			
-			System.out.println(fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas());
-			System.out.println(fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas());
+			//Guarda los datos 
+			
+			int indiceCliente = fachada.getClientesDAO().buscarIndiceClientes(cedula[1]);
+			
+			fachada.getClientesDAO().getClientes().get(indiceCliente).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
+			fachada.getClientesDAO().getClientes().get(indiceCliente).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
+			
+			//Actualizar Archivo
+			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 0);
+			
+			//fachada.getClientesDAO().buscarClientes(cedula[1]).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
+			//fachada.getClientesDAO().buscarClientes(cedula[1]).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
+			
+			System.out.println("Historial Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()
+			+"\n"+"Detalles Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas());
+		
+			//actualiza el numero Factura
 			numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText())+1;
 			gui.getPanelVentas().getLblIndice_numeroFactura().setText(numeroFactura+"");
+			 
+			 //Borrar valores tabla
+			gui.getPanelResultados2().getMod1().setRowCount(0);
+			gui.getPanelResultados2().getLblValorPrecioSinIva().setText("");
+			gui.getPanelResultados2().getLblValorPrecioIva().setText("");
+			gui.getPanelResultados2().getLblPrecioValorTotal().setText("");
+			
+			//Mensaje Transacción
+			gui.mostrarMensajeJOption("Su transacción ha sido efectuada","Transacción", 1);
+			
 		}
 		
 		
@@ -250,13 +270,45 @@ public class Controller implements ActionListener{
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setVisible(false);
-			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);
+			gui.getContentPane().add(gui.getPanelConsultas(),BorderLayout.CENTER);			
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
 			gui.getPanelConsultas().setVisible(true);
 			
 			
 		}
+		
+		
+		
+				
+		
+		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
+		{
+		
+			String informacionCliente = fachada.getClientesDAO().consultarCliente();
+			
+			gui.getPanelResultados().getTxtObjeto1().setText(informacionCliente);
+			
+		//Generar PDF
+			try {
+			
+				System.out.println(fachada.getCpdf().CrearPdf("prueba"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			
+		}
+		
+		if(evento.getActionCommand().equals("CONSULTAPROVEEDORES"))
+		{
+			
+			String informacionProveedores= "Just Killed a man";
+			
+			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);	
+		}
+		
 		
 		//Fin Modulo 6
 		
@@ -277,6 +329,7 @@ public class Controller implements ActionListener{
 		
 		if (evento.getActionCommand().equals("CLIENTE")) 
 		{
+		   
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
@@ -431,6 +484,7 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("LEERCLIENTE"))
 		{
 			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
+	
 			
 		}
 		
@@ -549,7 +603,8 @@ public class Controller implements ActionListener{
 		
 		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+	    	gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			
 		}
 		
 		

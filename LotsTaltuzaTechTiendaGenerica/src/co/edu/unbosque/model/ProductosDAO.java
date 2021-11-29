@@ -25,7 +25,7 @@ public class ProductosDAO implements Crud{
 	public boolean Verificar(String codigoDelProducto) {
 		boolean repetida = false;
 		
-		if(productos!=null) {	
+		if(bF.leerArchivoProductos()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
 				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigoDelProducto)) {
 					repetida= true;
@@ -80,7 +80,7 @@ public class ProductosDAO implements Crud{
 
 		ProductosDTO encontrar = null;
 
-		if(productos!=null) {	
+		if(bF.leerArchivoProductos()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
 				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigo)) {
 					encontrar= productos.get(i);

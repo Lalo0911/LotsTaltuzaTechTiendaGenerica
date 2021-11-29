@@ -20,6 +20,8 @@ public class ClientesDTO implements Serializable{
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.correo = correo;	
+		this.historialVentas="";
+		this.detallerDeVentas="";
 	}
 
 	

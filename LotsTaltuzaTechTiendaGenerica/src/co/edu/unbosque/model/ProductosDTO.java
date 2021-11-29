@@ -50,6 +50,7 @@ public class ProductosDTO implements Serializable{
 	public void setPrecioVentaProducto(String precioVentaProducto) {
 		this.precioVentaProducto = precioVentaProducto;
 	}
+	
 	@Override
 	public String toString() {
 		return "Código Producto-" + codigoProducto + ", Nombre Proveedor-" + nombreProducto

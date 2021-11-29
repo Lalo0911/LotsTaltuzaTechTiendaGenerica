@@ -26,6 +26,8 @@ public class View extends JFrame{
 	private PanelResultados2 panelResultados2;	
 	private PanelPropiedades panelPropiedades;
 	private PanelConsultas panelConsultas;
+	//Eliminar
+	private Viewsss pruebasView;
 		
 	public View(Controller control) {
 		
@@ -40,6 +42,7 @@ public class View extends JFrame{
 		panelBotones = new PanelBotones();
 		panelBuscar = new PanelBuscar();
 		panelPropiedades = new PanelPropiedades();
+		pruebasView = new Viewsss();
 		panelConsultas = new PanelConsultas();
 		
 		
@@ -124,6 +127,10 @@ public class View extends JFrame{
 
 	public PanelConsultas getPanelConsultas() {
 		return panelConsultas;
+	}
+
+	public Viewsss getPruebasView() {
+		return pruebasView;
 	}
 	
 }

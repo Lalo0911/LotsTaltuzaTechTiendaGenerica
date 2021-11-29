@@ -2,7 +2,6 @@ package co.edu.unbosque.model;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
 
@@ -24,7 +23,7 @@ public class ClientesDAO implements Crud{
 	public boolean Verificar(String cedula) {
 		boolean repetida = false;
 		
-		if(clientes!=null) {	
+		if(bF.leerArchivoClientes()!=null) {	
 			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
 				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
 					repetida= true;
@@ -35,6 +34,14 @@ public class ClientesDAO implements Crud{
 		return repetida;
 	}
 
+public void rellenar(){
+	if(bF.leerArchivoClientes()!=null){
+	clientes=bF.leerArchivoClientes();
+	}
+}
+
+
+
 	public void agregarCliente(ClientesDTO clientes1, int num){
 		if(num==1) {
 			clientes.add(clientes1);
@@ -42,7 +49,7 @@ public class ClientesDAO implements Crud{
 		}
 		else {
 			if(bF.leerArchivoClientes()!=null) {
-				clientes=bF.leerArchivoClientes();
+				//clientes=bF.leerArchivoClientes();
 				clientes.add(clientes1);
 				bF.escribirArchivoClientes(clientes);
 			}
@@ -80,7 +87,7 @@ public class ClientesDAO implements Crud{
 
 		ClientesDTO encontrar = null;
 
-		if(clientes!=null) {	
+		if(bF.leerArchivoClientes()!=null) {	
 			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
 				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
 					encontrar= clientes.get(i);
@@ -89,12 +96,29 @@ public class ClientesDAO implements Crud{
 		}
 		return encontrar;
 	}
+	
+	public int buscarIndiceClientes(String cedula)
+	{
+		int indice = 0;
+		if(bF.leerArchivoClientes()!=null) {	
+			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
+				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
+					indice = i;
+				}	
+			}
+		}
+		return indice;
+	}
+	
 
 	public void actualizarCliente(String cedula, String cedula1, String nombre, String direccion, String telefono,String correo){
 		if(buscarClientes(cedula)!=null) 
 		{ 
 			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono,correo);
+			
+
 			eliminarCliente(cedula);
+			
 			agregarCliente(encontrar,1);
 
 		}
@@ -106,13 +130,31 @@ public class ClientesDAO implements Crud{
 
 			f= new File("./Data/clientes.dat");
 			bF.eliminarFichero(f);
-			clientes.remove(buscarClientes(cedula));		
+			clientes.remove(buscarIndiceClientes(cedula));		
 			bF.escribirArchivoClientes(clientes);
 
 		}
-		else{
-			
+	}
+	
+	public String consultarCliente() {
+		String respuesta= "";
+
+   try{
+	   
+	for(int i=0;i< bF.leerArchivoClientes().size();i++){
+			respuesta =
+					"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
+					" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
+					" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
+					" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
+					"\n"+respuesta;	
 		}
+		
+   }catch(Exception e){
+	   
+   }
+		
+	return respuesta;
 	}
 
 	public BinariosFile getbF() {
@@ -130,9 +172,7 @@ public class ClientesDAO implements Crud{
 	public void setClientes(ArrayList<ClientesDTO> clientes) {
 		this.clientes = clientes;
 	}
-
 	
-
 }
 
 

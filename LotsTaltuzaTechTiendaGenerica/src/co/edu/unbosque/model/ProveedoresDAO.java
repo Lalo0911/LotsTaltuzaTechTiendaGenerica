@@ -21,9 +21,9 @@ public class ProveedoresDAO implements Crud{
 	public boolean Verificar(String nit) {
 		boolean repetida = false;
 		
-		if(proveedores!=null) {	
+		if(bF.leerArchivoProveedores()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
-				if(proveedores.get(i).getNit().equals(nit)) {
+				if(bF.leerArchivoProveedores().get(i).getNit().equals(nit)) {
 					repetida= true;
 				}	
 			}
@@ -76,9 +76,9 @@ public class ProveedoresDAO implements Crud{
 
 		ProveedoresDTO encontrar = null;
 
-		if(proveedores!=null) {	
+		if(bF.leerArchivoProveedores()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
-				if(proveedores.get(i).getNit().equals(nit)) {
+				if(bF.leerArchivoProveedores().get(i).getNit().equals(nit)) {
 					encontrar= proveedores.get(i);
 				}	
 			}
