@@ -5,22 +5,22 @@ import co.edu.unbosque.model.persistence.BinariosFile;
 
 
 public class ProveedoresDAO implements Crud{
-	
+
 	private ArrayList<ProveedoresDTO> proveedores;
 	private BinariosFile bF;
 	private File f;
-	
-	
+
+
 
 	public ProveedoresDAO() 
 	{
 		proveedores = new ArrayList<ProveedoresDTO>();
 		bF = new BinariosFile();	
 	}
-	
+
 	public boolean Verificar(String nit) {
 		boolean repetida = false;
-		
+
 		if(bF.leerArchivoProveedores()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
 				if(bF.leerArchivoProveedores().get(i).getNit().equals(nit)) {
@@ -28,17 +28,17 @@ public class ProveedoresDAO implements Crud{
 				}	
 			}
 		}
-		
+
 		return repetida;
 	}
-	
+
 	public void rellenar(){
 		if(bF.leerArchivoProveedores()!=null) {
-		proveedores=bF.leerArchivoProveedores();
-		bF.escribirArchivoProveedores(proveedores);		
+			proveedores=bF.leerArchivoProveedores();
+			bF.escribirArchivoProveedores(proveedores);		
 		}
 	}
-	
+
 	public void agregarProveedor(ProveedoresDTO proveedoruno, int num){
 		if(num==1) {
 			proveedores.add(proveedoruno);
@@ -56,29 +56,29 @@ public class ProveedoresDAO implements Crud{
 			}
 		}
 	}
-	
+
 	public String leer() {
-		
+
 		String respuesta= "";
-		
-		 try{
-			 
+
+		try{
+
 			for(int i=0;i<bF.leerArchivoProveedores().size();i++){
-			respuesta =
-		                "NIT: "+bF.leerArchivoProveedores().get(i).getNit()+
-		                " Nombre del proveedor: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
-		                " Direccion: " +bF.leerArchivoProveedores().get(i).getDireccion()+
-		                " Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
-		                " Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+
-		                "\n"+respuesta;
-		     } 
-			 
-		 }catch(Exception e){
-	   
-         }
+				respuesta =
+						"NIT: "+bF.leerArchivoProveedores().get(i).getNit()+
+						" Nombre del proveedor: " +bF.leerArchivoProveedores().get(i).getNombreProveedor()+
+						" Direccion: " +bF.leerArchivoProveedores().get(i).getDireccion()+
+						" Telefono: " +bF.leerArchivoProveedores().get(i).getTelefono()+	
+						" Ciudad: " +bF.leerArchivoProveedores().get(i).getCiudad()+
+						"\n"+respuesta;
+			} 
+
+		}catch(Exception e){
+
+		}
 		return respuesta;
-	    }
-	
+	}
+
 	public ProveedoresDTO buscarProveedor(String nit) {
 
 		ProveedoresDTO encontrar = null;
@@ -92,7 +92,19 @@ public class ProveedoresDAO implements Crud{
 		}
 		return encontrar;
 	}
-	
+
+	public int buscarIndiceProveedor(String nit) {
+		int indice = -1;
+		if(bF.leerArchivoProveedores()!=null) {	
+			for (int i = 0; i < bF.leerArchivoProveedores().size(); i++) {
+				if(bF.leerArchivoProveedores().get(i).getNit().equals(nit)) {
+					indice = i;
+				}	
+			}
+		}
+		return indice;
+	}
+
 	public void actualizarProveedor(String nitBuscar,String nit, String nombreProveedor, String direccion, String telefono, String ciudad){
 		if(buscarProveedor(nitBuscar)!=null) 
 		{ 
@@ -101,19 +113,19 @@ public class ProveedoresDAO implements Crud{
 			agregarProveedor(encontrar,1);
 		}
 	}
-	
+
 	public void eliminarProveedor(String nit){
 
-		if(buscarProveedor(nit) != null){ 
+		if(buscarIndiceProveedor(nit)!= -1){ 
 
 			f= new File("./Data/proveedores.dat");
+			proveedores.remove(buscarIndiceProveedor(nit));	
 			bF.eliminarFichero(f);
-			proveedores.remove(buscarProveedor(nit));			
 			bF.escribirArchivoProveedores(proveedores);
 
 		}
 		else{
-			
+
 		}
 	}
 

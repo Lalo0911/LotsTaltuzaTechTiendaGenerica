@@ -8,31 +8,31 @@ import co.edu.unbosque.model.persistence.BinariosFile;
 
 public class ProductosDAO implements Crud{
 
-	
+
 	private ArrayList<ProductosDTO> productos;
 	private BinariosFile bF;
 	private File f;
-	
-	
+
+
 
 	public ProductosDAO() 
 	{
 		productos = new ArrayList<ProductosDTO>();
 		bF = new BinariosFile();
-		
+
 	}
-	
+
 	public void rellenar(){
 		if(bF.leerArchivoProductos()!=null) {
-		productos=bF.leerArchivoProductos();
-		bF.escribirArchivoProductos(productos);	
+			productos=bF.leerArchivoProductos();
+			bF.escribirArchivoProductos(productos);	
 		}
-		
+
 	}
-	
+
 	public boolean Verificar(String codigoDelProducto) {
 		boolean repetida = false;
-		
+
 		if(bF.leerArchivoProductos()!=null) {	
 			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
 				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigoDelProducto)) {
@@ -40,10 +40,31 @@ public class ProductosDAO implements Crud{
 				}	
 			}
 		}
-		
+
 		return repetida;
 	}
-	
+
+	//	public String consultarCliente() {
+	//		String respuesta= "";
+	//
+	//		try{
+	//
+	//			for(int i=0;i< bF.leerArchivoClientes().size();i++){
+	//				respuesta =
+	//						"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
+	//						" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
+	//						" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
+	//						" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
+	//						"\n"+respuesta;	
+	//			}
+	//
+	//		}catch(Exception e){
+	//
+	//		}
+	//
+	//		return respuesta;
+	//	}
+
 	public void agregarProducto(ProductosDTO productos1, int num){
 		if(num==1) {
 			productos.add(productos1);
@@ -61,29 +82,29 @@ public class ProductosDAO implements Crud{
 			}
 		}
 	}
-	   
+
 	public String leer() {
-		
+
 		String respuesta= "";
-		
+
 		try{
-			
-		for(int i=0;i<bF.leerArchivoProductos().size();i++){
-			respuesta =
-					
-		                "Codigo del producto: "+bF.leerArchivoProductos().get(i).getCodigoProducto()+
-		                " Nombre del producto: " +bF.leerArchivoProductos().get(i).getNombreProducto()+
-		                " Nit del proveedor del producto: " +bF.leerArchivoProductos().get(i).getNitProveedor()+
-		                " Precio de compra del producto: " +bF.leerArchivoProductos().get(i).getPrecioCompraProducto()+	
-		                " Precio de venta del producto: " +bF.leerArchivoProductos().get(i).getPrecioVentaProducto()+"\n"+respuesta;
-		}	
-			
+
+			for(int i=0;i<bF.leerArchivoProductos().size();i++){
+				respuesta =
+
+						"Codigo del producto: "+bF.leerArchivoProductos().get(i).getCodigoProducto()+
+						" Nombre del producto: " +bF.leerArchivoProductos().get(i).getNombreProducto()+
+						" Nit del proveedor del producto: " +bF.leerArchivoProductos().get(i).getNitProveedor()+
+						" Precio de compra del producto: " +bF.leerArchivoProductos().get(i).getPrecioCompraProducto()+	
+						" Precio de venta del producto: " +bF.leerArchivoProductos().get(i).getPrecioVentaProducto()+"\n"+respuesta;
+			}	
+
 		}catch(Exception e){
 
-       }
+		}
 		return respuesta;
 	}
-	
+
 	public ProductosDTO buscarProducto(String codigo) {
 
 		ProductosDTO encontrar = null;
@@ -98,6 +119,20 @@ public class ProductosDAO implements Crud{
 		return encontrar;
 	}
 
+	public int buscarIndiceProducto(String codigo) {
+
+		int indice = -1;
+
+		if(bF.leerArchivoProductos()!=null) {	
+			for (int i = 0; i < bF.leerArchivoProductos().size(); i++) {
+				if(bF.leerArchivoProductos().get(i).getCodigoProducto().equals(codigo)) {
+					indice = i;
+				}	
+			}
+		}
+		return indice;
+	}
+
 	public void actualizarProducto(String codigoProductoActualizar,String codigoProducto, String nombreProducto, String nitProveedor, String precioCompraProducto,
 			String precioVentaProducto){
 		if(buscarProducto(codigoProductoActualizar)!=null) 
@@ -108,29 +143,28 @@ public class ProductosDAO implements Crud{
 		}
 	}
 
-public void eliminarProducto(String codigoProducto){
+	public void eliminarProducto(String codigoProducto){
 
 		if(buscarProducto(codigoProducto) != null){ 
 
 			f= new File("./Data/productos.dat");
+			productos.remove(buscarProducto(codigoProducto));
 			bF.eliminarFichero(f);
-			productos.remove(buscarProducto(codigoProducto));			
 			bF.escribirArchivoProductos(productos);
-
 		}
 		else{
-			
+
 		}
 	}
 
-	
+
 	public BinariosFile getbF() {
 		return bF;
 	}
 	public void setbF(BinariosFile bF) {
 		this.bF = bF;
 	}
-	
+
 	public ArrayList<ProductosDTO> getProductos() {
 		return productos;
 	}

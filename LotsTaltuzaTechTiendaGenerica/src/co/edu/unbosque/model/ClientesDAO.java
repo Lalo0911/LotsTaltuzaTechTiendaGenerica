@@ -2,11 +2,11 @@ package co.edu.unbosque.model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
 
 public class ClientesDAO implements Crud{
-
 
 	private ArrayList<ClientesDTO> clientes;
 	private BinariosFile bF;
@@ -21,25 +21,18 @@ public class ClientesDAO implements Crud{
 	}
 	
 	public boolean Verificar(String cedula) {
-		boolean repetida = false;
-		
-		if(bF.leerArchivoClientes()!=null) {	
-			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
-				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
-					repetida= true;
-				}	
-			}
+	boolean repetida = false;
+
+	if(bF.leerArchivoClientes()!=null) {	
+		for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
+			if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
+				repetida= true;
+			}	
 		}
-		
-		return repetida;
 	}
 
-	public void rellenar(){
-		if(bF.leerArchivoClientes()!=null) {
-		clientes=bF.leerArchivoClientes();
-		bF.escribirArchivoClientes(clientes);
-		}
-	}
+	return repetida;
+}
 
 	public void agregarCliente(ClientesDTO clientes1, int num){
 		if(num==1) {
@@ -81,11 +74,32 @@ public class ClientesDAO implements Crud{
 	return respuesta;
 	}
 	
+		public String consultarCliente() {
+	String respuesta= "";
+
+		try{
+
+			for(int i=0;i< bF.leerArchivoClientes().size();i++){
+				respuesta =
+						"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
+						" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
+						" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
+						" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
+						"\n"+respuesta;	
+			}
+
+		}catch(Exception e){
+
+		}
+
+		return respuesta;
+	}
 	
+
 	public ClientesDTO buscarClientes(String cedula) {
 
 		ClientesDTO encontrar = null;
-
+		
 		if(bF.leerArchivoClientes()!=null) {	
 			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
 				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
@@ -95,13 +109,14 @@ public class ClientesDAO implements Crud{
 		}
 		return encontrar;
 	}
-	
+
 	public int buscarIndiceClientes(String cedula)
 	{
-		int indice = 0;
+		int indice = -1;
 		if(bF.leerArchivoClientes()!=null) {	
 			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
 				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
+					System.out.println("*3");
 					indice = i;
 				}	
 			}
@@ -109,15 +124,11 @@ public class ClientesDAO implements Crud{
 		return indice;
 	}
 	
-
 	public void actualizarCliente(String cedula, String cedula1, String nombre, String direccion, String telefono,String correo){
 		if(buscarClientes(cedula)!=null) 
 		{ 
 			ClientesDTO encontrar = new ClientesDTO(cedula1, nombre, direccion, telefono,correo);
-			
-
 			eliminarCliente(cedula);
-			
 			agregarCliente(encontrar,1);
 
 		}
@@ -128,33 +139,14 @@ public class ClientesDAO implements Crud{
 		if(buscarClientes(cedula) != null){ 
 
 			f= new File("./Data/clientes.dat");
+			clientes.remove(buscarIndiceClientes(cedula));
 			bF.eliminarFichero(f);
-			System.out.println(buscarIndiceClientes(cedula));
-			clientes.remove(buscarIndiceClientes(cedula));		
 			bF.escribirArchivoClientes(clientes);
 
 		}
-	}
-	
-	public String consultarCliente() {
-		String respuesta= "";
-
-   try{
-	   
-	for(int i=0;i< bF.leerArchivoClientes().size();i++){
-			respuesta =
-					"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
-					" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
-					" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
-					" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
-					"\n"+respuesta;	
+		else{
+			
 		}
-		
-   }catch(Exception e){
-	   
-   }
-		
-	return respuesta;
 	}
 
 	public BinariosFile getbF() {
@@ -172,8 +164,9 @@ public class ClientesDAO implements Crud{
 	public void setClientes(ArrayList<ClientesDTO> clientes) {
 		this.clientes = clientes;
 	}
-	
-}
 
+	
+
+}
 
 

@@ -6,7 +6,7 @@ import co.edu.unbosque.model.*;
 public class BinariosFile {
 
 	private File f;
-	private File v;
+	
 
 	public BinariosFile() {
 	}
@@ -34,7 +34,7 @@ public class BinariosFile {
 		ArrayList<ClientesDTO> clientes=null;
 		try {
 			ObjectInputStream in = new ObjectInputStream (new FileInputStream("./Data/clientes.dat")); 
-			clientes =(ArrayList<ClientesDTO>)in.readObject();
+			clientes =(ArrayList<ClientesDTO>) in.readObject();
 			in.close();
 
 		} catch (IOException | ClassNotFoundException e) {
@@ -80,12 +80,12 @@ public class BinariosFile {
 	
 	public String escribirArchivoProductos(ArrayList<ProductosDTO> productos) {
 		String mensaje="Archivo Generado Exitosamente!";
-		v=new File("./Data/productos.dat");
+		f=new File("./Data/productos.dat");
 		try{     
-			ObjectOutputStream sal = new ObjectOutputStream(new FileOutputStream(v));
+			ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(f));
 			
-			sal.writeObject(productos);
-			sal.close();
+			salida.writeObject(productos);
+			salida.close();
 		} 
 		catch(FileNotFoundException e){     
 			mensaje= "No se encontro el archivo"; 

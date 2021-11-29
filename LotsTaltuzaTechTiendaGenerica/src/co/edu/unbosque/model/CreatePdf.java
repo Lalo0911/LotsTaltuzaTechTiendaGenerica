@@ -1,6 +1,10 @@
 package co.edu.unbosque.model;
 
-import java.io.IOException;  
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+
 import org.apache.pdfbox.pdmodel.PDDocument;  
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -21,7 +25,11 @@ public class CreatePdf
 	private PDDocument documento2;
 	private PDPage pagina2;
 	private PDPageContentStream contenido2;
+	
+	private String NombreArchivo;
 
+	
+	
 	
 	public CreatePdf() throws IOException 
 	{
@@ -36,6 +44,27 @@ public class CreatePdf
 		pagina2 = new PDPage(PDRectangle.A6);
 		documento2 = new PDDocument();
 		contenido2 = new PDPageContentStream(documento2, pagina2);
+			
+	}
+	
+	public File guardarArchivo() {
+
+		JFileChooser file = new JFileChooser();
+		file.showSaveDialog(file);
+		File guardar = file.getSelectedFile();
+		
+
+		return guardar;
+	}
+	
+	
+	public String Obtenernombre() 
+	{
+		
+		NombreArchivo = guardarArchivo()+".pdf";
+		
+		return NombreArchivo;
+		
 	}
 		
 	public String CrearPdfConsultaClientes(String texto) throws IOException {
@@ -50,7 +79,7 @@ public class CreatePdf
 		
 		contenido.close();
 		
-		documento.save("//C:\\Users\\User\\Downloads\\ConsultaClientes.pdf");  
+		documento.save(Obtenernombre());
 		
 		
 
@@ -69,8 +98,8 @@ public class CreatePdf
 		contenido1.endText();
 		
 		contenido1.close();
-		
-		documento1.save("//C:\\Users\\User\\Downloads\\ConsultaDetallesClientes.pdf");  
+	
+		documento1.save(Obtenernombre());
 		
 	
 		return "PDF created";
@@ -88,7 +117,7 @@ public class CreatePdf
 		
 		contenido2.close();
 		
-		documento2.save("//C:\\Users\\User\\Downloads\\ConsultaProveedores.pdf");  
+		documento2.save(Obtenernombre()); 
 		
 	
 		
