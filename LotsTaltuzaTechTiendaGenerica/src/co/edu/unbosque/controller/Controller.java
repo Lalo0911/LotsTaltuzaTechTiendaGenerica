@@ -202,7 +202,7 @@ public class Controller implements ActionListener{
 			fachada.getClientesDAO().getClientes().get(indiceCliente).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
 			
 			//Actualizar Archivo
-			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 0);
+			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 1);
 			
 			//fachada.getClientesDAO().buscarClientes(cedula[1]).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
 			//fachada.getClientesDAO().buscarClientes(cedula[1]).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
@@ -289,8 +289,11 @@ public class Controller implements ActionListener{
 			
 		//Generar PDF
 			try {
-				//fachada.getCpdf().getDocumento().save("//D:\\\\Desktop\\\\DetalleClientes.pdf");
+				
+				//D:\\\\Desktop\\\\DetalleClientes.pdf
+				
 				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionCliente));
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -303,13 +306,11 @@ public class Controller implements ActionListener{
 		{
 		
 			String detalleCliente = "Hola, amigos";
-			
 			gui.getPanelResultados().getTxtObjeto1().setText(detalleCliente);
 			
 		//Generar PDF
 			try {
-			//fachada.getCpdf().getDocumento().save("//D:\\Desktop\\DetalleClientes.pdf");
-				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(detalleCliente));
+				System.out.println(fachada.getCpdf().CrearPdfConsultaDetallesClientes(detalleCliente));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -328,8 +329,7 @@ public class Controller implements ActionListener{
 			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
 			//Generar PDF
 			try {
-			//fachada.getCpdf().getDocumento().save("//D:\\Desktop\\DetalleClientes.pdf");
-				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionProveedores));
+				System.out.println(fachada.getCpdf().CrearPdfConsultaProveedores(informacionProveedores));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -649,6 +649,7 @@ public class Controller implements ActionListener{
 			gui.getPanelProveedores().getTxtNit().setText("");
 			gui.getPanelProveedores().getTxtCiudad().setText("");
 			gui.getPanelProveedores().getTxtDireccion().setText("");
+			gui.getPanelProveedores().getTxtTelefono().setText("");
 			gui.getPanelProveedores().getTxtNombre().setText("");
 			gui.getPanelProveedores().getTxtTelefono();	
 				

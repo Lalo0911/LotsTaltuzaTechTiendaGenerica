@@ -13,6 +13,14 @@ public class CreatePdf
 	private PDDocument documento;
 	private PDPage pagina;
 	private PDPageContentStream contenido;
+	
+	private PDDocument documento1;
+	private PDPage pagina1;
+	private PDPageContentStream contenido1;
+	
+	private PDDocument documento2;
+	private PDPage pagina2;
+	private PDPageContentStream contenido2;
 
 	
 	public CreatePdf() throws IOException 
@@ -20,6 +28,14 @@ public class CreatePdf
 		pagina = new PDPage(PDRectangle.A6);
 		documento = new PDDocument();
 		contenido = new PDPageContentStream(documento, pagina);
+		
+		pagina1 = new PDPage(PDRectangle.A6);
+		documento1 = new PDDocument();
+		contenido1 = new PDPageContentStream(documento1, pagina1);
+		
+		pagina2 = new PDPage(PDRectangle.A6);
+		documento2 = new PDDocument();
+		contenido2 = new PDPageContentStream(documento2, pagina2);
 	}
 		
 	public String CrearPdfConsultaClientes(String texto) throws IOException {
@@ -34,14 +50,50 @@ public class CreatePdf
 		
 		contenido.close();
 		
-		documento.save("//D:\\\\Desktop\\\\DetalleClientes.pdf");  
+		documento.save("//C:\\Users\\User\\Downloads\\ConsultaClientes.pdf");  
 		
 		
-		System.out.println("PDF created");
+
 		
 		return "PDF created";
 	}
 	
+	public String CrearPdfConsultaDetallesClientes(String texto) throws IOException {
+
+		
+		documento1.addPage(pagina1);
+		contenido1.beginText();
+		contenido1.setFont(PDType1Font.COURIER, 12);
+		contenido1.newLineAtOffset(20, pagina1.getMediaBox().getHeight()-52);
+		contenido1.showText(texto);
+		contenido1.endText();
+		
+		contenido1.close();
+		
+		documento1.save("//C:\\Users\\User\\Downloads\\ConsultaDetallesClientes.pdf");  
+		
+	
+		return "PDF created";
+	}
+	
+	public String CrearPdfConsultaProveedores(String texto) throws IOException {
+
+		
+		documento2.addPage(pagina2);
+		contenido2.beginText();
+		contenido2.setFont(PDType1Font.COURIER, 12);
+		contenido2.newLineAtOffset(20, pagina2.getMediaBox().getHeight()-52);
+		contenido2.showText(texto);
+		contenido2.endText();
+		
+		contenido2.close();
+		
+		documento2.save("//C:\\Users\\User\\Downloads\\ConsultaProveedores.pdf");  
+		
+	
+		
+		return "PDF created";
+	}
 	
 	
 	

@@ -23,8 +23,11 @@ public class ProductosDAO implements Crud{
 	}
 	
 	public void rellenar(){
+		if(bF.leerArchivoProductos()!=null) {
 		productos=bF.leerArchivoProductos();
-		bF.escribirArchivoProductos(productos);
+		bF.escribirArchivoProductos(productos);	
+		}
+		
 	}
 	
 	public boolean Verificar(String codigoDelProducto) {
@@ -48,7 +51,7 @@ public class ProductosDAO implements Crud{
 		}
 		else {
 			if(bF.leerArchivoProductos()!=null) {
-				//productos=bF.leerArchivoProductos();
+				productos=bF.leerArchivoProductos();
 				productos.add(productos1);
 				bF.escribirArchivoProductos(productos);
 			}

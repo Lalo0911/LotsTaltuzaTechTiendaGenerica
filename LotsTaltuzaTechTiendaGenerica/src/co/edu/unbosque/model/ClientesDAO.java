@@ -35,8 +35,10 @@ public class ClientesDAO implements Crud{
 	}
 
 	public void rellenar(){
+		if(bF.leerArchivoClientes()!=null) {
 		clientes=bF.leerArchivoClientes();
 		bF.escribirArchivoClientes(clientes);
+		}
 	}
 
 	public void agregarCliente(ClientesDTO clientes1, int num){
@@ -46,7 +48,7 @@ public class ClientesDAO implements Crud{
 		}
 		else {
 			if(bF.leerArchivoClientes()!=null) {
-				//clientes=bF.leerArchivoClientes();
+				clientes=bF.leerArchivoClientes();
 				clientes.add(clientes1);
 				bF.escribirArchivoClientes(clientes);
 			}
@@ -127,6 +129,7 @@ public class ClientesDAO implements Crud{
 
 			f= new File("./Data/clientes.dat");
 			bF.eliminarFichero(f);
+			System.out.println(buscarIndiceClientes(cedula));
 			clientes.remove(buscarIndiceClientes(cedula));		
 			bF.escribirArchivoClientes(clientes);
 
