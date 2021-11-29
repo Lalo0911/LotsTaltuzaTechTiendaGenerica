@@ -80,7 +80,7 @@ public class PanelProductos extends JPanel{
 		txtPrecioCompraProducto.setBackground(Color.WHITE);
 		add(txtPrecioCompraProducto);
 		
-		labPrecioVentaProducto = new JLabel("Precio de compra producto:");
+		labPrecioVentaProducto = new JLabel("Precio de venta producto:");
 		add(labPrecioVentaProducto);
 		
 		txtPrecioVentaProducto = new JTextField("");

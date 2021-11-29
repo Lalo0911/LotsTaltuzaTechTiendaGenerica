@@ -10,6 +10,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.encoding.WinAnsiEncoding;
 
 public class CreatePdf
 {  
@@ -72,8 +73,9 @@ public class CreatePdf
 		
 		documento.addPage(pagina);
 		contenido.beginText();
-		contenido.setFont(PDType1Font.COURIER, 12);
-		contenido.newLineAtOffset(20, pagina.getMediaBox().getHeight()-52);
+		contenido.setFont(PDType1Font.COURIER, 8);
+		
+		contenido.newLineAtOffset(2, pagina.getMediaBox().getHeight()-20);
 		contenido.showText(texto);
 		contenido.endText();
 		
@@ -124,7 +126,20 @@ public class CreatePdf
 		return "PDF created";
 	}
 	
-	
+	public String remove(String test) {
+        
+		test = test.replace("\n", "").replace("\r", "");
+		return test;
+		
+//		StringBuilder b = new StringBuilder();
+//        for (int i = 0; i < test.length(); i++) {
+//            if (WinAnsiEncoding.INSTANCE.contains(test.charAt(i))) {
+//                b.append(test.charAt(i));
+//            }
+//        }
+//        return b.toString();
+    
+	}
 	
 	
 

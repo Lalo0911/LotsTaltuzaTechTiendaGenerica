@@ -78,20 +78,20 @@ public class ClientesDAO implements Crud{
 	String respuesta= "";
 
 		try{
-
+			
 			for(int i=0;i< bF.leerArchivoClientes().size();i++){
 				respuesta =
 						"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
 						" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
 						" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
-						" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
-						"\n"+respuesta;	
+						" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+"\n"+
+						respuesta;	
 			}
-
+			
 		}catch(Exception e){
-
+			respuesta="ERROR?";
 		}
-
+		
 		return respuesta;
 	}
 	
@@ -116,7 +116,6 @@ public class ClientesDAO implements Crud{
 		if(bF.leerArchivoClientes()!=null) {	
 			for (int i = 0; i < bF.leerArchivoClientes().size(); i++) {
 				if(bF.leerArchivoClientes().get(i).getCedula().equals(cedula)) {
-					System.out.println("*3");
 					indice = i;
 				}	
 			}
@@ -146,6 +145,17 @@ public class ClientesDAO implements Crud{
 		}
 		else{
 			
+		}
+	}
+	
+	public void actualizarClienteConsulta(String cedula,ClientesDTO clienteAnterior,String historialVentas, String detallesVentas){
+		if(buscarClientes(cedula)!=null) 
+		{ 	
+			clienteAnterior.setHistorialVentas(bF.leerArchivoClientes().get(buscarIndiceClientes(cedula)).getHistorialVentas()+"\n"+historialVentas);
+			clienteAnterior.setDetallerDeVentas(bF.leerArchivoClientes().get(buscarIndiceClientes(cedula)).getDetallerDeVentas()+"\n"+detallesVentas);
+			eliminarCliente(cedula);
+			agregarCliente(clienteAnterior,1);
+
 		}
 	}
 

@@ -25,6 +25,7 @@ public class PanelBuscar extends JPanel{
 		add(labBuscar);
 
 		txtBuscar = new JTextField("");
+		txtBuscar.setToolTipText("Ingrese la cedula del cliente, presione buscar y presione seleccionar en caso de gestionar venta.");
 		txtBuscar.setForeground(Color.BLACK);
 		txtBuscar.setBackground(Color.WHITE);
 		add(txtBuscar);

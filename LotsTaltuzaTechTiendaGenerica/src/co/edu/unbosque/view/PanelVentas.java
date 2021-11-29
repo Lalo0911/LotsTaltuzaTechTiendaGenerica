@@ -51,6 +51,7 @@ public class PanelVentas extends JPanel{
 		add(lblCodigoProd, "cell 1 2,grow");
 		
 		txfCodProd = new JTextField("");
+		txfCodProd.setToolTipText("Ingrese el codigo del producto");
 		add(txfCodProd, "cell 2 2,grow");
 		txfCodProd.setColumns(10);
 		
@@ -77,6 +78,7 @@ public class PanelVentas extends JPanel{
 		add(lblcantProd, "cell 3 4,growx");
 		
 		txfcantProd = new JTextField("");
+		txfcantProd.setToolTipText("Ingrese la cantidad y agregue");
 		add(txfcantProd, "cell 4 4,grow");
 		
 		add(new JLabel(""), "cell 1 5,grow");

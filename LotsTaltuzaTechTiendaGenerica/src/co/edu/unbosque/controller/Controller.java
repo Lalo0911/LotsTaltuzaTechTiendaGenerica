@@ -103,6 +103,7 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
 			gui.getPanelVentas().setVisible(true);
 			gui.getPanelResultados2().setVisible(true);	
+			gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
 		}
 
 		if(evento.getActionCommand().equals("SELECCIONAR")) {
@@ -144,7 +145,6 @@ public class Controller implements ActionListener{
 
 			String valorSinIva = gui.getPanelResultados2().getLblValorPrecioSinIva().getText();
 			String[] cedula = gui.getPanelVentas().getLblNombreCliente().getText().split("-");
-			String archivoVentas = cedula[1];
 			String ValorPrecioIva = gui.getPanelResultados2().getLblValorPrecioIva().getText();
 			String ValorTotal = gui.getPanelResultados2().getLblPrecioValorTotal().getText();
 			int numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText());
@@ -197,23 +197,24 @@ public class Controller implements ActionListener{
 			//Guarda los datos 
 
 
-//						
-//						fachada.getbF().leerArchivoClientes().get(indiceCliente).setHistorialVentas((fachada.getbF().leerArchivoClientes().get(indiceCliente).getHistorialVentas()+"\n"+rta));
-//						fachada.getClientesDAO().getClientes().get(indiceCliente).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
-//						fachada.getClientesDAO().getClientes().get(indiceCliente).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
-//				
-						
+			int indiceCliente = fachada.getClientesDAO().buscarIndiceClientes(cedula[1]);
+			
+
 			//Actualizar Archivo
+			
+			
+			fachada.getClientesDAO().actualizarClienteConsulta(cedula[1], fachada.getbF().leerArchivoClientes().get(indiceCliente), rta, tablaValores);
+			
+			
 			fachada.getClientesDAO().agregarCliente(fachada.getClientesDTO(), 1);
 
-			//fachada.getClientesDAO().buscarClientes(cedula[1]).setDetallerDeVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas()+"\n"+tablaValores));
-			//fachada.getClientesDAO().buscarClientes(cedula[1]).setHistorialVentas((fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()+"\n"+rta));
+			
 
 			System.out.println("Historial Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getHistorialVentas()
 					+"\n"+"Detalles Ventas: "+fachada.getClientesDAO().buscarClientes(cedula[1]).getDetallerDeVentas());
-            
-			
-            //actualiza el numero Factura
+
+
+			//actualiza el numero Factura
 			numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText())+1;
 			gui.getPanelVentas().getLblIndice_numeroFactura().setText(numeroFactura+"");
 
@@ -222,9 +223,10 @@ public class Controller implements ActionListener{
 			gui.getPanelResultados2().getLblValorPrecioSinIva().setText("");
 			gui.getPanelResultados2().getLblValorPrecioIva().setText("");
 			gui.getPanelResultados2().getLblPrecioValorTotal().setText("");
+			gui.getPanelVentas().getTxfCodProd().setText("");
 
 			//Mensaje Transacción
-			gui.mostrarMensajeJOption("Su transacción ha sido efectuada","Transacción", 1);
+			gui.mostrarMensajeJOption("Su transacción ha sido efectuada exitosamente","Transacción", 1);
 
 		}
 
@@ -283,35 +285,44 @@ public class Controller implements ActionListener{
 		}
 
 
-	if(evento.getActionCommand().equals("CONSULTACLIENTES"))
+		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
-		
+
 			String informacionCliente = fachada.getClientesDAO().consultarCliente();
-			
 			gui.getPanelResultados().getTxtObjeto1().setText(informacionCliente);
-			
-		//Generar PDF
+			fachada.getCpdf().remove(informacionCliente); 
+
+			informacionCliente = fachada.getCpdf().remove(informacionCliente);
+			//Generar PDF
 			try {
-				
-				//D:\\\\Desktop\\\\DetalleClientes.pdf
-				
+
 				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(informacionCliente));
-				
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			} 
+			//			catch(Exception i) {
+			//				
+			//				try {
+			//					fachada.getCpdf().CrearPdfConsultaClientes(fachada.getCpdf().remove(informacionCliente));
+			//				} catch (IOException e) {
+			//					// TODO Auto-generated catch block
+			//					e.printStackTrace();
+			//				}
+			//				
+			//			}
 		}
-		
-		
-	
+
+
+
 		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
 		{
-		
+
 			String detalleCliente = "Hola, amigos";
 			gui.getPanelResultados().getTxtObjeto1().setText(detalleCliente);
-			
-		//Generar PDF
+
+			//Generar PDF
 			try {
 				System.out.println(fachada.getCpdf().CrearPdfConsultaDetallesClientes(detalleCliente));
 			} catch (IOException e) {
@@ -319,16 +330,16 @@ public class Controller implements ActionListener{
 				e.printStackTrace();
 			}
 		}
-			
-		
-			
-	
-	
+
+
+
+
+
 		if(evento.getActionCommand().equals("CONSULTAPROVEEDORES"))
 		{
-			
+
 			String informacionProveedores= "Just Killed a man";
-			
+
 			gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
 			//Generar PDF
 			try {
@@ -610,6 +621,8 @@ public class Controller implements ActionListener{
 			gui.getPanelVentas().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
 			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
+			
+			
 
 		}
 
@@ -634,6 +647,10 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
 		{
 			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			if(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText())==null)
+			{
+				gui.mostrarMensajeJOption("Cliente no registrado", "Aviso", 0);
+			}
 
 		}
 
@@ -760,6 +777,7 @@ public class Controller implements ActionListener{
 			gui.limpiar_texto(gui.getPanelProveedores());
 			gui.limpiar_texto(gui.getPanelProductos());
 			gui.limpiar_texto(gui.getPanelBuscar());
+			gui.getPanelVentas().getLblNombreCliente().setText("");
 		}
 
 	}
