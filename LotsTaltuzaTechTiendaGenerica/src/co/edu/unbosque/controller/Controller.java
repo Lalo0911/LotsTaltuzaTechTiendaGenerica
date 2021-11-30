@@ -3,7 +3,6 @@ package co.edu.unbosque.controller;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -18,11 +17,11 @@ public class Controller implements ActionListener{
 	private String cedula;
 	private String codigoProducto;
 	private String nit;
-	int valortotalCompra = 0;
-	int numeroFactura = 0;
-	double ivaTotal = 0; 
+	private int valortotalCompra = 0;
+	private int numeroFactura = 0;
+	private double ivaTotal = 0; 
 
-	public Controller() throws IOException
+	public Controller() 
 
 	{
 		fachada = new Fachada();
@@ -68,7 +67,6 @@ public class Controller implements ActionListener{
 
 		gui.getPanelPropiedades().getButEditar().addActionListener(this);
 
-		gui.getPanelConsultas().getBtnConsultaProveedores().addActionListener(this);
 		gui.getPanelConsultas().getBtnConsultaClientes().addActionListener(this);
 		gui.getPanelConsultas().getBtnConsultaDetalleCliente().addActionListener(this);
 	}
@@ -244,9 +242,6 @@ public class Controller implements ActionListener{
 		}
 
 
-
-
-
 		if(evento.getActionCommand().equals("AGREGARPRODUCTO1")) 
 		{
 
@@ -302,28 +297,7 @@ public class Controller implements ActionListener{
 		{
 
 			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
-		//	fachada.getCpdf().remove(fachada.getClientesDAO().leer()); 
-
-//			enco = fachada.getCpdf().remove(fachada.getClientesDAO().leer());
-			//Generar PDF
-			try {
-
-				System.out.println(fachada.getCpdf().CrearPdfConsultaClientes(fachada.getClientesDAO().leer()));
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			//			catch(Exception i) {
-			//				
-			//				try {
-			//					fachada.getCpdf().CrearPdfConsultaClientes(fachada.getCpdf().remove(informacionCliente));
-			//				} catch (IOException e) {
-			//					// TODO Auto-generated catch block
-			//					e.printStackTrace();
-			//				}
-			//				
-			//			}
+		
 		}
 
 
@@ -338,30 +312,8 @@ public class Controller implements ActionListener{
 				"Detalles de ventas: "+fachada.getbF().leerArchivoClientes().get(
 				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getDetallerDeVentas());
             }
-			//Generar PDF
-			//try {
-				//System.out.println(fachada.getCpdf().CrearPdfConsultaDetallesClientes(detalleCliente));
-			//} catch (IOException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-		//	}
-		}
-
-
-
-
-
-		if(evento.getActionCommand().equals("CONSULTAPROVEEDORES"))
-		{
 			
-			//gui.getPanelResultados().getTxtObjeto1().setText(informacionProveedores);
-			//Generar PDF
-			/*try {
-				System.out.println(fachada.getCpdf().CrearPdfConsultaProveedores(informacionProveedores));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	*/
+			
 		}
 
 

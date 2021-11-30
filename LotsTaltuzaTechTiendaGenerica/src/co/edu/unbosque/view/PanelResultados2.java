@@ -43,9 +43,7 @@ public class PanelResultados2 extends JPanel{
         
 		tabla1.getColumnModel().getColumn(0).setPreferredWidth(10);
 		 
-		
-	      // scroll1.setFont(font);
-	       // scroll1.setBounds(25, 100, 380, 350
+
 		add(scroll1, "cell 0 0,grow");
 		
 		lblPrecioSinIva = new JLabel("PRECIO SIN IVA: $");
@@ -58,7 +56,6 @@ public class PanelResultados2 extends JPanel{
 		add(lblValorTotal, "flowx,cell 0 3,alignx right");
 		
 		lblValorPrecioSinIva = new JLabel(" 0");
-	//	lblValorPrecioSinIva.setBorder(new );
 		add(lblValorPrecioSinIva, "cell 0 1");
 		
 		lblValorPrecioIva = new JLabel(" 0");

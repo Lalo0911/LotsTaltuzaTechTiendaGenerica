@@ -68,8 +68,8 @@ public class View extends JFrame{
 		
 		
 		
-	sp = new JScrollPane(panelResultados.getTxtObjeto1(), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-	panelResultados.add(sp);
+		sp = new JScrollPane(panelResultados.getTxtObjeto1(), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		panelResultados.add(sp);
 		
 		panelBuscar = new PanelBuscar();
 		panelBuscar.setVisible(false);

@@ -1,8 +1,6 @@
 package co.edu.unbosque.view;
 
 import javax.swing.JPanel;
-import javax.swing.plaf.DimensionUIResource;
-
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.Dimension;
@@ -17,17 +15,16 @@ public class PanelConsultas extends JPanel {
 	private JLabel lblTitulo;
 	private JLabel lblIngresar;
 	private JButton btnConsultaClientes;
-	private JButton btnConsultaProveedores;
 	private JButton btnConsultaDetalleCliente;
 	private JTextField txfIngresoId;
 	
 	
 	public PanelConsultas() {
-		setLayout(new MigLayout("", "[154.00][106.00px][128.00px][80.00px][130.00]", "[119.00][91.00px][52.00px][40.00]"));
+		setLayout(new MigLayout("", "[154.00][106.00px][128.00px][80.00px][130.00]", "[50.00][91.00px][52.00px][40.00]"));
 		
 		
 		lblTitulo = new JLabel("CONSULTAS :D");
-		add(lblTitulo, "cell 2 1,alignx center,growy");
+		add(lblTitulo, "cell 1 1,alignx right,growy");
 		
 		lblTitulo = new JLabel("Ingrese ID:");
 		add(lblTitulo, "cell 1 3,alignx center,growy");
@@ -41,12 +38,6 @@ public class PanelConsultas extends JPanel {
 		btnConsultaDetalleCliente.setActionCommand("CONSULTADETALLECLIENTES");
 		btnConsultaDetalleCliente.setPreferredSize(new Dimension(200,100));;
 		add(btnConsultaDetalleCliente, "cell 2 2,alignx center,aligny center");
-
-		 btnConsultaProveedores = new JButton("Consulta Proveedores");
-		 btnConsultaProveedores.setActionCommand("CONSULTAPROVEEDORES");
-		 btnConsultaProveedores.setPreferredSize(new Dimension(200,100));;
-		add(btnConsultaProveedores, "cell 3 2,alignx center,aligny center");
-		
 		
 		txfIngresoId = new JTextField("");
 		add(txfIngresoId, "cell 2 3,grow");
@@ -74,15 +65,6 @@ public class PanelConsultas extends JPanel {
 	public void setBtnConsultaClientes(JButton btnConsultaClientes) {
 		this.btnConsultaClientes = btnConsultaClientes;
 	}
-
-	public JButton getBtnConsultaProveedores() {
-		return btnConsultaProveedores;
-	}
-
-	public void setBtnConsultaProveedores(JButton btnConsultaProveedores) {
-		this.btnConsultaProveedores = btnConsultaProveedores;
-	}
-
 
 	public JLabel getLblIngresar() {
 		return lblIngresar;

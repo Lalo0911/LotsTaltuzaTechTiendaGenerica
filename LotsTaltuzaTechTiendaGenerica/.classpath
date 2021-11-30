@@ -8,14 +8,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/debugger-app-2.0.24.jar" sourcepath="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/debugger-app-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/fontbox-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/pdfbox-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/pdfbox-app-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/pdfbox-debugger-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/pdfbox-tools-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/preflight-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/preflight-app-2.0.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/git/LotsTaltuzaTechTiendaGenerica/LotsTaltuzaTechTiendaGenerica/xmpbox-2.0.24.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -2,7 +2,6 @@ package co.edu.unbosque.model;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
 
@@ -44,26 +43,6 @@ public class ProductosDAO implements Crud{
 		return repetida;
 	}
 
-	//	public String consultarCliente() {
-	//		String respuesta= "";
-	//
-	//		try{
-	//
-	//			for(int i=0;i< bF.leerArchivoClientes().size();i++){
-	//				respuesta =
-	//						"Documento: "+bF.leerArchivoClientes().get(i).getCedula()+
-	//						" Nombre: " +bF.leerArchivoClientes().get(i).getNombre()+
-	//						" Total de ventas: " +bF.leerArchivoClientes().get(i).getHistorialVentas()+
-	//						" Detalles de ventas: " +bF.leerArchivoClientes().get(i).getDetallerDeVentas()+
-	//						"\n"+respuesta;	
-	//			}
-	//
-	//		}catch(Exception e){
-	//
-	//		}
-	//
-	//		return respuesta;
-	//	}
 
 	public void agregarProducto(ProductosDTO productos1, int num){
 		if(num==1) {

@@ -36,7 +36,7 @@ public class PanelVentas extends JPanel{
 		lblCliente = new JLabel("Cliente:");
 		add(lblCliente, "cell 1 0,alignx right");
 		
-		lblNombreCliente = new JLabel("----");
+		lblNombreCliente = new JLabel(" ");
 		add(lblNombreCliente, "cell 2 0,alignx center");
 		
 		lblNumeroFactura = new JLabel("No. Factura");

@@ -1,8 +1,6 @@
 package co.edu.unbosque.view;
-
 import javax.swing.*;
 import javax.swing.border.*;
-
 import java.awt.*;
 
 public class PanelBuscar extends JPanel{

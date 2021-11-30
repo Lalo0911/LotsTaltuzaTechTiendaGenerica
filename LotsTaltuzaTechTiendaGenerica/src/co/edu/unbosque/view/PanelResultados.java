@@ -23,9 +23,6 @@ public class PanelResultados extends JPanel{
 		setBorder( border );
 		labResultado = new JLabel("Listado de Resultados Juego");
 		
-		
-	
-	
 		txtObjeto1 = new JTextArea("");
 		txtObjeto1.setForeground(Color.BLACK);
 		txtObjeto1.setOpaque(false);
