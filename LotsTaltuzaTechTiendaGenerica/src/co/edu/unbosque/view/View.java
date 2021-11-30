@@ -1,7 +1,6 @@
 package co.edu.unbosque.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -9,7 +8,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import co.edu.unbosque.controller.Controller;
 
 

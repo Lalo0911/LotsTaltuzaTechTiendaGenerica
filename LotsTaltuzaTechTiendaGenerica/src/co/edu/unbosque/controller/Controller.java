@@ -147,13 +147,18 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO_A_AÑADIR"))
 		{
+			try{
 			String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
 
 			String precioVenta = fachada.getProductosDAO().buscarProducto(codProducto).getPrecioVentaProducto();
 
 			String nombreProducto = fachada.getProductosDAO().buscarProducto(codProducto).getNombreProducto();
 
-			gui.getPanelVentas().getlblProductoBuscado().setText(nombreProducto+ "  $ "+ precioVenta);
+			gui.getPanelVentas().getlblProductoBuscado().setText(nombreProducto+ "  $ "+ precioVenta);		
+			}catch(Exception e){
+				gui.mostrarMensajeJOption("El producto no existe", "Error", 0);
+			}
+			
 
 		}
 
@@ -295,25 +300,31 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
-
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
-		
+           try{
+		    gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
+           }catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+           }
 		}
 
 
 
 		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
 		{
-
-         if(fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())!=-1){
+			
+       try{
+          if(fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())!=-1){
 			//gui.getPanelConsultas().getTxfIngresoId().getText();
 			gui.getPanelResultados().getTxtObjeto1().setText("Historial venta: "+fachada.getbF().leerArchivoClientes().get(
 				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getHistorialVentas()+
 				"Detalles de ventas: "+fachada.getbF().leerArchivoClientes().get(
 				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getDetallerDeVentas());
-            }
-			
-			
+            }	
+          }
+          catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+           }
+         
 		}
 
 
@@ -323,7 +334,8 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("EDITAR"))
 		{
 
-			gui.getPanelBotones().setVisible(false);
+try{
+	gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
 			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
@@ -331,7 +343,10 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
 			gui.getPanelPropiedades().setVisible(true);
-
+}catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+           }
+			
 		}
 
 		if (evento.getActionCommand().equals("CLIENTE")) 
@@ -375,6 +390,7 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("BUSCARPROVEEDORES"))
 		{
+			try{
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
@@ -383,11 +399,23 @@ public class Controller implements ActionListener{
 			gui.getPanelClientes().setVisible(false);
 			gui.getPanelProductos().setVisible(false);
 			gui.getPanelBotones().setVisible(false);
-			gui.limpiar_texto(gui.getPanelBuscar());	
+			gui.limpiar_texto(gui.getPanelBuscar());
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún proveedor", "Error", 0);
+           }
+				
 		}
 
 		if (evento.getActionCommand().equals("LEERPRODUCTO")){
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().leer());
+			
+			try{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().leer());	
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
+           }
+           
 		}
 
 		if (evento.getActionCommand().equals("AGREGARPRODUCTO")) {
@@ -416,6 +444,8 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO"))
 		{
+			
+			try{
 			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
@@ -426,11 +456,22 @@ public class Controller implements ActionListener{
 			gui.getPanelBotones().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
 			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARPRODUCTODOS");
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
+           }
+           
 		}
 
 		if(evento.getActionCommand().equals("BUSCARPRODUCTODOS")) 
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().buscarProducto(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			try{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().buscarProducto(gui.getPanelBuscar().getTxtBuscar().getText()).toString());	
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+           }
+			
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTO")){
@@ -465,6 +506,8 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTODOS")){
 
+				
+			try{
 			String codigoProductoDos = gui.getPanelProductos().getTxtCodigoProducto().getText();
 			String nitProducto = gui.getPanelProductos().getTxtNitProveedorDeProducto().getText();
 			String nombreProducto = gui.getPanelProductos().getTxtNombreProducto().getText();
@@ -479,19 +522,35 @@ public class Controller implements ActionListener{
 			gui.getPanelProductos().getTxtNombreProducto().setText("");
 			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
 			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
-			gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");	
+			gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");		
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+           }
 
 		}
 
 		if(evento.getActionCommand().equals("BORRARPRODUCTO")){
+			
+			try{
 			fachada.getProductosDAO().eliminarProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);		
+			}
+			catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+           }
+			
 		}
 
 		if(evento.getActionCommand().equals("LEERCLIENTE"))
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
-
+			
+			try{
+			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());	
+			}
+            catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+           }
 
 		}
 
@@ -519,8 +578,15 @@ public class Controller implements ActionListener{
 		}
 
 		if(evento.getActionCommand().equals("BORRARCLIENTE")){
-			fachada.getClientesDAO().eliminarCliente(gui.getPanelClientes().getTxtCedula().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
+			
+			  try{
+				fachada.getClientesDAO().eliminarCliente(gui.getPanelClientes().getTxtCedula().getText());
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
+			  }
+			  catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
+           }
+			
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARCLIENTE"))
@@ -587,8 +653,6 @@ public class Controller implements ActionListener{
 			gui.getPanelVentas().setVisible(false);
 			gui.limpiar_texto(gui.getPanelBuscar());	
 			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARCLIENTEDOS");
-			
-			
 
 		}
 
@@ -612,11 +676,17 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			 try{
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
 			if(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText())==null)
 			{
 				gui.mostrarMensajeJOption("Cliente no registrado", "Aviso", 0);
-			}
+			}  
+			  }
+			  catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
+           }
+			
 
 		}
 
@@ -648,12 +718,24 @@ public class Controller implements ActionListener{
 		}
 
 		if(evento.getActionCommand().equals("LEERPROVEEDOR")){
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().leer());
+			 try{
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().leer());  
+			  }
+			  catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe ningun proveedor", "Error", 0);
+           }
+			
 		}
 
 		if(evento.getActionCommand().equals("BORRARPROVEEDOR")){
-			fachada.getProveedoresDAO().eliminarProveedor(gui.getPanelProveedores().getTxtNit().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);
+			 try{
+				fachada.getProveedoresDAO().eliminarProveedor(gui.getPanelProveedores().getTxtNit().getText());
+			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
+			  }
+			  catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
+           }
+			
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARPROVEEDOR")){
@@ -719,7 +801,13 @@ public class Controller implements ActionListener{
 
 		if(evento.getActionCommand().equals("BUSCARPROVEEDORESDOS")) 
 		{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().buscarProveedor(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
+			 try{
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().buscarProveedor(gui.getPanelBuscar().getTxtBuscar().getText()).toString());  
+			  }
+			  catch(Exception e){
+	        gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
+           }
+			
 		}
 
 		if (evento.getActionCommand().equals("INICIO")) 
@@ -740,6 +828,7 @@ public class Controller implements ActionListener{
 
 			gui.getPanelResultados().getTxtObjeto1().setText("");
 			gui.limpiar_texto(gui.getPanelClientes());
+			gui.limpiar_texto(gui.getPanelConsultas());
 			gui.limpiar_texto(gui.getPanelProveedores());
 			gui.limpiar_texto(gui.getPanelProductos());
 			gui.limpiar_texto(gui.getPanelBuscar());
