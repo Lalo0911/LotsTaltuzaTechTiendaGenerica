@@ -488,7 +488,7 @@ try{
 				gui.getPanelProductos().getTxtPrecioVentaProducto().setText(fachada.getProductosDAO().buscarProducto(codigoProducto).getPrecioVentaProducto());
 
 
-				if(fachada.getClientesDAO().buscarClientes(cedula)!=null){
+				if(fachada.getProductosDAO().buscarProducto(codigoProducto)!=null){
 
 					gui.getPanelProductos().getButActualizar().setActionCommand("ACTUALIZARPRODUCTODOS");
 					gui.mostrarMensajeJOption("Ahora ingrese valores y oprima de nuevo el boton", "Proceso a seguir", 1);
@@ -515,14 +515,14 @@ try{
 			String precioVentaProducto = gui.getPanelProductos().getTxtPrecioVentaProducto().getText();
 
 			fachada.getProductosDAO().actualizarProducto(codigoProducto, codigoProductoDos, nitProducto ,nombreProducto, precioCompraProducto, precioVentaProducto);	
-			JOptionPane.showMessageDialog(null, "Actializado con exito");
+			JOptionPane.showMessageDialog(null, "Actualizado con exito");
 
 			gui.getPanelProductos().getTxtCodigoProducto().setText("");
 			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
 			gui.getPanelProductos().getTxtNombreProducto().setText("");
 			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
 			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
-			gui.getPanelClientes().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");		
+			gui.getPanelProductos().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");		
 			}
 			catch(Exception e){
 	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
@@ -627,7 +627,7 @@ try{
 			String correo = gui.getPanelClientes().getTxtCorreo().getText();
 
 			fachada.getClientesDAO().actualizarCliente(cedula, cedula1, nombre, direccion, telefono, correo);	
-			JOptionPane.showMessageDialog(null, "Actializado con exito");
+			JOptionPane.showMessageDialog(null, "Actualizado con exito");
 
 			gui.getPanelClientes().getTxtCedula().setText("");
 			gui.getPanelClientes().getTxtDireccion().setText("");
@@ -774,7 +774,7 @@ try{
 			String ciudad = gui.getPanelProveedores().getTxtCiudad().getText();
 
 			fachada.getProveedoresDAO().actualizarProveedor(nit, nituno, nombre, direccion, telefono, ciudad); 
-			JOptionPane.showMessageDialog(null, "Actializado con exito");
+			JOptionPane.showMessageDialog(null, "Actualizado con exito");
 
 			gui.getPanelProveedores().getTxtNit().setText("");
 			gui.getPanelProveedores().getTxtDireccion().setText("");

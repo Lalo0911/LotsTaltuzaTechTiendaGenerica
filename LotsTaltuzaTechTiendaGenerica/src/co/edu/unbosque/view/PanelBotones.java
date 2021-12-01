@@ -23,7 +23,7 @@ public class PanelBotones extends JPanel{
 		
 		setLayout( new GridLayout(7,1) );
 		
-		labTitulo1 = new JLabel("Nombre Tienda", SwingConstants.CENTER);
+		labTitulo1 = new JLabel("Taltuza Tech Tienda Generica", SwingConstants.CENTER);
 		labTitulo1.setFont((new Font("Bahnschrift",Font.BOLD,20)));
 		add(labTitulo1);
 		

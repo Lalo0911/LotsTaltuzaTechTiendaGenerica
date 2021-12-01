@@ -94,7 +94,7 @@ public class View extends JFrame{
 		return panelClientes;
 	}
 	
-	public PanelProductos getPanelProductos() {
+	public PanelProductos Productos() {
 		return panelProductos;
 	}
 	
@@ -136,6 +136,14 @@ public class View extends JFrame{
 
 	public PanelConsultas getPanelConsultas() {
 		return panelConsultas;
+	}
+
+	public PanelProductos getPanelProductos() {
+		return panelProductos;
+	}
+
+	public JScrollPane getSp() {
+		return sp;
 	}
 
 
