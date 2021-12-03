@@ -90,7 +90,9 @@ public class Controller implements ActionListener{
 			gui.limpiar_texto(gui.getPanelPropiedades());
 		}
 
-		//Modulo 5
+		/**
+		 *Inicio MODULO 5 
+		 **/
 		if(evento.getActionCommand().equals("VENTAS"))
 		{
 
@@ -102,28 +104,27 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelResultados2(),BorderLayout.SOUTH);
 			gui.getPanelVentas().setVisible(true);
 			gui.getPanelResultados2().setVisible(true);	
-			
+
 			//Agregar Numero Factura Correspondiente
 			String historialTotal ="";
 			for(int i=0;i<fachada.getbF().leerArchivoClientes().size();i++) 
-			
+
 			{	
 				fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
 				historialTotal = fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas()+historialTotal;
-			
+
 
 
 			}
-			 String[] conteoHistorial = historialTotal.split("\n");
-			 numeroFactura = conteoHistorial.length;
-			 gui.getPanelVentas().getLblIndice_numeroFactura().setText(String.valueOf(numeroFactura));
-			 
-			 //Editar Label indice
-			 gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
-			 
-			 
-			
+			String[] conteoHistorial = historialTotal.split("\n");
+			numeroFactura = conteoHistorial.length;
+			gui.getPanelVentas().getLblIndice_numeroFactura().setText(String.valueOf(numeroFactura));
+
+			//Editar Labels Gestion Ventas
+			gui.mostrarMensajeJOption("Por favor, dirijase al apartado buscar cliente y seleccione el cliente"+ "\n" + " por la cedula","Info", 1);
+
 		}
+
 		if(evento.getActionCommand().equals("SELECCIONAR")) {
 			String cliente = gui.getPanelResultados().getTxtObjeto1().getText();			
 			String[] divisiones = cliente.split("-"); 
@@ -148,17 +149,17 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO_A_AÑADIR"))
 		{
 			try{
-			String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
+				String codProducto = gui.getPanelVentas().getTxfCodProd().getText();
 
-			String precioVenta = fachada.getProductosDAO().buscarProducto(codProducto).getPrecioVentaProducto();
+				String precioVenta = fachada.getProductosDAO().buscarProducto(codProducto).getPrecioVentaProducto();
 
-			String nombreProducto = fachada.getProductosDAO().buscarProducto(codProducto).getNombreProducto();
+				String nombreProducto = fachada.getProductosDAO().buscarProducto(codProducto).getNombreProducto();
 
-			gui.getPanelVentas().getlblProductoBuscado().setText(nombreProducto+ "  $ "+ precioVenta);		
+				gui.getPanelVentas().getlblProductoBuscado().setText(nombreProducto+ "  $ "+ precioVenta);		
 			}catch(Exception e){
 				gui.mostrarMensajeJOption("El producto no existe", "Error", 0);
 			}
-			
+
 
 		}
 
@@ -182,8 +183,6 @@ public class Controller implements ActionListener{
 
 
 			//Archivo Detalles de Venta
-
-			
 
 			String tablaValores="";
 			for (int i = 0; i < gui.getPanelResultados2().getTabla1().getRowCount(); i++) {
@@ -219,16 +218,11 @@ public class Controller implements ActionListener{
 			}
 
 			//Guarda los datos 
-
-
 			int indiceCliente = fachada.getClientesDAO().buscarIndiceClientes(cedula[1]);
-			
 
 			//Actualizar Archivo
-			
-			
+
 			fachada.getClientesDAO().actualizarClienteConsulta(cedula[1], fachada.getbF().leerArchivoClientes().get(indiceCliente), rta, tablaValores);
-		
 
 			//actualiza el numero Factura
 			numeroFactura = Integer.parseInt(gui.getPanelVentas().getLblIndice_numeroFactura().getText())+1;
@@ -243,7 +237,6 @@ public class Controller implements ActionListener{
 
 			//Mensaje Transacción
 			gui.mostrarMensajeJOption("Su transacción ha sido efectuada exitosamente","Transacción", 1);
-
 		}
 
 
@@ -276,16 +269,18 @@ public class Controller implements ActionListener{
 
 
 		}
+		/*
+		 *FIN MODULO 5 
+		 */
 
 
-		//FIN MODULO 5
 
-
-		//Modulo 6
+		/**
+		 *Inicio MODULO 6 
+		 **/
 
 		if(evento.getActionCommand().equals("CONSULTAS"))
 		{
-
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setVisible(false);
@@ -293,60 +288,56 @@ public class Controller implements ActionListener{
 			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
 			gui.getPanelResultados().setVisible(true);
 			gui.getPanelConsultas().setVisible(true);
-
-
 		}
 
 
 		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
-           try{
-		    gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
-           }catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
-           }
+			try{
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());
+			}catch(Exception e){
+				gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+			}
 		}
-
 
 
 		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
 		{
-			
-       try{
-          if(fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())!=-1){
-			//gui.getPanelConsultas().getTxfIngresoId().getText();
-			gui.getPanelResultados().getTxtObjeto1().setText("Historial venta: "+fachada.getbF().leerArchivoClientes().get(
-				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getHistorialVentas()+
-				"Detalles de ventas: "+fachada.getbF().leerArchivoClientes().get(
-				fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getDetallerDeVentas());
-            }	
-          }
-          catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
-           }
-         
+
+			try{
+				if(fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())!=-1){
+
+					gui.getPanelResultados().getTxtObjeto1().setText("Historial venta: "+fachada.getbF().leerArchivoClientes().get(
+							fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getHistorialVentas()+
+							"Detalles de ventas: "+fachada.getbF().leerArchivoClientes().get(
+									fachada.getClientesDAO().buscarIndiceClientes(gui.getPanelConsultas().getTxfIngresoId().getText())).getDetallerDeVentas());
+				}	
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+			}
+
 		}
+		   /**
+			 *Fin MODULO 6 
+			**/
 
-
-		//Fin Modulo 6
-
-
+		
 		if(evento.getActionCommand().equals("EDITAR"))
 		{
+			try{
+				gui.getPanelBotones().setVisible(false);
+				gui.getPanelBotones2().setVisible(true);
+				gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
+				gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
+				gui.getContentPane().add(gui.getPanelPropiedades(),BorderLayout.CENTER);
+				gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+				gui.getPanelResultados().setVisible(true);
+				gui.getPanelPropiedades().setVisible(true);
+			}catch(Exception e){
+				gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+			}
 
-try{
-	gui.getPanelBotones().setVisible(false);
-			gui.getPanelBotones2().setVisible(true);
-			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
-			gui.getPanelBotones2().getButBuscar().setActionCommand("BUSCARCLIENTE");
-			gui.getContentPane().add(gui.getPanelPropiedades(),BorderLayout.CENTER);
-			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
-			gui.getPanelResultados().setVisible(true);
-			gui.getPanelPropiedades().setVisible(true);
-}catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
-           }
-			
 		}
 
 		if (evento.getActionCommand().equals("CLIENTE")) 
@@ -391,31 +382,31 @@ try{
 		if(evento.getActionCommand().equals("BUSCARPROVEEDORES"))
 		{
 			try{
-			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
-			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
-			gui.getPanelResultados().setVisible(true);
-			gui.getPanelBuscar().setVisible(true);
-			gui.getPanelProveedores().setVisible(false);
-			gui.getPanelClientes().setVisible(false);
-			gui.getPanelProductos().setVisible(false);
-			gui.getPanelBotones().setVisible(false);
-			gui.limpiar_texto(gui.getPanelBuscar());
+				gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
+				gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+				gui.getPanelResultados().setVisible(true);
+				gui.getPanelBuscar().setVisible(true);
+				gui.getPanelProveedores().setVisible(false);
+				gui.getPanelClientes().setVisible(false);
+				gui.getPanelProductos().setVisible(false);
+				gui.getPanelBotones().setVisible(false);
+				gui.limpiar_texto(gui.getPanelBuscar());
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún proveedor", "Error", 0);
-           }
-				
+				gui.mostrarMensajeJOption("No existe ningún proveedor", "Error", 0);
+			}
+
 		}
 
 		if (evento.getActionCommand().equals("LEERPRODUCTO")){
-			
+
 			try{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().leer());	
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().leer());	
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
-           }
-           
+				gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
+			}
+
 		}
 
 		if (evento.getActionCommand().equals("AGREGARPRODUCTO")) {
@@ -444,34 +435,34 @@ try{
 
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO"))
 		{
-			
+
 			try{
-			gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
-			gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
-			gui.getPanelResultados().setVisible(true);
-			gui.getPanelBuscar().setVisible(true);
-			gui.getPanelProveedores().setVisible(false);
-			gui.getPanelClientes().setVisible(false);
-			gui.getPanelProductos().setVisible(false);
-			gui.getPanelBotones().setVisible(false);
-			gui.limpiar_texto(gui.getPanelBuscar());	
-			gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARPRODUCTODOS");
+				gui.getContentPane().add(gui.getPanelBuscar(),BorderLayout.CENTER);
+				gui.getContentPane().add(gui.getPanelResultados(),BorderLayout.SOUTH);
+				gui.getPanelResultados().setVisible(true);
+				gui.getPanelBuscar().setVisible(true);
+				gui.getPanelProveedores().setVisible(false);
+				gui.getPanelClientes().setVisible(false);
+				gui.getPanelProductos().setVisible(false);
+				gui.getPanelBotones().setVisible(false);
+				gui.limpiar_texto(gui.getPanelBuscar());	
+				gui.getPanelBuscar().getButBuscar().setActionCommand("BUSCARPRODUCTODOS");
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
-           }
-           
+				gui.mostrarMensajeJOption("No existe ningún producto", "Error", 0);
+			}
+
 		}
 
 		if(evento.getActionCommand().equals("BUSCARPRODUCTODOS")) 
 		{
 			try{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().buscarProducto(gui.getPanelBuscar().getTxtBuscar().getText()).toString());	
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProductosDAO().buscarProducto(gui.getPanelBuscar().getTxtBuscar().getText()).toString());	
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
-           }
-			
+				gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+			}
+
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTO")){
@@ -506,51 +497,55 @@ try{
 
 		if(evento.getActionCommand().equals("ACTUALIZARPRODUCTODOS")){
 
-				
+
 			try{
-			String codigoProductoDos = gui.getPanelProductos().getTxtCodigoProducto().getText();
-			String nitProducto = gui.getPanelProductos().getTxtNitProveedorDeProducto().getText();
-			String nombreProducto = gui.getPanelProductos().getTxtNombreProducto().getText();
-			String precioCompraProducto = gui.getPanelProductos().getTxtPrecioCompraProducto().getText();
-			String precioVentaProducto = gui.getPanelProductos().getTxtPrecioVentaProducto().getText();
+				String codigoProductoDos = gui.getPanelProductos().getTxtCodigoProducto().getText();
+				String nitProducto = gui.getPanelProductos().getTxtNitProveedorDeProducto().getText();
+				String nombreProducto = gui.getPanelProductos().getTxtNombreProducto().getText();
+				String precioCompraProducto = gui.getPanelProductos().getTxtPrecioCompraProducto().getText();
+				String precioVentaProducto = gui.getPanelProductos().getTxtPrecioVentaProducto().getText();
 
-			fachada.getProductosDAO().actualizarProducto(codigoProducto, codigoProductoDos, nitProducto ,nombreProducto, precioCompraProducto, precioVentaProducto);	
-			JOptionPane.showMessageDialog(null, "Actualizado con exito");
+				fachada.getProductosDAO().actualizarProducto(codigoProducto, codigoProductoDos, nitProducto ,nombreProducto, precioCompraProducto, precioVentaProducto);	
+				JOptionPane.showMessageDialog(null, "Actualizado con exito");
 
-			gui.getPanelProductos().getTxtCodigoProducto().setText("");
-			gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
-			gui.getPanelProductos().getTxtNombreProducto().setText("");
-			gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
-			gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
-			gui.getPanelProductos().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");		
+				gui.getPanelProductos().getTxtCodigoProducto().setText("");
+				gui.getPanelProductos().getTxtNitProveedorDeProducto().setText("");
+				gui.getPanelProductos().getTxtNombreProducto().setText("");
+				gui.getPanelProductos().getTxtPrecioCompraProducto().setText("");
+				gui.getPanelProductos().getTxtPrecioVentaProducto().setText("");
+				gui.getPanelProductos().getButActualizar().setActionCommand("ACTUALIZARPRODUCTO");		
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
-           }
+				gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+			}
 
 		}
 
 		if(evento.getActionCommand().equals("BORRARPRODUCTO")){
-			
+
 			try{
-			fachada.getProductosDAO().eliminarProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);		
+				fachada.getProductosDAO().eliminarProducto(gui.getPanelProductos().getTxtCodigoProducto().getText());
+				gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);		
 			}
 			catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
-           }
-			
+				gui.mostrarMensajeJOption("No existe ningún producto con esas especificaciones", "Error", 0);
+			}
+
 		}
 
+		/**
+		 *Inicio MODULO Cliente 
+		**/		
+		
 		if(evento.getActionCommand().equals("LEERCLIENTE"))
 		{
-			
+
 			try{
-			gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());	
+				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().leer());	
 			}
-            catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
-           }
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe ningún cliente", "Error", 0);
+			}
 
 		}
 
@@ -578,15 +573,15 @@ try{
 		}
 
 		if(evento.getActionCommand().equals("BORRARCLIENTE")){
-			
-			  try{
+
+			try{
 				fachada.getClientesDAO().eliminarCliente(gui.getPanelClientes().getTxtCedula().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
-			  }
-			  catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
-           }
-			
+				gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
+			}
+
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARCLIENTE"))
@@ -676,20 +671,28 @@ try{
 
 		if(evento.getActionCommand().equals("BUSCARCLIENTEDOS"))
 		{
-			 try{
+			try{
 				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText()).toString());
-			if(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText())==null)
-			{
-				gui.mostrarMensajeJOption("Cliente no registrado", "Aviso", 0);
-			}  
-			  }
-			  catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
-           }
-			
+				if(fachada.getClientesDAO().buscarClientes(gui.getPanelBuscar().getTxtBuscar().getText())==null)
+				{
+					gui.mostrarMensajeJOption("Cliente no registrado", "Aviso", 0);
+				}  
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe el cliente especificado", "Error", 0);
+			}
+
 
 		}
 
+		/**
+		 *Fin MODULO Cliente 
+		**/	
+		
+		
+		/**
+		 *Inicio MODULO Proveedor 
+		**/	
 
 		if(evento.getActionCommand().equals("AGREGARPROVEEDOR")){
 
@@ -718,24 +721,24 @@ try{
 		}
 
 		if(evento.getActionCommand().equals("LEERPROVEEDOR")){
-			 try{
+			try{
 				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().leer());  
-			  }
-			  catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe ningun proveedor", "Error", 0);
-           }
-			
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe ningun proveedor", "Error", 0);
+			}
+
 		}
 
 		if(evento.getActionCommand().equals("BORRARPROVEEDOR")){
-			 try{
+			try{
 				fachada.getProveedoresDAO().eliminarProveedor(gui.getPanelProveedores().getTxtNit().getText());
-			gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
-			  }
-			  catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
-           }
-			
+				gui.mostrarMensajeJOption("Eliminado con exito", "Proceso exitoso", 1);  
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
+			}
+
 		}
 
 		if(evento.getActionCommand().equals("ACTUALIZARPROVEEDOR")){
@@ -801,15 +804,21 @@ try{
 
 		if(evento.getActionCommand().equals("BUSCARPROVEEDORESDOS")) 
 		{
-			 try{
+			try{
 				gui.getPanelResultados().getTxtObjeto1().setText(fachada.getProveedoresDAO().buscarProveedor(gui.getPanelBuscar().getTxtBuscar().getText()).toString());  
-			  }
-			  catch(Exception e){
-	        gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
-           }
-			
-		}
+			}
+			catch(Exception e){
+				gui.mostrarMensajeJOption("No existe el proveedor especificado", "Error", 0);
+			}
 
+		}
+		
+		/**
+		 *Fin MODULO Proveedor
+		**/	
+		
+		//Regresar a Inicio
+		
 		if (evento.getActionCommand().equals("INICIO")) 
 		{
 			gui.getPanelResultados().setVisible(false);
