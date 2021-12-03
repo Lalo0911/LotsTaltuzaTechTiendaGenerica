@@ -33,40 +33,50 @@ public class Controller implements ActionListener{
 
 	public void asignarOyentes() 
 	{
+		//Botones panel menú principal
 		gui.getPanelBotones().getButClientes().addActionListener(this);
 		gui.getPanelBotones().getButProductos().addActionListener(this);
 		gui.getPanelBotones().getButVentas().addActionListener(this);
 		gui.getPanelBotones().getButProveedores().addActionListener(this);
 		gui.getPanelBotones().getButEditarProperties().addActionListener(this);
 		gui.getPanelBotones().getButConsultas().addActionListener(this);
+		
 
+		//Botones gestión productos
 		gui.getPanelProductos().getButEscribir().addActionListener(this);
 		gui.getPanelProductos().getButLeer().addActionListener(this);
 		gui.getPanelProductos().getButActualizar().addActionListener(this);
 		gui.getPanelProductos().getButEliminar().addActionListener(this);
-
+		
+		//Botones gestión proveedores
 		gui.getPanelProveedores().getButEscribir().addActionListener(this);
 		gui.getPanelProveedores().getButLeer().addActionListener(this);
 		gui.getPanelProveedores().getButActualizar().addActionListener(this);
 		gui.getPanelProveedores().getButEliminar().addActionListener(this);
 
+		//Gestión clientes
 		gui.getPanelClientes().getButEscribir().addActionListener(this);
 		gui.getPanelClientes().getButLeer().addActionListener(this);
 		gui.getPanelClientes().getButActualizar().addActionListener(this);
 		gui.getPanelClientes().getButEliminar().addActionListener(this);
 
+		//Gestión botón volver y botón buscar
 		gui.getPanelBotones2().getButRegresar().addActionListener(this);
 		gui.getPanelBotones2().getButBuscar().addActionListener(this);
 
+		//Botones panel buscar
 		gui.getPanelBuscar().getButBuscar().addActionListener(this);
 		gui.getPanelBuscar().getButSeleccionarCliente().addActionListener(this);
 
+		//Botones gestion Ventas
 		gui.getPanelVentas().getBtnAgregarProd().addActionListener(this);
 		gui.getPanelVentas().getBtnBuscarProd().addActionListener(this);
 		gui.getPanelVentas().getBtnTerminarCompra().addActionListener(this);
 
+		//Botón editar propiedades
 		gui.getPanelPropiedades().getButEditar().addActionListener(this);
 
+		//Botones gestión consultas
 		gui.getPanelConsultas().getBtnConsultaClientes().addActionListener(this);
 		gui.getPanelConsultas().getBtnConsultaDetalleCliente().addActionListener(this);
 	}
@@ -74,7 +84,7 @@ public class Controller implements ActionListener{
 	public void actionPerformed(ActionEvent evento){ 
 
 
-		//Modulo 1
+		//Modulo 1 Edición de propiedades
 		if(evento.getActionCommand().equals("EDITARPROPIEDADES")) {
 			String nombreTienda =  gui.getPanelPropiedades().getTxtNombreTienda().getText()+"";
 			String TipoComercio =  gui.getPanelPropiedades().getTxtTipoComercio().getText()+"";
@@ -96,6 +106,7 @@ public class Controller implements ActionListener{
 		if(evento.getActionCommand().equals("VENTAS"))
 		{
 
+			//Ingreso al panel ventas
 			gui.getPanelBotones().setVisible(false);
 			gui.getPanelBotones2().setVisible(true);
 			gui.getPanelBotones2().getButBuscar().setText("Buscar Cliente");
@@ -112,9 +123,6 @@ public class Controller implements ActionListener{
 			{	
 				fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas();
 				historialTotal = fachada.getbF().leerArchivoClientes().get(i).getHistorialVentas()+historialTotal;
-
-
-
 			}
 			String[] conteoHistorial = historialTotal.split("\n");
 			numeroFactura = conteoHistorial.length;
@@ -125,6 +133,7 @@ public class Controller implements ActionListener{
 
 		}
 
+		//Botón seleccionar ventas, trae el nombre y cedula al dar seleccionar en el panel ventas  
 		if(evento.getActionCommand().equals("SELECCIONAR")) {
 			String cliente = gui.getPanelResultados().getTxtObjeto1().getText();			
 			String[] divisiones = cliente.split("-"); 
@@ -146,6 +155,7 @@ public class Controller implements ActionListener{
 
 		}
 
+		//Botón buscar producto, nos trae el nombre del producto y el valor de venta, referente al codigo ingresado
 		if(evento.getActionCommand().equals("BUSCARPRODUCTO_A_AÑADIR"))
 		{
 			try{
@@ -159,9 +169,9 @@ public class Controller implements ActionListener{
 			}catch(Exception e){
 				gui.mostrarMensajeJOption("El producto no existe", "Error", 0);
 			}
-
-
 		}
+		
+		
 
 		if(evento.getActionCommand().equals("FINALIZARCOMPRA"))
 		{
@@ -239,7 +249,7 @@ public class Controller implements ActionListener{
 			gui.mostrarMensajeJOption("Su transacción ha sido efectuada exitosamente","Transacción", 1);
 		}
 
-
+		//Agrega el producto en una linea de la tabla
 		if(evento.getActionCommand().equals("AGREGARPRODUCTO1")) 
 		{
 
@@ -279,6 +289,7 @@ public class Controller implements ActionListener{
 		 *Inicio MODULO 6 
 		 **/
 
+		//ingresa al modulo gestion consultas
 		if(evento.getActionCommand().equals("CONSULTAS"))
 		{
 			gui.getPanelBotones().setVisible(false);
@@ -290,7 +301,7 @@ public class Controller implements ActionListener{
 			gui.getPanelConsultas().setVisible(true);
 		}
 
-
+		//Trae los clientes
 		if(evento.getActionCommand().equals("CONSULTACLIENTES"))
 		{
 			try{
@@ -300,7 +311,7 @@ public class Controller implements ActionListener{
 			}
 		}
 
-
+		//Trae los detalles de venta de cliente por cedula 
 		if(evento.getActionCommand().equals("CONSULTADETALLECLIENTES"))
 		{
 
